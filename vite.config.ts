@@ -5,6 +5,7 @@ import { defineConfig } from 'vite'
 import Vue from '@vitejs/plugin-vue'
 import Pages from 'vite-plugin-pages'
 import Components from 'unplugin-vue-components/vite'
+import { HeadlessUiResolver } from 'unplugin-vue-components/resolvers'
 import AutoImport from 'unplugin-auto-import/vite'
 import Unocss from 'unocss/vite'
 
@@ -30,7 +31,7 @@ export default defineConfig({
         'vue-router',
         '@vueuse/core',
       ],
-      dts: true,
+      dts: './src/types/auto-import.d.ts',
       dirs: [
         './src/composables',
       ],
@@ -39,7 +40,10 @@ export default defineConfig({
 
     // https://github.com/antfu/vite-plugin-components
     Components({
-      dts: true,
+      dts: './src/types/components.d.ts',
+      resolvers: [
+        HeadlessUiResolver(),
+      ],
     }),
 
     // https://github.com/antfu/unocss
