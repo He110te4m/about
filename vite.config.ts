@@ -21,7 +21,17 @@ export default defineConfig({
     }),
 
     // https://github.com/hannoeru/vite-plugin-pages
-    Pages(),
+    Pages({
+      dirs: [
+        'src/pages',
+        {
+          dir: 'src/components',
+          baseRoute: 'demo/components',
+        },
+      ],
+      exclude: ['**/!(index).vue'],
+      extensions: ['vue'],
+    }),
 
     // https://github.com/antfu/unplugin-auto-import
     AutoImport({
@@ -31,7 +41,7 @@ export default defineConfig({
         'vue-router',
         '@vueuse/core',
       ],
-      dts: './src/types/auto-import.d.ts',
+      dts: 'src/types/auto-import.d.ts',
       dirs: [
         './src/composables',
       ],
@@ -40,7 +50,10 @@ export default defineConfig({
 
     // https://github.com/antfu/vite-plugin-components
     Components({
-      dts: './src/types/components.d.ts',
+      dts: 'src/types/components.d.ts',
+      globs: [
+        'src/components/**/src/*.vue',
+      ],
       resolvers: [
         HeadlessUiResolver(),
       ],

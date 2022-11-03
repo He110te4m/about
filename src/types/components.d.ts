@@ -7,8 +7,11 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    Counter: typeof import('./../components/Counter.vue')['default']
-    Footer: typeof import('./../components/Footer.vue')['default']
+    Menu: typeof import('@headlessui/vue')['Menu']
+    MenuButton: typeof import('@headlessui/vue')['MenuButton']
+    MenuItem: typeof import('@headlessui/vue')['MenuItem']
+    MenuItems: typeof import('@headlessui/vue')['MenuItems']
+    NavMenu: typeof import('./../components/menu/src/NavMenu.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }
