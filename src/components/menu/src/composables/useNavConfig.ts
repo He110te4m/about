@@ -10,8 +10,16 @@ function formattedNavConfig(options: NavMenuDataSource[]) {
     if (!item.type) {
       item.type = 'nav'
     }
-    if (item.type === 'nav' && item.children) {
-      item.children = formattedNavConfig(item.children)
+
+    if (!item.key) {
+      const key = item.type === 'nav' ? (item.title ?? 'nav-menu') : 'nav-menu'
+      item.key = Symbol(key)
+    }
+
+    if (item.type === 'nav') {
+      if (item.children) {
+        item.children = formattedNavConfig(item.children)
+      }
     }
   })
 
