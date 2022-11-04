@@ -1,5 +1,5 @@
 <script lang="ts" setup></script>
 
 <template>
-  <NavMenu />
+  <NavMenu title="show `NavMenu` basic usage" />
 </template>
