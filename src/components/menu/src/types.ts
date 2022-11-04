@@ -1,11 +1,13 @@
-type NavMenuDiffrence = XOR<[{ title: string }, { children: NavMenuDataSource[] }]>
+interface NavMenuCommonConfig {
+  key?: string | symbol
+}
 
-type NavMenuNormalConfig = NavMenuDiffrence & {
+type NavMenuNormalConfig = NavMenuCommonConfig & XOR<[{ title: string }, { children: NavMenuDataSource[] }]> & {
   type?: 'nav'
   disabled?: boolean
 }
 
-interface NavMenuSeparator {
+interface NavMenuSeparator extends NavMenuCommonConfig {
   type: 'sep'
 }
 

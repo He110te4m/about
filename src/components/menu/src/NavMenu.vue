@@ -12,22 +12,27 @@ const config = useNavConfig(options)
 
 <template>
   <Menu as="nav" class="components-nav-menu">
-    <slot name="button">
-      <MenuButton class="components-nav-menu__title">
-        {{ title }}
-      </MenuButton>
-    </slot>
+    <template #default="defaultSlotParams">
+      <slot name="button" v-bind="defaultSlotParams">
+        <MenuButton class="components-nav-menu__title">
+          {{ title }}
+        </MenuButton>
+      </slot>
 
-    <slot name="list">
-      <template v-for="item in config">
-        <MenuItems v-if="item.type === 'nav'" :key="item.title" as="dl" class="components-nav-menu__navs">
-          <MenuItem as="dd" class="components-nav-menu__navs__item">
-            <slot>
-              <a class="components-nav-menu__navs__item--link">menu item</a>
-            </slot>
-          </MenuItem>
-        </MenuItems>
-      </template>
-    </slot>
+      <slot name="list" v-bind="defaultSlotParams">
+        <NavSubMenu v-for="item in config" :key="item.key" :menu-data="item" :open="defaultSlotParams.open">
+          <template #default="{ navTitle }">
+            <a>{{ navTitle }}</a>
+          </template>
+        </NavSubMenu>
+      </slot>
+    </template>
   </Menu>
 </template>
+
+<style>
+.components-nav-menu .components-nav-menu__title {
+  border: 1px solid #ddd;
+  padding: 8px 16px;
+}
+</style>
