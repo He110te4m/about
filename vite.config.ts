@@ -8,11 +8,17 @@ import Components from 'unplugin-vue-components/vite'
 import { HeadlessUiResolver } from 'unplugin-vue-components/resolvers'
 import AutoImport from 'unplugin-auto-import/vite'
 import Unocss from 'unocss/vite'
+import Inspect from 'vite-plugin-inspect'
 
 export default defineConfig({
   resolve: {
     alias: {
       '~/': `${path.resolve(__dirname, 'src')}/`,
+    },
+  },
+  server: {
+    watch: {
+      usePolling: true,
     },
   },
   plugins: [
@@ -62,6 +68,8 @@ export default defineConfig({
     // https://github.com/antfu/unocss
     // see unocss.config.ts for config
     Unocss(),
+
+    Inspect(),
   ],
 
   // https://github.com/vitest-dev/vitest

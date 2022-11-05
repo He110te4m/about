@@ -7,7 +7,8 @@ module.exports = {
   ],
   "rules": {
     "curly": [2, "all"],
-    "@typescript-eslint/brace-style": [2, "1tbs"]
+    "@typescript-eslint/brace-style": [2, "1tbs"],
+    "@typescript-eslint/ban-ts-comment": 0,
   },
   ignorePatterns: [
     'node_modules/',
