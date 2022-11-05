@@ -7,6 +7,7 @@ declare global {
     T extends [infer Only] ? Only :
     T extends [infer A, infer B, ...infer Rest] ? XOR<[XORBetween<A, B>, ...Rest]> :
     never;
+  type Nullable<T> = T | null
 }
 
 export {}
