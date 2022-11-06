@@ -7,6 +7,8 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    ArticleCard: typeof import('./../components/article/src/ArticleCard.vue')['default']
+    ArticleList: typeof import('./../components/article/src/ArticleList.vue')['default']
     Menu: typeof import('@headlessui/vue')['Menu']
     MenuButton: typeof import('@headlessui/vue')['MenuButton']
     MenuItem: typeof import('@headlessui/vue')['MenuItem']

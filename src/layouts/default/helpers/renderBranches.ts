@@ -18,7 +18,7 @@ export function renderBranches(canvasHandler: CanvasOperator, drawer: BranchesDr
     reset,
   }
 
-  function requestFrame() {
+  function requestFrame(stop: () => void = () => {}) {
     if ((performance.now() - lastTime) < minInterval) {
       return
     }
@@ -28,6 +28,11 @@ export function renderBranches(canvasHandler: CanvasOperator, drawer: BranchesDr
     }
 
     const lines = drawer.generateNextSteps()
+    if (!lines.length) {
+      stop()
+      return
+    }
+
     lines.forEach((line) => {
       canvasHandler.drawCanvasLine(line)
     })
