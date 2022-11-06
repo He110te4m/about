@@ -21,7 +21,9 @@ onMounted(() => {
     minInterval: 1000 / 40,
     filterRatio: 0.5,
   })
-  rafControl = useRafFn(requestFrame, { immediate: false })
+  rafControl = useRafFn(() => {
+    requestFrame(rafControl?.pause)
+  }, { immediate: false })
 
   const drawerColor = '#88888825'
   reset = () => {
