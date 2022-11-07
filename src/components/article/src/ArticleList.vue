@@ -9,7 +9,9 @@ const { list } = defineProps<{
 <template>
   <dl class="components-article-list">
     <dd v-for="article in list" :key="article.id" class="components-article-list__article">
-      <ArticleCard class="components-article-list__article__card" :article="article" />
+      <slot :article="article">
+        <ArticleCard class="components-article-list__article__card" :article="article" />
+      </slot>
     </dd>
   </dl>
 </template>
