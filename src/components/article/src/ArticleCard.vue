@@ -4,14 +4,22 @@ import type { Article as ArticleType } from './types'
 const { article } = defineProps<{
   article: ArticleType
 }>()
+
+const emitters = defineEmits<{
+  (e: 'click-title', articleID: ArticleType['id']): void
+}>()
+
+function onTitleClick() {
+  emitters('click-title', article.id)
+}
 </script>
 
 <template>
   <article class="components-article-card">
     <header class="components-article-card__header">
-      <h2 class="components-article-card__header__title">
+      <a class="components-article-card__header__title" @click="onTitleClick">
         {{ article.title }}
-      </h2>
+      </a>
     </header>
     <section class="components-article-card__content">
       article content
@@ -22,7 +30,7 @@ const { article } = defineProps<{
   </article>
 </template>
 
-<style scoped>
+<style>
 .components-article-card {
   border: 1px solid #ddd;
   padding: 0 var(--size-3xl);
@@ -39,12 +47,13 @@ const { article } = defineProps<{
 .components-article-card__content,
 .components-article-card__footer {
   padding: var(--horizontal-padding-sm);
-  border-bottom: 1px solid var(--card-border-color);
+}
+.components-article-card__content {
+  --border: 1px solid var(--card-border-color);
+  border-top: var(--border);
+  border-bottom: var(--border);
 }
 .components-article-card__header__title {
   font-size: var(--font-xl);
-}
-.components-article-card__footer {
-  border-bottom: none;
 }
 </style>

@@ -16,7 +16,7 @@ const { list } = defineProps<{
   </dl>
 </template>
 
-<style scoped>
+<style>
 .components-article-list__article + .components-article-list__article {
   margin-top: var(--gap-lg);
 }

@@ -9,6 +9,7 @@ module.exports = {
     "curly": [2, "all"],
     "@typescript-eslint/brace-style": [2, "1tbs"],
     "@typescript-eslint/ban-ts-comment": 0,
+    'vue/custom-event-name-casing': [2, 'kebab-case'],
   },
   ignorePatterns: [
     'node_modules/',
