@@ -4,15 +4,50 @@ import { createArticle, getArticleCardWrapper } from '../utils'
 
 describe('ArticleCard interact', () => {
   it('click title', async () => {
-    const id = 'test `ArticleCard`'
-    const wrapper = getArticleCardWrapper(createArticle({ id }))
+    const id = 'test `ArticleCard` click-title event'
+    await testClickEvent({
+      article: { id },
+      cls: '.components-article-card__header__title',
+      toBeValue: id,
+      eventName: 'click-title',
+    })
+  })
 
-    const titleEl = wrapper.find('.components-article-card__header__title')
-    expect(titleEl.exists()).toBeTruthy()
+  it('click category', async () => {
+    const category = 'test `ArticleCard` click-category event'
+    await testClickEvent({
+      article: { category },
+      cls: '.components-article-card__footer__category',
+      toBeValue: category,
+      eventName: 'click-category',
+    })
+  })
 
-    await titleEl.trigger('click')
-    const titleClickEmitted = wrapper.emitted()['click-title']?.[0] as [Article['id']] | undefined
-    expect(titleClickEmitted).toHaveLength(1)
-    expect(titleClickEmitted?.[0]).toBe(id)
+  it('click tag', async () => {
+    const tag = 'test `ArticleCard` click-tag event'
+    await testClickEvent({
+      article: { tags: [tag] },
+      cls: '.components-article-card__footer__tags__item',
+      toBeValue: tag,
+      eventName: 'click-tag',
+    })
   })
 })
+
+interface TestClickEventOptions {
+  eventName: string
+  article: Partial<Article>
+  cls: string
+  toBeValue: any
+}
+async function testClickEvent({ eventName, article, cls, toBeValue }: TestClickEventOptions) {
+  const wrapper = getArticleCardWrapper(createArticle(article))
+
+  const el = wrapper.find(cls)
+  expect(el.exists()).toBeTruthy()
+
+  await el.trigger('click')
+  const titleClickEmitted = wrapper.emitted()[eventName]?.[0] as [unknown] | undefined
+  expect(titleClickEmitted).toHaveLength(1)
+  expect(titleClickEmitted?.[0]).toBe(toBeValue)
+}
