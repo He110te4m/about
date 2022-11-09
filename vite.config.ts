@@ -75,5 +75,13 @@ export default defineConfig({
   // https://github.com/vitest-dev/vitest
   test: {
     environment: 'jsdom',
+    coverage: {
+      provider: 'c8',
+      reporter: ['json', 'html'],
+      reportsDirectory: 'coverages',
+      include: [
+        'src/components/**/src',
+      ],
+    },
   },
 })
