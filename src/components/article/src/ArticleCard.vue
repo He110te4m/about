@@ -12,8 +12,8 @@ const emitters = defineEmits<{
   (e: 'click-tag', tag: Tag): void
 }>()
 
-const createdTime = useDateFormat(article.createdAt, 'YYYY-MM-DD')
-const updatedTime = useDateFormat(article.updatedAt, 'YYYY-MM-DD')
+const createdTime = computed(() => useDateFormat(article.createdAt, 'YYYY-MM-DD').value)
+const updatedTime = computed(() => useDateFormat(article.updatedAt, 'YYYY-MM-DD').value)
 
 function onTitleClick() {
   emitters('click-title', article.id)

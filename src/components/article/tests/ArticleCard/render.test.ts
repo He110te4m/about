@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { type Article } from '../..'
-import { createArticle, getArticleCardWrapper } from '../utils'
+import { createArticle, formatDate, getArticleCardWrapper } from '../utils'
 
 describe('ArticleCard render', () => {
   it('render title', () => {
@@ -35,20 +35,6 @@ describe('ArticleCard render', () => {
     testArticleCardRender({ updatedAt }, formattedText, '.components-article-card__footer__updated-time')
   })
 })
-
-function formatDate(timestamp: number) {
-  const date = new Date(timestamp)
-
-  const year = padNum(date.getFullYear())
-  const month = padNum(date.getMonth() + 1)
-  const day = padNum(date.getDate())
-
-  return `${year}-${month}-${day}`
-}
-
-function padNum(number: number) {
-  return String(number).padStart(2, '0')
-}
 
 function testArticleCardRender(article: Partial<Article>, toBeText: string, cls: string) {
   const wrapper = getArticleCardWrapper(createArticle(article))
