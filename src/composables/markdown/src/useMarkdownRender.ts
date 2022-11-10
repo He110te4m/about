@@ -3,5 +3,9 @@ import DOMPurify from 'dompurify'
 import { marked } from './marked'
 
 export function useMarkdownRender(mdText: MaybeComputedRef<string>) {
-  return computed(() => DOMPurify.sanitize(marked.parse(resolveUnref(mdText))))
+  return computed(() => renderMarkdown(resolveUnref(mdText)))
+}
+
+function renderMarkdown(mdText: string) {
+  return DOMPurify.sanitize(marked.parse(mdText))
 }
