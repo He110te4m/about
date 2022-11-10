@@ -14,12 +14,16 @@
   "dependencies": {
     "@headlessui/vue": "^1.7.3",
     "@vueuse/core": "^9.4.0",
+    "dompurify": "^2.4.0",
+    "marked": "^4.2.2",
     "vue": "^3.2.41",
     "vue-router": "^4.1.6"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^0.29.2",
     "@iconify-json/carbon": "^1.1.9",
+    "@types/dompurify": "^2.3.4",
+    "@types/marked": "^4.0.7",
     "@types/node": "^18.11.8",
     "@unocss/reset": "^0.46.2",
     "@vitejs/plugin-vue": "^3.2.0",

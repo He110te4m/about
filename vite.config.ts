@@ -31,12 +31,31 @@ export default defineConfig({
       dirs: [
         'src/pages',
         {
-          dir: 'src/components',
+          dir: 'src/components/**/demo',
           baseRoute: 'demo/components',
+        },
+        {
+          dir: 'src/composables/**/demo',
+          baseRoute: 'demo/composables',
         },
       ],
       exclude: ['**/!(index).vue'],
       extensions: ['vue'],
+      onRoutesGenerated(routes) {
+        routes.forEach((route) => {
+          if (['components', 'composables'].every(dirName => !route.component.includes(dirName))) {
+            return
+          }
+
+          route.path = `/demo${route.component.slice(4, 0 - '/index.vue'.length)}`
+          route.name = route.path
+            .split(/[\\\/]/g)
+            .map((dir: string) => dir.charAt(0).toUpperCase() + dir.slice(1))
+            .join('')
+        })
+
+        return routes
+      },
     }),
 
     // https://github.com/antfu/unplugin-auto-import
@@ -81,6 +100,7 @@ export default defineConfig({
       reportsDirectory: 'coverages',
       include: [
         'src/components/**/src',
+        'src/composables/**/src',
       ],
     },
   },
