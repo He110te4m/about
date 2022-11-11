@@ -7,8 +7,9 @@
     "lint": "eslint .",
     "typecheck": "vue-tsc --noEmit",
     "preview": "vite preview",
-    "test": "vitest",
-    "coverage": "vitest run --coverage",
+    "test:unit": "vitest",
+    "test:e2e": "cypress open",
+    "coverage:unit": "vitest run --coverage",
     "up": "taze major -I"
   },
   "dependencies": {
@@ -29,6 +30,7 @@
     "@vitejs/plugin-vue": "^3.2.0",
     "@vitest/coverage-c8": "^0.25.1",
     "@vue/test-utils": "^2.2.1",
+    "cypress": "^11.0.1",
     "eslint": "^8.26.0",
     "jsdom": "^20.0.2",
     "pnpm": "^7.14.1",

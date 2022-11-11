@@ -39,7 +39,7 @@ export default defineConfig({
           baseRoute: 'demo/composables',
         },
       ],
-      exclude: ['**/!(index).vue'],
+      exclude: ['(components|composables)/**/!(index).vue'],
       extensions: ['vue'],
       onRoutesGenerated(routes) {
         routes.forEach((route) => {
