@@ -6,3 +6,8 @@
     index
   </div>
 </template>
+
+<route lang="yaml">
+redirect:
+  name: articles
+</route>
