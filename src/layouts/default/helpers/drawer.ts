@@ -116,7 +116,7 @@ export class BranchesDrawer {
 
   private generateLineByBranchPoint(point: BranchesPoint): Line {
     return {
-      start: reactiveOmit(point, 'angle'),
+      start: reactiveOmit(reactive(point), 'angle'),
       end: this.getLineEndPoint(point),
     }
   }

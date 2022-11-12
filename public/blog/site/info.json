@@ -1,9 +1,5 @@
 {
-    "code": 0,
-    "msg": "success",
-    "data": {
-        "author": "He110",
-        "desc": "须知少时拏云志，曾许人间第一流",
-        "name": "He110's Blog"
-    }
+  "author": "He110",
+  "desc": "须知少时拏云志，曾许人间第一流",
+  "name": "He110's Blog"
 }

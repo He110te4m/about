@@ -25,7 +25,7 @@ onMounted(() => {
     requestFrame(rafControl?.pause)
   }, { immediate: false })
 
-  const drawerColor = '#88888825'
+  const drawerColor = '#2BBBFF19'
   reset = () => {
     canvasHandler.reset({
       strokeStyle: drawerColor,

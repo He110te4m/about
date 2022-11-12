@@ -61,15 +61,15 @@ function onTagClick(tag: Tag) {
 <style>
 /* wrapper */
 .components-article-card {
-  border: 1px solid #ddd;
+  border: 1px solid #2BBBFF;
   padding: 0 var(--size-3xl);
   background-color: var(--background);
   border-radius: var(--size-xs);
-  box-shadow: 0 0 var(--size-xs) #ddd;
+  box-shadow: 0 0 var(--size-xs) #2BBBFF66;
   transition: box-shadow .5s;
 }
 .components-article-card:hover {
-  box-shadow: 0 var(--size-sm) var(--size-3xl) #ddd;
+  box-shadow: 0 var(--size-sm) var(--size-xl) #2BBBFF33;
 }
 
 /* layout */
@@ -82,6 +82,7 @@ function onTagClick(tag: Tag) {
 /* header */
 .components-article-card__header__title {
   font-size: var(--font-xl);
+  cursor: pointer;
 }
 
 /* content */
@@ -101,5 +102,9 @@ function onTagClick(tag: Tag) {
 .components-article-card__footer__created-time,
 .components-article-card__footer__updated-time {
   flex: 0 1 50%;
+}
+.components-article-card__footer__tags__item,
+.components-article-card__footer__category {
+  cursor: pointer;
 }
 </style>
