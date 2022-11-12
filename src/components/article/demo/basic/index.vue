@@ -4,7 +4,7 @@ import list from '~/../public/blog/articles/list.json'
 
 <template>
   <div class="demo-article">
-    <ArticleList :list="list.data" />
+    <ArticleList :list="list" />
   </div>
 </template>
 

@@ -39,7 +39,10 @@ export default defineConfig({
           baseRoute: 'demo/composables',
         },
       ],
-      exclude: ['(components|composables)/**/!(index).vue'],
+      exclude: [
+        '(components|composables)/**/!(index).vue',
+        '_*',
+      ],
       extensions: ['vue'],
       onRoutesGenerated(routes) {
         routes.forEach((route) => {
@@ -69,6 +72,7 @@ export default defineConfig({
       dts: 'src/types/auto-import.d.ts',
       dirs: [
         './src/composables',
+        './src/composables/**/src',
       ],
       vueTemplate: true,
     }),
