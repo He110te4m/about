@@ -6,10 +6,15 @@
     <div text="xl">
       牡龙's Blog
     </div>
-    <dl>
+    <dl flex gap="4">
       <dd>
         <RouterLink to="/articles">
           Articles
+        </RouterLink>
+      </dd>
+      <dd>
+        <RouterLink to="/aboutme">
+          About me
         </RouterLink>
       </dd>
       <dd v-if="false">
