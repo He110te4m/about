@@ -1,7 +1,5 @@
 <template>
-  <footer text-xl py-6 flex gap-2 justify="center">
-    <button icon-btn @click="toggleDark()">
-      <div dark:i-carbon-moon i-carbon-sun />
-    </button>
+  <footer text="sm" p="x-4 y-2" w="full" flex justify="center" color="$text-description-color">
+    copyright © <a href="https://me.he110.site">牡龙's Blog</a>
   </footer>
 </template>

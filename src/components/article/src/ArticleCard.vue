@@ -61,15 +61,15 @@ function onTagClick(tag: Tag) {
 <style>
 /* wrapper */
 .components-article-card {
-  border: 1px solid #2BBBFF;
+  border: 1px solid #ddd;
   padding: 0 var(--size-3xl);
   background-color: var(--background);
   border-radius: var(--size-xs);
-  box-shadow: 0 0 var(--size-xs) #2BBBFF66;
+  box-shadow: 0 0 var(--size-xs) #8886;
   transition: box-shadow .5s;
 }
 .components-article-card:hover {
-  box-shadow: 0 var(--size-sm) var(--size-xl) #2BBBFF33;
+  box-shadow: 0 var(--size-sm) var(--size-xl) #8883;
 }
 
 /* layout */
