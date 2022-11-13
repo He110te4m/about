@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { useFilterOptions } from './_articles/useFilterOptions'
+import { useFilterOptions } from './composables/useFilterOptions'
 import type { Article } from '~/components/article'
 
 // Calculate the list to display
@@ -17,8 +17,19 @@ onMounted(() => {
     list.value = articles ?? []
   })
 })
+
+const router = useRouter()
+const route = useRoute()
+function onChangeCategory(category: string) {
+  router.push({
+    path: route.path,
+    query: {
+      category,
+    },
+  })
+}
 </script>
 
 <template>
-  <ArticleList :list="articleList" />
+  <ArticleList :list="articleList" @click-category="onChangeCategory" />
 </template>
