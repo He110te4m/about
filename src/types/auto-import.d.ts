@@ -201,6 +201,7 @@ declare global {
   const useOnline: typeof import('@vueuse/core')['useOnline']
   const usePage: typeof import('../composables/page/src/usePage')['usePage']
   const usePageLeave: typeof import('@vueuse/core')['usePageLeave']
+  const usePager: typeof import('../composables/pager/src/usePager')['usePager']
   const useParallax: typeof import('@vueuse/core')['useParallax']
   const usePermission: typeof import('@vueuse/core')['usePermission']
   const usePointer: typeof import('@vueuse/core')['usePointer']
@@ -482,6 +483,7 @@ declare module 'vue' {
     readonly useOnline: UnwrapRef<typeof import('@vueuse/core')['useOnline']>
     readonly usePage: UnwrapRef<typeof import('../composables/page/src/usePage')['usePage']>
     readonly usePageLeave: UnwrapRef<typeof import('@vueuse/core')['usePageLeave']>
+    readonly usePager: UnwrapRef<typeof import('../composables/pager/src/usePager')['usePager']>
     readonly useParallax: UnwrapRef<typeof import('@vueuse/core')['useParallax']>
     readonly usePermission: UnwrapRef<typeof import('@vueuse/core')['usePermission']>
     readonly usePointer: UnwrapRef<typeof import('@vueuse/core')['usePointer']>

@@ -8,7 +8,7 @@ export function usePage<T>(originList: MaybeComputedRef<T[]>, originLimit: Maybe
   const currentList = computed(() => resolveUnref(originList))
   const maxPage = computed(() => Math.ceil(currentList.value.length / limit.value))
 
-  const list = computed(() => currentList.value.slice(start.value, limit.value))
+  const list = computed(() => currentList.value.slice(start.value, start.value + limit.value))
 
   function jump(page: number) {
     // invalid page value includes:
