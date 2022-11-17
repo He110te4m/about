@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { useFilterOptions } from './composables/useFilterOptions'
 import type { Article } from '~/components/article'
-import type { PagerItem } from '~/composables/pager'
+import type { PagerItem } from '~/components/pager'
 
 // Calculate the list to display
 const list = ref<Article[]>([])
