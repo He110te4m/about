@@ -15,8 +15,8 @@ export function usePage<T>(originList: MaybeComputedRef<T[]>, originLimit: Maybe
     // - over than `maxPage`
     // - less than `1`
     // - `NaN`
-    // - no integer
-    if (page > maxPage.value || page < 1 || isNaN(page) || String(page).includes('.')) {
+    // - no integer or with `e`, like `Math.PI` and `1e2`
+    if (page > maxPage.value || page < 1 || isNaN(page) || ['.', 'e'].some(char => String(page).includes(char))) {
       return false
     }
 
