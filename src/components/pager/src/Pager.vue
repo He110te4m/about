@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { PagerItem } from './usePager'
+import { type PagerItem, usePager } from './usePager'
 
 const props = defineProps<{
   maxPage: number

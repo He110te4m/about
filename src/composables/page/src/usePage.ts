@@ -1,24 +1,21 @@
-import { type MaybeComputedRef, resolveUnref } from '@vueuse/core'
-import { allPass, complement, curry, gt, lt } from 'ramda'
+import type { MaybeComputedRef } from '@vueuse/core'
+import { allPass, complement, curry, gte, lte } from 'ramda'
+import type { ComputedRef } from 'vue'
 
 export function usePage<T>(originList: MaybeComputedRef<T[]>, originLimit: MaybeComputedRef<number>) {
+  const [currentList, limit] = batchResolveComputed(originList, originLimit)
+
   const currentPage = ref(1)
-  const limit = computed(() => resolveUnref(originLimit))
   const start = computed(() => (currentPage.value - 1) * limit.value)
 
-  const currentList = computed(() => resolveUnref(originList))
   const maxPage = computed(() => Math.ceil(currentList.value.length / limit.value))
 
   const list = computed(() => currentList.value.slice(start.value, start.value + limit.value))
 
-  function jump(page: number) {
-    const isValid = checkPage(page, maxPage.value)
-    if (isValid) {
-      currentPage.value = page
-    }
-
-    return isValid
-  }
+  const { onAfterValidSuccess, jump } = makeJump(maxPage)
+  onAfterValidSuccess((page) => {
+    currentPage.value = page
+  })
 
   return {
     page: computed(() => currentPage.value),
@@ -29,6 +26,19 @@ export function usePage<T>(originList: MaybeComputedRef<T[]>, originLimit: Maybe
     toNext: () => jump(currentPage.value + 1),
     toPrev: () => jump(currentPage.value - 1),
     jump,
+  }
+}
+
+function makeJump(maxPage: ComputedRef<number>) {
+  const { on, trigger } = createEventHook<number>()
+  return {
+    onAfterValidSuccess: on,
+    jump: (page: number) => {
+      const isValid = checkPage(page, maxPage.value)
+      if (isValid) {
+        trigger(page)
+      }
+    },
   }
 }
 
@@ -49,8 +59,8 @@ function checkPage(page: number, maxValue: number) {
   )
 
   return allPass([
-    gt(maxValue),
-    lt(minValue),
+    gte(maxValue),
+    lte(minValue),
     complement(isNaN),
     checkInvalidChars(['.', 'e', 'b']),
   ])(page)
