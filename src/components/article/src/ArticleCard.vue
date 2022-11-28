@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { Article as ArticleType } from './types'
+import type { Article as ArticleType } from '~/apis/article/types'
 
 type Tag = Required<ArticleType>['tags'][number]
 
