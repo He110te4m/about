@@ -25,21 +25,19 @@ export function useObjectListFilter<TData extends {}, TKey extends GeyKeyType<TD
 }
 
 function filterObjectList<TData extends {}, TKey extends GeyKeyType<TData>>(list: TData[], { searchKey, keyword }: RequiredFilterOptions<TData, TKey>) {
+  const isIncludeable = compose(isString, prop(searchKey))
+  const handleIncludeCompare = compose(includes(keyword), prop(searchKey))
+
+  const isEqualable = compose(
+    anyPass([isBoolean, isNumber]),
+    prop(searchKey),
+  )
+  const handleEqualCompare = propEq(searchKey, keyword)
+
   return filter(
     cond([
-      [
-        compose(isString, prop(searchKey)),
-        // TODO: waiting for fix type error
-        // @ts-expect-error
-        compose(includes(keyword), prop(searchKey)),
-      ],
-      [
-        compose(
-          anyPass([isBoolean, isNumber]),
-          prop(searchKey),
-        ),
-        propEq(searchKey, keyword),
-      ],
+      [isIncludeable, handleIncludeCompare],
+      [isEqualable, handleEqualCompare],
       [T, always(false)],
     ]),
     list,
