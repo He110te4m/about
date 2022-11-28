@@ -1,5 +1,2 @@
-import type { Article } from './types'
-
-export function getArticleList() {
-  return useFetch<Article[]>('blog/articles/list').json()
-}
+export * from './api'
+export * from './types'

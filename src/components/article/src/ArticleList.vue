@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import type { Article } from '~/apis/article/types'
+import type { Article } from '~/apis/article'
 
 const { list } = defineProps<{
   list: Article[]
