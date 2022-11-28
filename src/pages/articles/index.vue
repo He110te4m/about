@@ -17,10 +17,10 @@ function onJump(item: PagerItem) {
 
 // Handle data loading
 onMounted(() => {
-  const { data } = useFetch<Article[]>('blog/articles/list').json()
-  watch(data, (articles) => {
+  const { data } = getArticleList()
+  watch(data, (articles = []) => {
     articles.reverse()
-    list.value = articles ?? []
+    list.value = articles
   })
 })
 
