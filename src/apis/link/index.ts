@@ -1,5 +1,2 @@
-import type { LinkItem } from './types'
-
-export function getLinks() {
-  return useFetch<LinkItem[]>('blog/links/list').json()
-}
+export * from './api'
+export * from './types'

@@ -71,11 +71,11 @@ export default defineConfig({
       ],
       dts: 'src/types/auto-import.d.ts',
       dirs: [
-        './src/apis',
         './src/apis/*',
         './src/composables',
         './src/composables/**/src',
         './src/helpers',
+        './src/operators',
       ],
       vueTemplate: true,
     }),
