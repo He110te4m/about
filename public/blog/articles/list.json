@@ -86,7 +86,7 @@
     "createdAt": 1548772799000,
     "category": "GoLang",
     "desc": "GoLang 常考考点之一，defer 和 return 结合使用的一些注意事项",
-    "tags": [],
+    "tags": ["测试"],
     "content": ""
   },
   {
@@ -95,7 +95,7 @@
     "createdAt": 1553096026000,
     "category": "前端开发",
     "desc": "原型继承是 ES6 以前实现继承的方式之一，但是其衍生出来的问题，可谓是不少，本文以一道面试题为引，引出 JS 内部的一些机制",
-    "tags": [],
+    "tags": ["测试"],
     "content": ""
   }
 ]
