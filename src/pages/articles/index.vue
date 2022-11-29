@@ -6,17 +6,22 @@ const { list, page, maxPage, onJump } = useArticleList()
 
 const router = useRouter()
 const route = useRoute()
-function onChangeCategory(category: string) {
+function updateRouteQuery(query: Record<string, string>) {
   router.push({
     path: route.path,
-    query: {
-      category,
-    },
+    query,
   })
+}
+
+function onClickCategory(category: string) {
+  updateRouteQuery({ category })
+}
+function onClickTag(tag: string) {
+  updateRouteQuery({ tag })
 }
 </script>
 
 <template>
-  <ArticleList :list="list" @click-category="onChangeCategory" />
+  <ArticleList :list="list" @click-category="onClickCategory" @click-tag="onClickTag" />
   <Pager :page="page" :max-page="maxPage" @jump="onJump" />
 </template>

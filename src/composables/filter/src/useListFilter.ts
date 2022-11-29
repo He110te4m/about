@@ -1,6 +1,6 @@
 import { type MaybeComputedRef, type MaybeRef, resolveUnref } from '@vueuse/core'
-import { T, always, anyPass, compose, cond, filter, includes, prop, propEq } from 'ramda'
-import { isBoolean, isNumber, isString } from '~/helpers/typeof'
+import { T, always, any, anyPass, compose, cond, equals, filter, includes, prop, propEq } from 'ramda'
+import { isArray, isBoolean, isNumber, isString } from '~/helpers/typeof'
 
 type GeyKeyType<TData extends {}> = (keyof TData) & (string | number)
 
@@ -34,10 +34,14 @@ function filterObjectList<TData extends {}, TKey extends GeyKeyType<TData>>(list
   )
   const handleEqualCompare = propEq(searchKey, keyword)
 
+  const isArrayItem = compose(isArray, prop(searchKey))
+  const handleArrayItemCompare = compose(any(equals(keyword)), prop(searchKey))
+
   return filter(
     cond([
       [isIncludeable, handleIncludeCompare],
       [isEqualable, handleEqualCompare],
+      [isArrayItem, handleArrayItemCompare],
       [T, always(false)],
     ]),
     list,

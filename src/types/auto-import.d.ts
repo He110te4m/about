@@ -35,21 +35,30 @@ declare global {
   const eagerComputed: typeof import('@vueuse/core')['eagerComputed']
   const effectScope: typeof import('vue')['effectScope']
   const extendRef: typeof import('@vueuse/core')['extendRef']
-  const getArticle: typeof import('../apis/article/index')['getArticle']
-  const getArticleList: typeof import('../apis/article/index')['getArticleList']
+  const getArticle: typeof import('../apis/article/api')['getArticle']
+  const getArticleList: typeof import('../apis/article/api')['getArticleList']
   const getCurrentInstance: typeof import('vue')['getCurrentInstance']
   const getCurrentScope: typeof import('vue')['getCurrentScope']
-  const getLinks: typeof import('../apis/link/index')['getLinks']
-  const getSocials: typeof import('../apis/socials/index')['getSocials']
+  const getLinks: typeof import('../apis/link/api')['getLinks']
+  const getSocials: typeof import('../apis/socials/api')['getSocials']
   const h: typeof import('vue')['h']
   const ignorableWatch: typeof import('@vueuse/core')['ignorableWatch']
   const inject: typeof import('vue')['inject']
+  const isArray: typeof import('../helpers/typeof')['isArray']
+  const isBigInt: typeof import('../helpers/typeof')['isBigInt']
+  const isBoolean: typeof import('../helpers/typeof')['isBoolean']
   const isDark: typeof import('../composables/dark')['isDark']
   const isDefined: typeof import('@vueuse/core')['isDefined']
+  const isFunction: typeof import('../helpers/typeof')['isFunction']
+  const isNull: typeof import('../helpers/typeof')['isNull']
+  const isNumber: typeof import('../helpers/typeof')['isNumber']
+  const isObject: typeof import('../helpers/typeof')['isObject']
   const isProxy: typeof import('vue')['isProxy']
   const isReactive: typeof import('vue')['isReactive']
   const isReadonly: typeof import('vue')['isReadonly']
   const isRef: typeof import('vue')['isRef']
+  const isString: typeof import('../helpers/typeof')['isString']
+  const isSymbol: typeof import('../helpers/typeof')['isSymbol']
   const makeDestructurable: typeof import('@vueuse/core')['makeDestructurable']
   const markRaw: typeof import('vue')['markRaw']
   const marked: typeof import('../composables/markdown/src/marked')['marked']
@@ -322,21 +331,30 @@ declare module 'vue' {
     readonly eagerComputed: UnwrapRef<typeof import('@vueuse/core')['eagerComputed']>
     readonly effectScope: UnwrapRef<typeof import('vue')['effectScope']>
     readonly extendRef: UnwrapRef<typeof import('@vueuse/core')['extendRef']>
-    readonly getArticle: UnwrapRef<typeof import('../apis/article/index')['getArticle']>
-    readonly getArticleList: UnwrapRef<typeof import('../apis/article/index')['getArticleList']>
+    readonly getArticle: UnwrapRef<typeof import('../apis/article/api')['getArticle']>
+    readonly getArticleList: UnwrapRef<typeof import('../apis/article/api')['getArticleList']>
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
-    readonly getLinks: UnwrapRef<typeof import('../apis/link/index')['getLinks']>
-    readonly getSocials: UnwrapRef<typeof import('../apis/socials/index')['getSocials']>
+    readonly getLinks: UnwrapRef<typeof import('../apis/link/api')['getLinks']>
+    readonly getSocials: UnwrapRef<typeof import('../apis/socials/api')['getSocials']>
     readonly h: UnwrapRef<typeof import('vue')['h']>
     readonly ignorableWatch: UnwrapRef<typeof import('@vueuse/core')['ignorableWatch']>
     readonly inject: UnwrapRef<typeof import('vue')['inject']>
+    readonly isArray: UnwrapRef<typeof import('../helpers/typeof')['isArray']>
+    readonly isBigInt: UnwrapRef<typeof import('../helpers/typeof')['isBigInt']>
+    readonly isBoolean: UnwrapRef<typeof import('../helpers/typeof')['isBoolean']>
     readonly isDark: UnwrapRef<typeof import('../composables/dark')['isDark']>
     readonly isDefined: UnwrapRef<typeof import('@vueuse/core')['isDefined']>
+    readonly isFunction: UnwrapRef<typeof import('../helpers/typeof')['isFunction']>
+    readonly isNull: UnwrapRef<typeof import('../helpers/typeof')['isNull']>
+    readonly isNumber: UnwrapRef<typeof import('../helpers/typeof')['isNumber']>
+    readonly isObject: UnwrapRef<typeof import('../helpers/typeof')['isObject']>
     readonly isProxy: UnwrapRef<typeof import('vue')['isProxy']>
     readonly isReactive: UnwrapRef<typeof import('vue')['isReactive']>
     readonly isReadonly: UnwrapRef<typeof import('vue')['isReadonly']>
     readonly isRef: UnwrapRef<typeof import('vue')['isRef']>
+    readonly isString: UnwrapRef<typeof import('../helpers/typeof')['isString']>
+    readonly isSymbol: UnwrapRef<typeof import('../helpers/typeof')['isSymbol']>
     readonly makeDestructurable: UnwrapRef<typeof import('@vueuse/core')['makeDestructurable']>
     readonly markRaw: UnwrapRef<typeof import('vue')['markRaw']>
     readonly marked: UnwrapRef<typeof import('../composables/markdown/src/marked')['marked']>
