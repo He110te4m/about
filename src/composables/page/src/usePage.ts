@@ -1,6 +1,8 @@
 import type { MaybeComputedRef } from '@vueuse/core'
-import { allPass, complement, curry, gte, lte } from 'ramda'
 import type { ComputedRef } from 'vue'
+import { Ord } from 'fp-ts/number'
+import { between } from 'fp-ts/Ord'
+import { not } from 'fp-ts/Predicate'
 
 export function usePage<T>(originList: MaybeComputedRef<T[]>, originLimit: MaybeComputedRef<number>) {
   const [currentList, limit] = batchResolveComputed(originList, originLimit)
@@ -23,8 +25,6 @@ export function usePage<T>(originList: MaybeComputedRef<T[]>, originLimit: Maybe
 
     list,
 
-    toNext: () => jump(currentPage.value + 1),
-    toPrev: () => jump(currentPage.value - 1),
     jump,
   }
 }
@@ -52,16 +52,12 @@ function makeJump(maxPage: ComputedRef<number>) {
 function checkPage(page: number, maxValue: number) {
   const minValue = 1
 
-  const checkInvalidChars = curry(
-    (invalidChars: string[], num: number) =>
-      // TODO: It's no functional. The code here needs to be modified.
-      invalidChars.every(char => !String(num).includes(char)),
-  )
+  const checkInvalidChars = (invalidChars: string[]) =>
+    (num: number) => invalidChars.every(char => !String(num).includes(char))
 
   return allPass([
-    gte(maxValue),
-    lte(minValue),
-    complement(isNaN),
+    between(Ord)(minValue, maxValue),
+    not(isNaN),
     checkInvalidChars(['.', 'e', 'b']),
   ])(page)
 }

@@ -75,6 +75,7 @@ export default defineConfig({
         './src/composables',
         './src/composables/**/src',
         './src/helpers',
+        './src/helpers/*',
         './src/operators',
       ],
       vueTemplate: true,

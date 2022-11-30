@@ -10,6 +10,8 @@ declare global {
   const $toRef: typeof import('vue/macros')['$toRef']
   const CacheOperator: typeof import('../operators/CacheOperator')['CacheOperator']
   const EffectScope: typeof import('vue')['EffectScope']
+  const allPass: typeof import('../helpers/fp/logic')['allPass']
+  const anyPass: typeof import('../helpers/fp/logic')['anyPass']
   const asyncComputed: typeof import('@vueuse/core')['asyncComputed']
   const autoResetRef: typeof import('@vueuse/core')['autoResetRef']
   const batchResolveComputed: typeof import('../helpers/resolve')['batchResolveComputed']
@@ -18,6 +20,7 @@ declare global {
   const computedEager: typeof import('@vueuse/core')['computedEager']
   const computedInject: typeof import('@vueuse/core')['computedInject']
   const computedWithControl: typeof import('@vueuse/core')['computedWithControl']
+  const cond: typeof import('../helpers/fp/logic')['cond']
   const controlledComputed: typeof import('@vueuse/core')['controlledComputed']
   const controlledRef: typeof import('@vueuse/core')['controlledRef']
   const createApp: typeof import('vue')['createApp']
@@ -34,15 +37,20 @@ declare global {
   const defineComponent: typeof import('vue')['defineComponent']
   const eagerComputed: typeof import('@vueuse/core')['eagerComputed']
   const effectScope: typeof import('vue')['effectScope']
+  const equalBoolean: typeof import('../helpers/fp/equal')['equalBoolean']
+  const equalNumber: typeof import('../helpers/fp/equal')['equalNumber']
+  const equalString: typeof import('../helpers/fp/equal')['equalString']
   const extendRef: typeof import('@vueuse/core')['extendRef']
   const getArticle: typeof import('../apis/article/api')['getArticle']
   const getArticleList: typeof import('../apis/article/api')['getArticleList']
   const getCurrentInstance: typeof import('vue')['getCurrentInstance']
   const getCurrentScope: typeof import('vue')['getCurrentScope']
+  const getFiledValue: typeof import('../helpers/fp/record')['getFiledValue']
   const getLinks: typeof import('../apis/link/api')['getLinks']
   const getSocials: typeof import('../apis/socials/api')['getSocials']
   const h: typeof import('vue')['h']
   const ignorableWatch: typeof import('@vueuse/core')['ignorableWatch']
+  const includesString: typeof import('../helpers/fp/equal')['includesString']
   const inject: typeof import('vue')['inject']
   const isArray: typeof import('../helpers/typeof')['isArray']
   const isBigInt: typeof import('../helpers/typeof')['isBigInt']
@@ -83,6 +91,7 @@ declare global {
   const onUnmounted: typeof import('vue')['onUnmounted']
   const onUpdated: typeof import('vue')['onUpdated']
   const pausableWatch: typeof import('@vueuse/core')['pausableWatch']
+  const propEq: typeof import('../helpers/fp/logic')['propEq']
   const provide: typeof import('vue')['provide']
   const reactify: typeof import('@vueuse/core')['reactify']
   const reactifyObject: typeof import('@vueuse/core')['reactifyObject']
@@ -114,6 +123,7 @@ declare global {
   const toRef: typeof import('vue')['toRef']
   const toRefs: typeof import('vue')['toRefs']
   const toggleDark: typeof import('../composables/dark')['toggleDark']
+  const trace: typeof import('../helpers/fp/debug')['trace']
   const triggerRef: typeof import('vue')['triggerRef']
   const tryOnBeforeMount: typeof import('@vueuse/core')['tryOnBeforeMount']
   const tryOnBeforeUnmount: typeof import('@vueuse/core')['tryOnBeforeUnmount']
@@ -306,6 +316,8 @@ declare module 'vue' {
     readonly $toRef: UnwrapRef<typeof import('vue/macros')['$toRef']>
     readonly CacheOperator: UnwrapRef<typeof import('../operators/CacheOperator')['CacheOperator']>
     readonly EffectScope: UnwrapRef<typeof import('vue')['EffectScope']>
+    readonly allPass: UnwrapRef<typeof import('../helpers/fp/logic')['allPass']>
+    readonly anyPass: UnwrapRef<typeof import('../helpers/fp/logic')['anyPass']>
     readonly asyncComputed: UnwrapRef<typeof import('@vueuse/core')['asyncComputed']>
     readonly autoResetRef: UnwrapRef<typeof import('@vueuse/core')['autoResetRef']>
     readonly batchResolveComputed: UnwrapRef<typeof import('../helpers/resolve')['batchResolveComputed']>
@@ -314,6 +326,7 @@ declare module 'vue' {
     readonly computedEager: UnwrapRef<typeof import('@vueuse/core')['computedEager']>
     readonly computedInject: UnwrapRef<typeof import('@vueuse/core')['computedInject']>
     readonly computedWithControl: UnwrapRef<typeof import('@vueuse/core')['computedWithControl']>
+    readonly cond: UnwrapRef<typeof import('../helpers/fp/logic')['cond']>
     readonly controlledComputed: UnwrapRef<typeof import('@vueuse/core')['controlledComputed']>
     readonly controlledRef: UnwrapRef<typeof import('@vueuse/core')['controlledRef']>
     readonly createApp: UnwrapRef<typeof import('vue')['createApp']>
@@ -330,15 +343,20 @@ declare module 'vue' {
     readonly defineComponent: UnwrapRef<typeof import('vue')['defineComponent']>
     readonly eagerComputed: UnwrapRef<typeof import('@vueuse/core')['eagerComputed']>
     readonly effectScope: UnwrapRef<typeof import('vue')['effectScope']>
+    readonly equalBoolean: UnwrapRef<typeof import('../helpers/fp/equal')['equalBoolean']>
+    readonly equalNumber: UnwrapRef<typeof import('../helpers/fp/equal')['equalNumber']>
+    readonly equalString: UnwrapRef<typeof import('../helpers/fp/equal')['equalString']>
     readonly extendRef: UnwrapRef<typeof import('@vueuse/core')['extendRef']>
     readonly getArticle: UnwrapRef<typeof import('../apis/article/api')['getArticle']>
     readonly getArticleList: UnwrapRef<typeof import('../apis/article/api')['getArticleList']>
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
+    readonly getFiledValue: UnwrapRef<typeof import('../helpers/fp/record')['getFiledValue']>
     readonly getLinks: UnwrapRef<typeof import('../apis/link/api')['getLinks']>
     readonly getSocials: UnwrapRef<typeof import('../apis/socials/api')['getSocials']>
     readonly h: UnwrapRef<typeof import('vue')['h']>
     readonly ignorableWatch: UnwrapRef<typeof import('@vueuse/core')['ignorableWatch']>
+    readonly includesString: UnwrapRef<typeof import('../helpers/fp/equal')['includesString']>
     readonly inject: UnwrapRef<typeof import('vue')['inject']>
     readonly isArray: UnwrapRef<typeof import('../helpers/typeof')['isArray']>
     readonly isBigInt: UnwrapRef<typeof import('../helpers/typeof')['isBigInt']>
@@ -379,6 +397,7 @@ declare module 'vue' {
     readonly onUnmounted: UnwrapRef<typeof import('vue')['onUnmounted']>
     readonly onUpdated: UnwrapRef<typeof import('vue')['onUpdated']>
     readonly pausableWatch: UnwrapRef<typeof import('@vueuse/core')['pausableWatch']>
+    readonly propEq: UnwrapRef<typeof import('../helpers/fp/logic')['propEq']>
     readonly provide: UnwrapRef<typeof import('vue')['provide']>
     readonly reactify: UnwrapRef<typeof import('@vueuse/core')['reactify']>
     readonly reactifyObject: UnwrapRef<typeof import('@vueuse/core')['reactifyObject']>
@@ -410,6 +429,7 @@ declare module 'vue' {
     readonly toRef: UnwrapRef<typeof import('vue')['toRef']>
     readonly toRefs: UnwrapRef<typeof import('vue')['toRefs']>
     readonly toggleDark: UnwrapRef<typeof import('../composables/dark')['toggleDark']>
+    readonly trace: UnwrapRef<typeof import('../helpers/fp/debug')['trace']>
     readonly triggerRef: UnwrapRef<typeof import('vue')['triggerRef']>
     readonly tryOnBeforeMount: UnwrapRef<typeof import('@vueuse/core')['tryOnBeforeMount']>
     readonly tryOnBeforeUnmount: UnwrapRef<typeof import('@vueuse/core')['tryOnBeforeUnmount']>

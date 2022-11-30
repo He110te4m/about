@@ -1,6 +1,6 @@
 import { type MaybeComputedRef, type MaybeRef, resolveUnref } from '@vueuse/core'
-import { T, always, any, anyPass, compose, cond, equals, filter, includes, prop, propEq } from 'ramda'
-import { isArray, isBoolean, isNumber, isString } from '~/helpers/typeof'
+import { constant, flow } from 'fp-ts/function'
+import { filter, some } from 'fp-ts/Array'
 
 type GeyKeyType<TData extends {}> = (keyof TData) & (string | number)
 
@@ -25,25 +25,43 @@ export function useObjectListFilter<TData extends {}, TKey extends GeyKeyType<TD
 }
 
 function filterObjectList<TData extends {}, TKey extends GeyKeyType<TData>>(list: TData[], { searchKey, keyword }: RequiredFilterOptions<TData, TKey>) {
-  const isIncludeable = compose(isString, prop(searchKey))
-  const handleIncludeCompare = compose(includes(keyword), prop(searchKey))
-
-  const isEqualable = compose(
-    anyPass([isBoolean, isNumber]),
-    prop(searchKey),
+  const isIncludeable = flow(
+    getFiledValue(searchKey),
+    isString,
   )
-  const handleEqualCompare = propEq(searchKey, keyword)
+  const handleIncludeCompare = flow(
+    getFiledValue<string>(searchKey),
+    includesString(String(keyword)),
+  )
 
-  const isArrayItem = compose(isArray, prop(searchKey))
-  const handleArrayItemCompare = compose(any(equals(keyword)), prop(searchKey))
+  const isEqualable = flow(
+    getFiledValue(searchKey),
+    anyPass([isBoolean, isNumber]),
+  )
+  const equal = cond<number | boolean, boolean>([
+    [isNumber, equalNumber(Number(keyword))],
+    [isBoolean, equalBoolean(Boolean(keyword))],
+  ])(constant(false))
+  const handleEqualCompare = flow(
+    getFiledValue<number | boolean>(searchKey),
+    equal,
+  )
+
+  const isArrayItem = flow(
+    getFiledValue(searchKey),
+    isArray,
+  )
+  const handleArrayItemCompare = flow(
+    getFiledValue<unknown[]>(searchKey),
+    filter(isString),
+    some(equalString(String(keyword))),
+  )
 
   return filter(
     cond([
       [isIncludeable, handleIncludeCompare],
       [isEqualable, handleEqualCompare],
       [isArrayItem, handleArrayItemCompare],
-      [T, always(false)],
-    ]),
-    list,
-  )
+    ])(constant(false)),
+  )(list)
 }

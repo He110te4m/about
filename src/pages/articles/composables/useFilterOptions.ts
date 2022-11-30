@@ -1,20 +1,15 @@
-import { T, always, clone, compose, cond, isEmpty, mergeLeft, not, objOf, prop, propOr } from 'ramda'
+import { has } from 'fp-ts/Record'
 import type { LocationQuery } from 'vue-router'
 import type { Article } from '~/components/article'
 import type { ObjectListFilterOptions } from '~/composables/filter'
 
 type FilterOptions = ObjectListFilterOptions<Article, 'category' | 'tags'>
 
-const defaultFilterOptions: FilterOptions = {
-  searchKey: 'category',
-  keyword: '',
-}
-
 /**
  * Transfer the filter state
  */
 export function useFilterOptions() {
-  const filterOptions = ref<FilterOptions>(clone(defaultFilterOptions))
+  const filterOptions = ref<FilterOptions>(getDefaultFilterOptions())
   const route = useRoute()
   watch(
     () => route.query,
@@ -30,28 +25,36 @@ export function useFilterOptions() {
 }
 
 function getFilterOptions(query: LocationQuery = {}): FilterOptions {
-  const hasCategory = compose(not, isEmpty, propOr('', 'category'))
-  const categorySearchKeyObj = objOf('searchKey', 'category')
-  // @ts-expect-error
-  const genOptionsByCategory = compose(
-    mergeLeft(categorySearchKeyObj),
-    objOf('keyword'),
-    prop('category'),
-  )
+  const hasTag = makeHasQueryKey('tag')
+  const hasCategory = makeHasQueryKey('category')
 
-  const hasTag = compose(not, isEmpty, propOr('', 'tag'))
-  const tagsSearchKeyObj = objOf('searchKey', 'tags')
-  // @ts-expect-error
-  const genOptionsByTag = compose(
-    mergeLeft(tagsSearchKeyObj),
-    objOf('keyword'),
-    prop('tag'),
-  )
-
-  // @ts-expect-error
   return cond([
-    [hasTag, genOptionsByTag],
-    [hasCategory, genOptionsByCategory],
-    [T, always(clone(defaultFilterOptions))],
-  ])(query)
+    [hasTag, composeTagsFilterOptions],
+    [hasCategory, composeCategoryFilterOptions],
+  ])(getDefaultFilterOptions)(query)
+}
+
+function makeHasQueryKey(key: string) {
+  return (query: LocationQuery) => has(key, query)
+}
+
+function composeCategoryFilterOptions({ category }: LocationQuery): FilterOptions {
+  return {
+    searchKey: 'category',
+    keyword: isString(category) ? category : '',
+  }
+}
+
+function composeTagsFilterOptions({ tag }: LocationQuery): FilterOptions {
+  return {
+    searchKey: 'tags',
+    keyword: isString(tag) ? tag : '',
+  }
+}
+
+function getDefaultFilterOptions(): FilterOptions {
+  return {
+    searchKey: 'category',
+    keyword: '',
+  }
 }
