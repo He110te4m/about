@@ -24,7 +24,21 @@ export function useObjectListFilter<TData extends {}, TKey extends GeyKeyType<TD
   }
 }
 
-function filterObjectList<TData extends {}, TKey extends GeyKeyType<TData>>(list: TData[], { searchKey, keyword }: RequiredFilterOptions<TData, TKey>) {
+function filterObjectList<TData extends {}, TKey extends GeyKeyType<TData>>(list: TData[], options: RequiredFilterOptions<TData, TKey>) {
+  const { isIncludeable, handleIncludeCompare } = generateIncludeBranch(options)
+  const { isEqualable, handleEqualCompare } = generateEqualBranch(options)
+  const { isArrayItem, handleArrayItemCompare } = generateArrayItemBranch(options)
+
+  return filter(
+    cond([
+      [isIncludeable, handleIncludeCompare],
+      [isEqualable, handleEqualCompare],
+      [isArrayItem, handleArrayItemCompare],
+    ])(constant(false)),
+  )(list)
+}
+
+function generateIncludeBranch<TData extends {}, TKey extends GeyKeyType<TData>>({ searchKey, keyword }: RequiredFilterOptions<TData, TKey>) {
   const isIncludeable = flow(
     getFiledValue(searchKey),
     isString,
@@ -34,6 +48,10 @@ function filterObjectList<TData extends {}, TKey extends GeyKeyType<TData>>(list
     includesString(String(keyword)),
   )
 
+  return { isIncludeable, handleIncludeCompare }
+}
+
+function generateEqualBranch<TData extends {}, TKey extends GeyKeyType<TData>>({ searchKey, keyword }: RequiredFilterOptions<TData, TKey>) {
   const isEqualable = flow(
     getFiledValue(searchKey),
     anyPass([isBoolean, isNumber]),
@@ -47,6 +65,10 @@ function filterObjectList<TData extends {}, TKey extends GeyKeyType<TData>>(list
     equal,
   )
 
+  return { isEqualable, handleEqualCompare }
+}
+
+function generateArrayItemBranch<TData extends {}, TKey extends GeyKeyType<TData>>({ searchKey, keyword }: RequiredFilterOptions<TData, TKey>) {
   const isArrayItem = flow(
     getFiledValue(searchKey),
     isArray,
@@ -57,11 +79,5 @@ function filterObjectList<TData extends {}, TKey extends GeyKeyType<TData>>(list
     some(equalString(String(keyword))),
   )
 
-  return filter(
-    cond([
-      [isIncludeable, handleIncludeCompare],
-      [isEqualable, handleEqualCompare],
-      [isArrayItem, handleArrayItemCompare],
-    ])(constant(false)),
-  )(list)
+  return { isArrayItem, handleArrayItemCompare }
 }
