@@ -4,7 +4,6 @@ import { concatAll } from 'fp-ts/Monoid'
 import { type Predicate, getMonoidAll, getMonoidAny } from 'fp-ts/Predicate'
 import { first } from 'fp-ts/Semigroup'
 import { fromPredicate, getMonoid as getOptionMonoid, getOrElse, map as objectMap } from 'fp-ts/Option'
-import { contramap } from 'fp-ts/Eq'
 
 export const allPass = <A>(fn: Array<Predicate<A>>): Predicate<A> =>
   concatAll(getMonoidAll<A>())(fn)
@@ -23,5 +22,3 @@ export const cond
           apply(input),
           getOrElse(() => fallback(input)),
         )
-
-export const propEq = <TData extends object, TKey extends keyof TData>(key: TKey) => contramap((data: TData) => data[key])
