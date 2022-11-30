@@ -16,10 +16,10 @@ specifiers:
   cypress: ^11.0.1
   dompurify: ^2.4.1
   eslint: ^8.27.0
+  fp-ts: ^2.13.1
   jsdom: ^20.0.2
   marked: ^4.2.2
   pnpm: ^7.15.0
-  ramda: ^0.28.0
   taze: ^0.8.3
   typescript: ^4.8.4
   unocss: ^0.46.4
@@ -38,8 +38,8 @@ dependencies:
   '@types/ramda': 0.28.20
   '@vueuse/core': 9.5.0_vue@3.2.45
   dompurify: 2.4.1
+  fp-ts: 2.13.1
   marked: 4.2.2
-  ramda: 0.28.0
   vue: 3.2.45
   vue-router: 4.1.6_vue@3.2.45
 
@@ -2795,6 +2795,10 @@ packages:
       mime-types: 2.1.35
     dev: true
 
+  /fp-ts/2.13.1:
+    resolution: {integrity: sha512-0eu5ULPS2c/jsa1lGFneEFFEdTbembJv8e4QKXeVJ3lm/5hyve06dlKZrpxmMwJt6rYen7sxmHHK2CLaXvWuWQ==}
+    dev: false
+
   /fs-extra/10.1.0:
     resolution: {integrity: sha512-oRXApq54ETRj4eMiFzGnHWGy+zo5raudjuxN0b8H7s/RU2oW0Wvsx9O0ACRN/kRq9E8Vu/ReskGB5o3ji+FzHQ==}
     engines: {node: '>=12'}
@@ -4509,10 +4513,6 @@ packages:
   /queue-microtask/1.2.3:
     resolution: {integrity: sha512-NuaNSa6flKT5JaSYQzJok04JzTL1CA6aGhv5rfLW3PgqA+M2ChpZQnAC8h8i4ZFkBS8X5RqkDBHA7r4hej3K9A==}
     dev: true
-
-  /ramda/0.28.0:
-    resolution: {integrity: sha512-9QnLuG/kPVgWvMQ4aODhsBUFKOUmnbUnsSXACv+NCQZcHbeb+v8Lodp8OVxtRULN1/xOyYLLaL6npE6dMq5QTA==}
-    dev: false
 
   /read-package-json-fast/2.0.3:
     resolution: {integrity: sha512-W/BKtbL+dUjTuRL2vziuYhp76s5HZ9qQhd/dKfWIZveD0O40453QNyZhC0e63lqZrAQ4jiOapVoeJ7JrszenQQ==}

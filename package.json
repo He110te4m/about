@@ -17,8 +17,8 @@
     "@types/ramda": "^0.28.20",
     "@vueuse/core": "^9.5.0",
     "dompurify": "^2.4.1",
+    "fp-ts": "^2.13.1",
     "marked": "^4.2.2",
-    "ramda": "^0.28.0",
     "vue": "^3.2.45",
     "vue-router": "^4.1.6"
   },
