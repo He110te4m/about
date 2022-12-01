@@ -146,23 +146,26 @@ function makePointConvertor({ width, height }: ViewSize): (dir: Direction) => Ve
   const getRandomWidth = randomInt(0, width)
   const getRandomHeight = randomInt(0, height)
 
+  const randomWidth = getRandomWidth()
+  const randomHeight = getRandomHeight()
+
+  const isTop = equalString('top')
+  const makeTopVector = constant({ x: randomWidth, y: 0, angle: AngleEnum.a90 })
+
+  const isLeft = equalString('left')
+  const makeLeftVector = constant({ x: 0, y: randomHeight, angle: AngleEnum.a0 })
+
+  const isRight = equalString('right')
+  const makeRightVector = constant({ x: width, y: randomHeight, angle: AngleEnum.a180 })
+
+  const isBottom = equalString('bottom')
+  const makeBottomVector = constant({ x: randomWidth, y: height, angle: -AngleEnum.a90 })
+
   return cond<string, Vector>([
-    [
-      equalString('top'),
-      constant({ x: getRandomWidth(), y: 0, angle: AngleEnum.a90 }),
-    ],
-    [
-      equalString('left'),
-      constant({ x: 0, y: getRandomHeight(), angle: AngleEnum.a0 }),
-    ],
-    [
-      equalString('right'),
-      constant({ x: width, y: getRandomHeight(), angle: AngleEnum.a180 }),
-    ],
-    [
-      equalString('bottom'),
-      constant({ x: getRandomWidth(), y: height, angle: -AngleEnum.a90 }),
-    ],
+    [isTop, makeTopVector],
+    [isLeft, makeLeftVector],
+    [isRight, makeRightVector],
+    [isBottom, makeBottomVector],
   ])(constant({ x: 0, y: 0, angle: AngleEnum.a0 }))
 }
 
