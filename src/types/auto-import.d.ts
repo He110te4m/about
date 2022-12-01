@@ -67,6 +67,7 @@ declare global {
   const isRef: typeof import('vue')['isRef']
   const isString: typeof import('../helpers/typeof')['isString']
   const isSymbol: typeof import('../helpers/typeof')['isSymbol']
+  const isUndefined: typeof import('../helpers/typeof')['isUndefined']
   const makeDestructurable: typeof import('@vueuse/core')['makeDestructurable']
   const markRaw: typeof import('vue')['markRaw']
   const marked: typeof import('../composables/markdown/src/marked')['marked']
@@ -91,7 +92,6 @@ declare global {
   const onUnmounted: typeof import('vue')['onUnmounted']
   const onUpdated: typeof import('vue')['onUpdated']
   const pausableWatch: typeof import('@vueuse/core')['pausableWatch']
-  const propEq: typeof import('../helpers/fp/logic')['propEq']
   const provide: typeof import('vue')['provide']
   const reactify: typeof import('@vueuse/core')['reactify']
   const reactifyObject: typeof import('@vueuse/core')['reactifyObject']
@@ -373,6 +373,7 @@ declare module 'vue' {
     readonly isRef: UnwrapRef<typeof import('vue')['isRef']>
     readonly isString: UnwrapRef<typeof import('../helpers/typeof')['isString']>
     readonly isSymbol: UnwrapRef<typeof import('../helpers/typeof')['isSymbol']>
+    readonly isUndefined: UnwrapRef<typeof import('../helpers/typeof')['isUndefined']>
     readonly makeDestructurable: UnwrapRef<typeof import('@vueuse/core')['makeDestructurable']>
     readonly markRaw: UnwrapRef<typeof import('vue')['markRaw']>
     readonly marked: UnwrapRef<typeof import('../composables/markdown/src/marked')['marked']>
@@ -397,7 +398,6 @@ declare module 'vue' {
     readonly onUnmounted: UnwrapRef<typeof import('vue')['onUnmounted']>
     readonly onUpdated: UnwrapRef<typeof import('vue')['onUpdated']>
     readonly pausableWatch: UnwrapRef<typeof import('@vueuse/core')['pausableWatch']>
-    readonly propEq: UnwrapRef<typeof import('../helpers/fp/logic')['propEq']>
     readonly provide: UnwrapRef<typeof import('vue')['provide']>
     readonly reactify: UnwrapRef<typeof import('@vueuse/core')['reactify']>
     readonly reactifyObject: UnwrapRef<typeof import('@vueuse/core')['reactifyObject']>

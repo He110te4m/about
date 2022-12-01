@@ -1,188 +1,195 @@
-import type { Line, Point } from '../types'
+import { filter, map, reduce } from 'fp-ts/Array'
+import { MonoidAny } from 'fp-ts/boolean'
+import { constant, flow } from 'fp-ts/function'
+import { Ord } from 'fp-ts/number'
+import { between } from 'fp-ts/Ord'
+import { randomBool, randomInt } from 'fp-ts/Random'
 
-type BranchesPoint = Point & { angle: number }
-type Direction = 'left' | 'right' | 'top' | 'bottom'
-type DrawingZoneSize = Record<'width' | 'height', number>
-
-enum angleEnum {
+type Direction = 'top' | 'left' | 'right' | 'bottom'
+type Point = Record<'x' | 'y', number>
+type Line = Record<'start' | 'end', Point>
+enum AngleEnum {
   a0 = 0,
   a15 = Math.PI / 12,
   a90 = Math.PI / 2,
   a180 = Math.PI,
 }
+type Vector = Point & { angle: AngleEnum }
+
+type MixedPoint = Direction | Vector
+
+type ViewSize = Record<'width' | 'height', number>
 
 interface BranchesDrawerOptions {
-  lineLength: [number, number]
-  branchNum: number
-  lineDestroyedTimes: number
+  startPoint: MixedPoint[]
+  branchLengthRange: [number, number]
+  branchDestroyedTimes: number
+  viewSize: ViewSize
 }
-
-const defaultBranchesDrawerOptions: BranchesDrawerOptions = {
-  lineLength: [5, 7],
-  branchNum: 2,
-  lineDestroyedTimes: 5,
-}
-
-export type BranchesStartPosition = BranchesPoint | Direction
 
 export class BranchesDrawer {
-  #points: BranchesPoint[]
-  #size: DrawingZoneSize
-  #options: BranchesDrawerOptions
+  #vectors: Vector[] = []
+  #getBranchLength: () => number
+  #checkOverView: (point: Point) => boolean
+  #formatVectors: (points: BranchesDrawerOptions['startPoint']) => Vector[]
 
-  constructor(startPoints: BranchesStartPosition[], size: DrawingZoneSize, options: Partial<BranchesDrawerOptions> = {}) {
-    this.#options = {
-      ...defaultBranchesDrawerOptions,
-      ...options,
+  constructor({ startPoint, branchLengthRange, branchDestroyedTimes, viewSize }: BranchesDrawerOptions) {
+    this.#formatVectors = makeFormatVectors(viewSize)
+    this.reset(startPoint)
+
+    this.#getBranchLength = makeRandomLengthFactory(branchLengthRange)
+
+    const overSizeLength = Math.max(...branchLengthRange) * branchDestroyedTimes
+    this.#checkOverView = makeCheckOverView(overSizeLength, viewSize)
+  }
+
+  reset(points: BranchesDrawerOptions['startPoint']) {
+    this.#vectors = this.#formatVectors(points)
+  }
+
+  next(whetherToRandomlyPrune = false) {
+    if (!this.#vectors.length) {
+      return []
     }
-    this.#size = size
-    this.#points = this.formatPoints(startPoints)
-  }
 
-  pruning(cb: (point: BranchesPoint, index: number, array: BranchesPoint[]) => boolean) {
-    this.#points = this.#points.filter(cb)
-  }
+    // generate lines
+    const convertVectorToLine = makeConvertVectorToLine(this.#getBranchLength)
+    const originLines: Line[] = map(convertVectorToLine)(this.#vectors)
 
-  setPoints(points: BranchesStartPosition[]) {
-    this.#points = this.formatPoints(points)
-  }
-
-  generateNextSteps() {
-    const points = this.#points
-    const nextPoints: BranchesPoint[] = []
-    const lines: Line[] = []
-
-    points.forEach(
-      (point) => {
-        const line = this.generateLineByBranchPoint(point)
-        lines.push(line)
-
-        const { x, y } = line.end
-
-        // The line has overflowed the screen and it will be destroyed automatically
-        if (this.checkLinesOverflow({ x, y })) {
-          return
-        }
-
-        const angleList = this.getNextAngleList(point.angle)
-
-        nextPoints.push(...angleList.map(angle => ({
-          x,
-          y,
-          angle,
-        })))
-      },
+    // prune lines
+    const purneOverView = flow(
+      getFiledValue<Point, Line>('end'),
+      this.#checkOverView,
     )
+    const filterLines = filter(
+      purneOverView,
+      // allPass([pruneRandomly, purneOverView]),
+    )
+    const lines = filterLines(originLines)
 
-    this.#points = nextPoints
+    const pruneRandomly = anyPass([
+      constant(!whetherToRandomlyPrune),
+      randomBool,
+    ])
+    const newVectors = createNextVectors(lines, this.#vectors)
+    this.#vectors = filter(pruneRandomly)(newVectors)
 
     return lines
   }
+}
 
-  private checkLinesOverflow({ x, y }: Point) {
-    const { width, height } = this.#size
-    const overSize = Math.max(...this.#options.lineLength) * this.#options.lineDestroyedTimes
+function createNextVectors(lines: Line[], originVectors: Vector[]): Vector[] {
+  const angleMap = createAngleMap(originVectors)
 
-    return x < 0 - overSize
-      || y < 0 - overSize
-      || x > width + overSize
-      || y > height + overSize
+  return makeVectors(lines, angleMap)
+}
+
+function createAngleMap(vectors: Vector[]) {
+  const angleMap: Record<string, AngleEnum> = {}
+  const updateAngleMap = reduce(angleMap, (obj: Record<string, AngleEnum>, vector: Vector) => {
+    obj[createKeyByPoint(vector)] = vector.angle
+    return obj
+  })
+  updateAngleMap(vectors)
+
+  return angleMap
+}
+
+function makeVectors(lines: Line[], angleMap: Record<string, AngleEnum>) {
+  return reduce<Line, Vector[]>([], (list: Vector[], { start, end }: Line) => {
+    const key = createKeyByPoint(start)
+    const newAngles: AngleEnum[] = getNextAngleList(angleMap[key])
+
+    const makeVectors = map<AngleEnum, Vector>((angle: AngleEnum) => ({ ...end, angle }))
+
+    return list.concat(makeVectors(newAngles))
+  })(lines)
+}
+
+function createKeyByPoint({ x, y }: Point): string {
+  return `${x}-${y}`
+}
+
+function getNextAngleList(angle?: AngleEnum): AngleEnum[] {
+  if (isUndefined(angle)) {
+    return []
   }
 
-  private getNextAngleList(angle: number): number[] {
-    const { branchNum } = this.#options
-    const isOdd = Boolean(branchNum & 1)
-    const num = branchNum >> 1
+  return [
+    angle - AngleEnum.a15,
+    angle + AngleEnum.a15,
+  ]
+}
 
-    const angleList: number[] = []
+function makeConvertVectorToLine(getLength: () => number) {
+  return ({ x, y, angle }: Vector): Line => {
+    const distance = getLength()
+    const dx = distance * Math.cos(angle)
+    const dy = distance * Math.sin(angle)
 
-    new Array(branchNum + Number(!isOdd))
-      .fill(null)
-      .forEach(
-        (_, idx) => {
-          if (idx === num) {
-            if (isOdd) {
-              angleList.push(0)
-            }
-            return
-          }
-
-          angleList.push(angle + (num - idx) * angleEnum.a15)
-        },
-      )
-
-    return angleList
-  }
-
-  private generateLineByBranchPoint(point: BranchesPoint): Line {
     return {
-      start: reactiveOmit(reactive(point), 'angle'),
-      end: this.getLineEndPoint(point),
+      start: { x, y },
+      end: { x: x + dx, y: y + dy },
     }
   }
+}
 
-  private getLineEndPoint(point: BranchesPoint): Point {
-    const { x, y, angle } = point
-    const lineLength = this.getBranchLength()
+function makeFormatVectors(size: ViewSize): (points: MixedPoint[]) => Vector[] {
+  const getPointByDirectory = makePointConvertor(size)
 
-    const dx = lineLength * Math.cos(angle)
-    const dy = lineLength * Math.sin(angle)
+  const formatVector = (point: MixedPoint) => isString(point) ? getPointByDirectory(point) : point
 
-    return {
-      x: x + dx,
-      y: y + dy,
-    }
-  }
+  return map<MixedPoint, Vector>(formatVector)
+}
 
-  private getBranchLength() {
-    const [min, max] = this.#options.lineLength
-    return Math.floor(Math.random() * Math.abs(max - min)) + Math.min(min, max)
-  }
+function makePointConvertor({ width, height }: ViewSize): (dir: Direction) => Vector {
+  const getRandomWidth = randomInt(0, width)
+  const getRandomHeight = randomInt(0, height)
 
-  private formatPoints(points: BranchesStartPosition[]) {
-    return points.map(
-      item => typeof item === 'object' ? item : this.getPointByDirection(item),
-    )
-  }
+  return cond<string, Vector>([
+    [
+      equalString('top'),
+      constant({ x: getRandomWidth(), y: 0, angle: AngleEnum.a90 }),
+    ],
+    [
+      equalString('left'),
+      constant({ x: 0, y: getRandomHeight(), angle: AngleEnum.a0 }),
+    ],
+    [
+      equalString('right'),
+      constant({ x: width, y: getRandomHeight(), angle: AngleEnum.a180 }),
+    ],
+    [
+      equalString('bottom'),
+      constant({ x: getRandomWidth(), y: height, angle: -AngleEnum.a90 }),
+    ],
+  ])(constant({ x: 0, y: 0, angle: AngleEnum.a0 }))
+}
 
-  private getPointByDirection(dir: Direction): BranchesPoint {
-    let x = 0
-    let y = 0
-    let angle = 0
+function makeRandomLengthFactory(list: number[]) {
+  const { min, max } = getMinMax(list)
 
-    const { width, height } = this.#size
+  return randomInt(min, max)
+}
 
-    switch (dir) {
-      case 'bottom':
-        x = Math.random() * width
-        y = height
-        angle = -angleEnum.a90
-        break
+function makeCheckOverView(overSizeLength: number, { width, height }: ViewSize) {
+  const minWidth = 0 - overSizeLength
+  const maxWidth = width + overSizeLength
 
-      case 'left':
-        x = 0
-        y = Math.random() * height
-        angle = angleEnum.a0
-        break
+  const minHeight = 0 - overSizeLength
+  const maxHeight = height + overSizeLength
 
-      case 'right':
-        x = width
-        y = Math.random() * height
-        angle = angleEnum.a180
-        break
+  const numBetween = between(Ord)
 
-      case 'top':
-        x = Math.random() * width
-        y = 0
-        angle = angleEnum.a90
-        break
+  return ({ x, y }: Point) => MonoidAny.concat(
+    numBetween(minWidth, maxWidth)(x),
+    numBetween(minHeight, maxHeight)(y),
+  )
+}
 
-      default:
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars, no-case-declarations
-        const n: never = dir
-        break
-    }
-
-    return { x, y, angle }
+function getMinMax(list: number[]) {
+  return {
+    min: Math.min(...list),
+    max: Math.max(...list),
   }
 }
