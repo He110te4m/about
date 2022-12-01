@@ -1,0 +1,45 @@
+.typography {
+  text-align: left;
+}
+
+/* header start */
+.typography h1 {
+  font-size: var(--font-3xl)
+}
+.typography h2 {
+  font-size: var(--font-2xl)
+}
+.typography h3 {
+  font-size: var(--font-xl)
+}
+.typography h4 {
+  font-size: var(--font-lg)
+}
+.typography h5 {
+  font-size: var(--font-md)
+}
+.typography h1,
+.typography h2,
+.typography h3,
+.typography h4,
+.typography h5 {
+  font-weight: bold;
+  margin: 0.5em 0;
+}
+/* header end */
+
+/* code start */
+.typography pre {
+  border: 1px solid #ddd;
+  padding: var(--gap-sm) var(--gap-lg);
+  border-radius: 2px;
+}
+/* code end */
+
+/* paragraph start */
+.typography p {
+  line-height: var(--size-xl);
+  margin: var(--size-sm) 0;
+  text-indent: 2em;
+}
+/* paragraph end */
