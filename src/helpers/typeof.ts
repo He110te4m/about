@@ -1,3 +1,7 @@
+export function isUndefined(val: unknown): val is undefined {
+  return typeof val === 'undefined'
+}
+
 export function isBoolean(val: unknown): val is boolean {
   return typeof val === 'boolean'
 }

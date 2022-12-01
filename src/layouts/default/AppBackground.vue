@@ -1,51 +1,55 @@
 <script lang='ts' setup>
-import { CanvasOperator } from './helpers/canvas'
-import { BranchesDrawer, type BranchesStartPosition } from './helpers/drawer'
-import { renderBranches } from './helpers/renderBranches'
+import { CanvasOperator } from './helpers/canvasOperator'
+import { BranchesDrawer } from './helpers/drawer'
 
 const el = ref<HTMLCanvasElement>()
-
-let rafControl: ReturnType<typeof useRafFn> | null = null
-let reset: () => void = () => {}
 
 onMounted(() => {
   const { width, height } = reactive(useWindowSize())
   const size = { width, height }
 
-  const branchesStart: BranchesStartPosition[] = ['top', 'bottom', 'left', 'right']
-  const drawer = new BranchesDrawer(branchesStart, size)
+  const drawer = new BranchesDrawer({
+    startPoint: [],
+    branchLengthRange: [8, 12],
+    viewSize: size,
+    branchDestroyedTimes: 3,
+  })
 
   const canvasHandler = new CanvasOperator(el.value!, size)
-  const { requestFrame, reset: resetRender } = renderBranches(canvasHandler, drawer, {
-    minTimes: 3,
-    minInterval: 1000 / 40,
-    filterRatio: 0.5,
-  })
-  rafControl = useRafFn(() => {
-    requestFrame(rafControl?.pause)
-  }, { immediate: false })
 
-  const drawerColor = '#ddd3'
-  reset = () => {
+  let times = 0
+  let lastTime = performance.now()
+  const minTimes = 3
+  const minInterval = 1000 / 40
+
+  const rafControl = useRafFn(requestFrame, { immediate: false })
+
+  function requestFrame() {
+    if (performance.now() - lastTime < minInterval) {
+      return
+    }
+
+    const lines = drawer.next(times > minTimes)
+    if (!lines.length) {
+      rafControl.pause()
+    }
+
+    lines.forEach(line => canvasHandler.drawCanvasLine(line))
+
+    times++
+    lastTime = performance.now()
+  }
+
+  const reset = () => {
     canvasHandler.reset({
-      strokeStyle: drawerColor,
+      strokeStyle: '#ddd3',
     })
-    drawer.setPoints(branchesStart)
-    resetRender()
+    drawer.reset(['top', 'left', 'right', 'bottom'])
   }
 
-  startAnimation()
-})
-
-function startAnimation() {
-  if (!rafControl) {
-    return
-  }
-
-  rafControl.pause()
   reset()
-  rafControl.resume()
-}
+  nextTick(rafControl.resume)
+})
 </script>
 
 <template>
