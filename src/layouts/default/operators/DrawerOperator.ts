@@ -27,7 +27,7 @@ interface BranchesDrawerOptions {
   viewSize: ViewSize
 }
 
-export class BranchesDrawer {
+export class DrawerOperator {
   #vectors: Vector[] = []
   #getBranchLength: () => number
   #checkOverView: (point: Point) => boolean
