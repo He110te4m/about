@@ -1,6 +1,6 @@
 <script lang='ts' setup>
-import { CanvasOperator } from './helpers/canvasOperator'
-import { BranchesDrawer } from './helpers/drawer'
+import { CanvasOperator } from './operators/CanvasOperator'
+import { DrawerOperator } from './operators/DrawerOperator'
 
 const el = ref<HTMLCanvasElement>()
 
@@ -8,7 +8,7 @@ onMounted(() => {
   const { width, height } = reactive(useWindowSize())
   const size = { width, height }
 
-  const drawer = new BranchesDrawer({
+  const drawer = new DrawerOperator({
     startPoint: [],
     branchLengthRange: [8, 12],
     viewSize: size,
