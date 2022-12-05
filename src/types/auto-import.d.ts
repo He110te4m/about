@@ -41,6 +41,7 @@ declare global {
   const equalNumber: typeof import('../helpers/fp/equal')['equalNumber']
   const equalString: typeof import('../helpers/fp/equal')['equalString']
   const extendRef: typeof import('@vueuse/core')['extendRef']
+  const fromBoolean: typeof import('../helpers/fp/either')['fromBoolean']
   const getArticle: typeof import('../apis/article/api')['getArticle']
   const getArticleList: typeof import('../apis/article/api')['getArticleList']
   const getCurrentInstance: typeof import('vue')['getCurrentInstance']
@@ -347,6 +348,7 @@ declare module 'vue' {
     readonly equalNumber: UnwrapRef<typeof import('../helpers/fp/equal')['equalNumber']>
     readonly equalString: UnwrapRef<typeof import('../helpers/fp/equal')['equalString']>
     readonly extendRef: UnwrapRef<typeof import('@vueuse/core')['extendRef']>
+    readonly fromBoolean: UnwrapRef<typeof import('../helpers/fp/either')['fromBoolean']>
     readonly getArticle: UnwrapRef<typeof import('../apis/article/api')['getArticle']>
     readonly getArticleList: UnwrapRef<typeof import('../apis/article/api')['getArticleList']>
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
