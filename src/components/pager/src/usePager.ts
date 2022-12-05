@@ -1,4 +1,10 @@
-import { type MaybeComputedRef, type MaybeRef, resolveUnref } from '@vueuse/core'
+import { type MaybeComputedRef, type MaybeRef } from '@vueuse/core'
+import { append, mapWithIndex, prepend } from 'fp-ts/Array'
+import { constant, flow, pipe } from 'fp-ts/function'
+import { match } from 'fp-ts/Either'
+import { Ord } from 'fp-ts/number'
+import { clamp } from 'fp-ts/Ord'
+import { fromBoolean } from '~/helpers/fp/either'
 
 export interface PagerOptions {
   showPageItemNum?: number
@@ -7,9 +13,7 @@ export interface PagerOptions {
 export type PagerItem = XOR<[{ type: 'page'; value: number }, { type: 'sep' }]>
 
 export function usePager(originPage: MaybeComputedRef<number>, originMaxPage: MaybeComputedRef<number>, originOptions: MaybeRef<PagerOptions> = {}) {
-  const page = computed(() => resolveUnref(originPage))
-  const maxPage = computed(() => resolveUnref(originMaxPage))
-  const options = computed(() => resolveUnref(originOptions))
+  const [page, maxPage, options] = batchResolveComputed(originPage, originMaxPage, originOptions)
 
   const pages = computed(() => getCenterPage(page.value, maxPage.value, options.value.showPageItemNum ?? 5))
 
@@ -18,45 +22,59 @@ export function usePager(originPage: MaybeComputedRef<number>, originMaxPage: Ma
   }
 }
 
-function getCenterPage(page: number, maxPage: number, originLimit: number): PagerItem[] {
-  const limit = originLimit + (1 - originLimit % 2)
-  if (maxPage <= limit) {
-    return new Array(maxPage).fill(null).map((_, idx) => ({ type: 'page', value: idx + 1 }))
+function getCenterPage(page: number, maxPage: number, onShowPageNumber: number): PagerItem[] {
+  // ensure `pageNum` is odd
+  const pageNum = onShowPageNumber + (1 - onShowPageNumber % 2)
+
+  if (maxPage <= pageNum) {
+    return createPageItemByLength(maxPage)
   }
 
   const pageMinLimit = 1
-  const pageMaxLimit = maxPage - limit + 1
+  const pageMaxLimit = maxPage - pageNum + 1
 
-  const startPage = Math.min(
-    Math.max(pageMinLimit, page - (limit >> 1)),
-    pageMaxLimit,
-  )
-  let pages: PagerItem[] = new Array(limit).fill(null).map((_, idx) => ({ type: 'page', value: startPage + idx }))
+  const getValueBetweenNumberRange = clamp(Ord)(pageMinLimit, pageMaxLimit)
+  const startPage = getValueBetweenNumberRange(page - (pageNum >> 1))
+  const pages: PagerItem[] = createPageItemByLength(pageNum, startPage)
 
-  pages = getPrevList().concat(
+  return pipe(
     pages,
-    getNextList(maxPage),
+    handlePrevPager(startPage, pageMinLimit),
+    handleLastPager(startPage, pageMaxLimit),
+  )
+}
+
+function handlePrevPager(start: number, minLimit: number) {
+  return makeHandlePagerFn(start, minLimit, prepend)
+}
+
+function handleLastPager(start: number, maxLimit: number) {
+  return makeHandlePagerFn(start, maxLimit, append)
+}
+
+function makeHandlePagerFn(start: number, limit: number, appendFn: typeof append | typeof prepend) {
+  const checkFn = fromBoolean(equalNumber(limit))
+  const addPagerFn = flow(
+    appendFn<PagerItem>(createPagerItem()),
+    appendFn(createPagerItem(limit)),
   )
 
-  if (startPage === pageMinLimit) {
-    pages = pages.slice(2)
-  } else if (startPage === pageMaxLimit) {
-    pages = pages.slice(0, -2)
-  }
-
-  return pages
+  return (pagers: PagerItem[]) => pipe(
+    start,
+    checkFn,
+    match(
+      constant(addPagerFn(pagers)),
+      constant(pagers),
+    ),
+  )
 }
 
-function getPrevList(startPage = 1): PagerItem[] {
-  return [
-    { type: 'page', value: startPage },
-    { type: 'sep' },
-  ]
+function createPagerItem(page?: number): PagerItem {
+  return page ? { type: 'page', value: page } : { type: 'sep' }
 }
 
-function getNextList(endPage: number): PagerItem[] {
-  return [
-    { type: 'sep' },
-    { type: 'page', value: endPage },
-  ]
+function createPageItemByLength(len: number, startPage = 1) {
+  const createPageItemByList = mapWithIndex<number, PagerItem>((idx, startPage) => ({ type: 'page', value: startPage + idx }))
+
+  return createPageItemByList(new Array(len).fill(startPage))
 }
