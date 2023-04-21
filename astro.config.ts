@@ -10,6 +10,6 @@ export default defineConfig({
     mdx(),
     sitemap(),
   ],
-  // output: 'server',
+  output: import.meta.env.DEV ? 'static' : 'server',
   adapter: deployNetlify(),
 })
