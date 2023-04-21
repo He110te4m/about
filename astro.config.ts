@@ -10,6 +10,6 @@ export default defineConfig({
     mdx(),
     sitemap(),
   ],
-  output: 'server',
+  // output: 'server',
   adapter: deployNetlify(),
 })

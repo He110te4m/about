@@ -6,7 +6,6 @@
       "@components/*": ["src/components/*"],
       "@/*": ["src/*"],
     },
-    "strictNullChecks": true,
-    "verbatimModuleSyntax": true
+    "strictNullChecks": true
   }
 }
