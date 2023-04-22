@@ -10,6 +10,13 @@ export default defineConfig({
     mdx(),
     sitemap(),
   ],
+  vite: {
+    server: {
+      watch: {
+        usePolling: true,
+      },
+    },
+  },
   output: import.meta.env.DEV ? 'static' : 'server',
   adapter: import.meta.env.DEV ? undefined : deployNetlify(),
 })
