@@ -1,0 +1,42 @@
+---
+import type { HTMLAttributes } from 'astro/types'
+
+export interface Props extends Omit<HTMLAttributes<'a'>, 'href'> {
+  navs: Record<'url' | 'title', string>[]
+}
+
+const { navs, class: className, ...aTagProps } = Astro.props
+
+const { pathname } = Astro.url;
+const checkActive = (href: string) => href === pathname || href === pathname.replace(/\/$/, '')
+---
+
+<nav>
+  <ul>
+    {
+      navs.map(
+        nav =>
+          <li>
+            <a href={nav.url} class:list={[className, { active: checkActive(nav.url) }]} {...aTagProps}>
+              {nav.title}
+            </a>
+          </li>
+      )
+    }
+  </ul>
+</nav>
+
+<style>
+ul {
+  display: flex;
+  gap: 8px;
+}
+a {
+  display: inline-block;
+  line-height: 24px;
+  margin-block: 4px;
+}
+a.active {
+  font-weight: bold;
+}
+</style>
