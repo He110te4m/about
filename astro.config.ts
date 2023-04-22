@@ -11,5 +11,5 @@ export default defineConfig({
     sitemap(),
   ],
   output: import.meta.env.DEV ? 'static' : 'server',
-  adapter: deployNetlify(),
+  adapter: import.meta.env.DEV ? undefined : deployNetlify(),
 })
