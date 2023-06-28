@@ -2,7 +2,8 @@
 title: "原型继承及其衍生的问题"
 description: "原型继承是 ES6 以前实现继承的方式之一，但是其衍生出来的问题，可谓是不少，本文以一道面试题为引，引出 JS 内部的一些机制"
 pubDate: 1553096026000
-category: "前端开发"
+category: "Front end"
+tags: ["Prototype", "ES6"]
 ---
 
 ## 面试题 ###
@@ -11,12 +12,12 @@ category: "前端开发"
 
 ```js
 // 父类
-function A (name) {
-    this.name = name || 'Tom'
+function A(name) {
+  this.name = name || 'Tom'
 }
 
 // 子类
-function B () {
+function B() {
 
 }
 

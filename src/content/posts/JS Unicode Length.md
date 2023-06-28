@@ -2,7 +2,8 @@
 title: "JS Unicode 编码引发的字符串长度计算问题"
 description: "Unicode 特殊字符长度计算问题"
 pubDate: 1519568277000
-category: "前端开发"
+category: "Front end"
+tags: ["Unicode", "charset", "encode"]
 ---
 
 # 一. 问题重现
@@ -20,7 +21,7 @@ category: "前端开发"
 借助另一门语言：C#，进行字符串长度的验证，发现结果和 PHP 是一样的，也就是说，应该是 JS 解析出现了问题，查看了下 JS 的取 ASCII 函数以及 PHP 的取 ASCII 函数，JS 的手册写的是这样的：
 
 ```js
-charCodeAt() 方法可返回指定位置的字符的 Unicode 编码。这个返回值是 0 - 65535 之间的整数。
+charCodeAt() // 方法可返回指定位置的字符的 Unicode 编码。这个返回值是 0 - 65535 之间的整数。
 ```
 
 而 PHP 中取的是 UTF8（函数参考：[PHP 文档](http://php.net/manual/zh/function.ord.php#109812)），所以感觉应该是 Unicode 和 UTF8 之间出了问题

@@ -3,6 +3,7 @@ title: "GoLang 结构体构造函数研究"
 description: "参考 Rob Pike 博客的设计方法研究较为灵活的构造方式"
 pubDate: 1548406522000
 category: "GoLang"
+tags: ["constructor", "Algorithm"]
 ---
 
 ## GoLang 构造函数
