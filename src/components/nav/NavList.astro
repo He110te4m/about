@@ -17,7 +17,7 @@ const checkActive = (href: string) => href === pathname || href === pathname.rep
       navs.map(
         nav =>
           <li>
-            <a href={nav.url} class:list={[className, { active: checkActive(nav.url) }]} {...aTagProps}>
+            <a href={nav.url} class:list={[className, 'link', { active: checkActive(nav.url) }]} {...aTagProps}>
               {nav.title}
             </a>
           </li>

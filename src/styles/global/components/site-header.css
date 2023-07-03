@@ -1,0 +1,12 @@
+.site-header {
+  --color: #3E3355;
+  --shadow-color: #8AE6FB;
+
+  color: var(--color);
+  text-shadow: var(--shadow-color) 4px 2px 0;
+}
+
+.dark .site-header {
+  --color: #FFFFFF;
+  --shadow-color: #3B82F6;
+}

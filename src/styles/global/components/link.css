@@ -1,10 +1,10 @@
-a {
+a.link {
   --color: LinkText;
   color: var(--color);
 }
 
-a:hover,
-a:focus-within {
+a.link:hover,
+a.link:focus-within {
   color: hsl(from var(--color));
   text-decoration: underline;
 }

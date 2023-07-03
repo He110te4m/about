@@ -1,3 +1,5 @@
-@import './layout.css';
-@import './link.css';
-@import './reset.css';
+@layer basic, layout, page, component;
+
+@import './basic/index.css' layer(basic);
+@import './layout/index.css' layer(layout);
+@import './components/index.css' layer(component);

@@ -1,7 +1,7 @@
 ---
-import BaseHead from "@/components/layout/BaseHead.astro";
-import Header from "@/components/layout/Header.astro";
-import Footer from "@/components/layout/Footer.astro";
+import BaseHead from "@/layouts/BaseHead.astro";
+import Header from "@/layouts/Header.astro";
+import Footer from "@/layouts/Footer.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "@/consts";
 import { getCollection } from "astro:content";
 import FormattedDate from "@/components/FormattedDate.astro";
@@ -42,7 +42,7 @@ const posts = (await getCollection("posts")).sort(
             posts.map((post) => (
               <li>
                 <FormattedDate date={post.data.pubDate} />
-                <a href={`/posts/${post.slug}/`}>{post.data.title}</a>
+                <a class="link" href={`/posts/${post.slug}/`}>{post.data.title}</a>
               </li>
             ))
           }
