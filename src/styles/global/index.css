@@ -2,4 +2,3 @@
 
 @import './basic/index.css' layer(basic);
 @import './layout/index.css' layer(layout);
-@import './components/index.css' layer(component);

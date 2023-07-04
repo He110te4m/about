@@ -1,5 +1,5 @@
 ---
-import HeaderLink from "@/components/HeaderLink.astro";
+import SiteHeader from "@/components/display/SiteHeader.astro";
 import { SITE_TITLE } from "@/consts";
 import NavList from '@/components/nav/NavList.astro';
 
@@ -12,9 +12,7 @@ const navs = [
 ---
 
 <header>
-  <h1 class="site-header">
-    {SITE_TITLE}
-  </h1>
+  <SiteHeader title={SITE_TITLE} />
   <NavList navs={navs} />
 </header>
 <style>

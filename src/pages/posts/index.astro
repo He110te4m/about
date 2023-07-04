@@ -4,7 +4,8 @@ import Header from "@/layouts/Header.astro";
 import Footer from "@/layouts/Footer.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "@/consts";
 import { getCollection } from "astro:content";
-import FormattedDate from "@/components/FormattedDate.astro";
+import FormattedDate from "@/components/display/FormattedDate.astro";
+import CommonLink from "@/components/display/CommonLink.astro";
 
 const posts = (await getCollection("posts")).sort(
   (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime()
@@ -42,7 +43,7 @@ const posts = (await getCollection("posts")).sort(
             posts.map((post) => (
               <li>
                 <FormattedDate date={post.data.pubDate} />
-                <a class="link" href={`/posts/${post.slug}/`}>{post.data.title}</a>
+                <CommonLink href={ `/posts/${ post.slug }/` }>{ post.data.title }</CommonLink>
               </li>
             ))
           }

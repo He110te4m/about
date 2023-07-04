@@ -1,5 +1,6 @@
 ---
 import type { HTMLAttributes } from 'astro/types'
+import CommonLink from '@/components/display/CommonLink.astro'
 
 export interface Props extends Omit<HTMLAttributes<'a'>, 'href'> {
   navs: Record<'url' | 'title', string>[]
@@ -17,9 +18,9 @@ const checkActive = (href: string) => href === pathname || href === pathname.rep
       navs.map(
         nav =>
           <li>
-            <a href={nav.url} class:list={[className, 'link', { active: checkActive(nav.url) }]} {...aTagProps}>
+            <CommonLink href={ nav.url } class:list={[className, 'link', { active: checkActive(nav.url) }]} { ...aTagProps }>
               {nav.title}
-            </a>
+            </CommonLink>
           </li>
       )
     }
