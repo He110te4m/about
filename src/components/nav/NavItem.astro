@@ -1,0 +1,27 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import CommonLink from "@/components/display/CommonLink.astro";
+
+type Props = HTMLAttributes<"a">;
+const { class: className = '', ...props } = Astro.props
+---
+
+<CommonLink class={`${className} nav-item`} {...props}>
+  <slot />
+</CommonLink>
+
+<style>
+  .nav-item {
+    display: inline-block;
+    line-height: 24px;
+    margin-block: 4px;
+  }
+  .nav-item.active {
+    font-weight: bold;
+  }
+  .nav-item.link:hover,
+  .nav-item.link:focus-within,
+  .nav-item.link.active {
+    text-decoration: none;
+  }
+</style>

@@ -1,6 +1,6 @@
 ---
 import type { HTMLAttributes } from 'astro/types'
-import CommonLink from '@/components/display/CommonLink.astro'
+import NavItem from './NavItem.astro'
 
 export interface Props extends Omit<HTMLAttributes<'a'>, 'href'> {
   navs: Record<'url' | 'title', string>[]
@@ -18,9 +18,9 @@ const checkActive = (href: string) => href === pathname || href === pathname.rep
       navs.map(
         nav =>
           <li>
-            <CommonLink href={ nav.url } class:list={[className, 'link', { active: checkActive(nav.url) }]} { ...aTagProps }>
+            <NavItem href={ nav.url } class:list={[className, 'link', { active: checkActive(nav.url) }]} { ...aTagProps }>
               {nav.title}
-            </CommonLink>
+            </NavItem>
           </li>
       )
     }
@@ -31,13 +31,5 @@ const checkActive = (href: string) => href === pathname || href === pathname.rep
 ul {
   display: flex;
   gap: 8px;
-}
-a {
-  display: inline-block;
-  line-height: 24px;
-  margin-block: 4px;
-}
-a.active {
-  font-weight: bold;
 }
 </style>
