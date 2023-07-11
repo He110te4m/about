@@ -1,4 +1,0 @@
-body {
-  width: clamp(640px, 80%, 800px);
-  line-height: 1.5;
-}
