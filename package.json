@@ -58,7 +58,6 @@
     "vite-plugin-pages": "^0.31.0",
     "vite-plugin-pwa": "^0.16.4",
     "vite-plugin-vue-component-preview": "^1.1.6",
-    "vite-plugin-vue-devtools": "^0.4.12",
     "vite-plugin-vue-layouts": "^0.8.0",
     "vite-plugin-vue-markdown": "^0.23.5",
     "vite-plugin-webfont-dl": "^3.7.6",
