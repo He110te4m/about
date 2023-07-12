@@ -1,6 +1,8 @@
 import { type Meta } from '@unhead/vue'
 
 export function getOpenGraphMeta({ title, description }: Record<'title' | 'description', string>): Meta[] {
+  const route = useRoute()
+
   return [
     {
       property: 'og:type',
@@ -8,7 +10,7 @@ export function getOpenGraphMeta({ title, description }: Record<'title' | 'descr
     },
     {
       property: 'og:url',
-      content: import.meta.url,
+      content: () => new URL(route.fullPath, import.meta.url).href,
     },
     {
       property: 'og:title',

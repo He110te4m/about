@@ -1,6 +1,8 @@
 import { type Meta } from '@unhead/vue'
 
 export function getTwitterMeta({ title, description }: Record<'title' | 'description', string>): Meta[] {
+  const route = useRoute()
+
   return [
     {
       property: 'twitter:card',
@@ -8,7 +10,7 @@ export function getTwitterMeta({ title, description }: Record<'title' | 'descrip
     },
     {
       property: 'twitter:url',
-      content: import.meta.url,
+      content: () => new URL(route.fullPath, import.meta.url).href,
     },
     {
       property: 'twitter:title',
