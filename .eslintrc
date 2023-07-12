@@ -2,5 +2,26 @@
   "extends": [
     "@antfu",
     "@unocss"
-  ]
+  ],
+  "rules": {
+    "curly": [
+      2,
+      "all"
+    ],
+    "@typescript-eslint/brace-style": [
+      2,
+      "1tbs"
+    ],
+    "@typescript-eslint/ban-ts-comment": 0,
+    "vue/custom-event-name-casing": [ 2, "kebab-case" ],
+    "spaced-comment": [
+      "error",
+      "always",
+      {
+        "line": {
+          "markers": ["#region", "#endregion", "region", "endregion", "/" ]
+        }
+      }
+    ]
+  }
 }
