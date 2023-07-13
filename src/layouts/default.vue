@@ -1,13 +1,20 @@
+<script setup lang="ts">
+import { title } from '~/configs/site'
+
+function close() {
+  window.location.href = 'about:blank'
+  window.close()
+}
+</script>
+
 <template>
-  <LayoutHeader />
-  <main
-    px-4 py-10
-    text="center gray-700"
-  >
-    <RouterView />
-    <TheFooter />
-    <div mx-auto mt-5 text-center text-sm opacity-50>
-      [Default Layout]
-    </div>
-  </main>
+  <div wrapper>
+    <header flex justify="between" items="center" lh="10" border="b color-gray-300" px="4">
+      <div>{{ title }}</div>
+      <i i-carbon-close-filled cursor="pointer" bg="red-600" @click="close" />
+    </header>
+    <main>
+      <RouterView />
+    </main>
+  </div>
 </template>
