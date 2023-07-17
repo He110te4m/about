@@ -8,13 +8,13 @@ import {
   transformerDirectives,
   transformerVariantGroup,
 } from 'unocss'
+import { socials } from './src/configs/site'
 
 export default defineConfig({
   shortcuts: [
     ['btn', 'px-4 py-1 rounded inline-block bg-teal-700 text-white cursor-pointer !outline-none hover:bg-teal-800 disabled:cursor-default disabled:bg-gray-600 disabled:opacity-50'],
     ['icon-btn', 'inline-block cursor-pointer select-none opacity-75 transition duration-200 ease-in-out hover:opacity-100 hover:text-teal-600'],
     ['center-full', 'flex items-center justify-around'],
-    ['wrapper', 'w-wrapper aspect-ratio-video shadow-wrapper'],
   ],
   presets: [
     presetUno(),
@@ -37,8 +37,9 @@ export default defineConfig({
     transformerVariantGroup(),
   ],
   rules: [
-    ['w-wrapper', { width: 'clamp(640px, 80%, 960px)' }],
-    ['shadow-wrapper', { 'box-shadow': '#d1d5db 1px 1px 10px, #3c3c3c 0 0 1px' }],
   ],
-  safelist: 'prose m-auto text-left'.split(' '),
+  safelist: 'prose m-auto text-left'.split(' ')
+    .concat(
+      socials.map(({ icon }) => icon),
+    ),
 })
