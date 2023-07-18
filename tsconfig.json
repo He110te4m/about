@@ -23,17 +23,11 @@
       "vite-plugin-vue-component-preview/client",
       "vite-plugin-vue-layouts/client",
       "vite-plugin-pwa/client",
-      "unplugin-vue-macros/macros-global"
+      "./plugins/articles/module.d.ts"
     ],
     "paths": {
       "~/*": ["src/*"]
     }
-  },
-  "vueCompilerOptions": {
-    "plugins": [
-      "@vue-macros/volar/define-models",
-      "@vue-macros/volar/define-slots"
-    ]
   },
   "exclude": ["dist", "node_modules"]
 }

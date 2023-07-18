@@ -17,6 +17,7 @@ specifiers:
   critters: ^0.0.19
   cross-env: ^7.0.3
   eslint: ^8.44.0
+  fast-glob: ^3.3.0
   https-localhost: ^4.7.1
   lint-staged: ^13.2.3
   markdown-it-link-attributes: ^4.0.1
@@ -74,6 +75,7 @@ devDependencies:
   critters: 0.0.19
   cross-env: 7.0.3
   eslint: 8.44.0
+  fast-glob: 3.3.0
   https-localhost: 4.7.1
   lint-staged: 13.2.3
   markdown-it-link-attributes: 4.0.1

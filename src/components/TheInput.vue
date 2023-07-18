@@ -1,7 +1,13 @@
 <script setup lang="ts">
-const { modelValue } = defineModels<{
+const props = defineProps<{
   modelValue: string
 }>()
+
+const emits = defineEmits<{
+  (e: 'update:moduleValue', val: string): void
+}>()
+
+const modelValue = useVModel(props, 'modelValue', emits)
 </script>
 
 <template>

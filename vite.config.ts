@@ -15,9 +15,8 @@ import LinkAttributes from 'markdown-it-link-attributes'
 import Unocss from 'unocss/vite'
 import Shiki from 'markdown-it-shiki'
 
-// @ts-expect-error failed to resolve types
-import VueMacros from 'unplugin-vue-macros/vite'
 import WebfontDownload from 'vite-plugin-webfont-dl'
+import Articles from './plugins/articles'
 
 export default defineConfig({
   resolve: {
@@ -27,12 +26,8 @@ export default defineConfig({
   },
 
   plugins: [
-    VueMacros({
-      plugins: {
-        vue: Vue({
-          include: [/\.vue$/, /\.md$/],
-        }),
-      },
+    Vue({
+      include: [/\.vue$/, /\.md$/],
     }),
 
     // https://github.com/hannoeru/vite-plugin-pages
@@ -138,6 +133,10 @@ export default defineConfig({
 
     // // https://github.com/webfansplz/vite-plugin-vue-devtools
     // VueDevTools(),
+
+    Articles({
+      postDir: 'src/pages/posts',
+    }),
   ],
 
   // https://github.com/vitest-dev/vitest
