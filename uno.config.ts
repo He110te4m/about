@@ -37,6 +37,7 @@ export default defineConfig({
     transformerVariantGroup(),
   ],
   rules: [
+    [/^g-name-(.+)$/, ([, name]) => ({ 'grid-area': name })],
   ],
   safelist: 'prose m-auto text-left'.split(' ')
     .concat(

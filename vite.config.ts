@@ -26,12 +26,6 @@ export default defineConfig({
     },
   },
 
-  server: {
-    watch: {
-      usePolling: true,
-    },
-  },
-
   plugins: [
     VueMacros({
       plugins: {

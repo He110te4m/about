@@ -10,7 +10,7 @@ import { description, socials, title } from '~/configs/site'
       {{ title }}
     </div>
 
-    <div color="gray-400">
+    <div color="gray-500">
       {{ description }}
     </div>
 

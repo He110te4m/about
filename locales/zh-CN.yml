@@ -12,3 +12,8 @@ intro:
   aka: 也叫
   whats-your-name: 输入你的名字
 not-found: 未找到页面
+
+layout:
+  nav:
+    articles: 文章列表
+    archives: 归档系列
