@@ -8,7 +8,7 @@ const { t } = useI18n()
       <!-- TODO: 随机内容 -->
     </div>
     <nav flex gap="4">
-      <RouterLink to="/articles">
+      <RouterLink to="/posts">
         {{ t('layout.nav.articles') }}
       </RouterLink>
       <RouterLink to="/archives">

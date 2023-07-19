@@ -2,7 +2,7 @@
   <div w="full" h="full" class="layout">
     <LayoutSidebar g-name="sidebar" />
     <LayoutHeader g-name="header" />
-    <main g-name="main" overflow="y-scroll">
+    <main g-name="main" overflow="y-auto">
       <RouterView />
     </main>
     <LayoutFooter g-name="footer" />
@@ -17,18 +17,5 @@
       "sidebar header"
       "sidebar main"
       "sidebar footer"
-}
-
-.layout .sidebar {
-  grid-area: sidebar;
-}
-.layout .header {
-  grid-area: header;
-}
-.layout .main {
-  grid-area: main;
-}
-.layout .footer {
-  grid-area: footer;
 }
 </style>
