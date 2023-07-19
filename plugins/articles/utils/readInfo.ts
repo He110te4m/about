@@ -13,7 +13,7 @@ export async function readArticleInfo(file: string, resolveToRoutePath: ResolveT
     const info = parseYaml(res)
     const data = postExtraDataValidator.parse(info)
     const url = resolveToRoutePath(file)
-    if (url) {
+    if (url && data) {
       articleInfo = {
         ...data,
         url,

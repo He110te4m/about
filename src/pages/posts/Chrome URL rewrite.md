@@ -1,7 +1,7 @@
 ---
 title: "Chrome 下 URL 重写问题"
 description: "一. 问题重现\r\n1. 运行环境\r\nApache 2.4\r\nPHP 5.6\r\nMySQL 5.5\r\nrewrite 扩展\r\nPDO 扩展\r\n2. 问题代码\r\nPHP 会重写到默认首页，以下是默认首页中的代码："
-pubDate: 1502348230000
+createdAt: 1502348230000
 category: "PHP"
 tags: ["URL rewrite", "Chrome"]
 ---

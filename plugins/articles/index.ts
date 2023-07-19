@@ -20,8 +20,8 @@ export default function createPlugin(options: PluginOptions): Plugin {
       if (id.startsWith(resolvedID)) {
         const dir = id.slice(resolvedID.length + 1)
 
-        const posts = await readPosts({ ...options, postDir: join(options.postDir, dir) })
-        posts.sort(({ pubDate: pubDate1 }, { pubDate: pubDate2 }) => pubDate2 - pubDate1)
+        const posts = await readPosts({ ...options, postDir: join(options.postDir, dir) }) || []
+        posts.sort(({ createdAt: createdAt1 }, { createdAt: createdAt2 }) => createdAt2 - createdAt1)
 
         return {
           code: `export const articles = ${JSON.stringify(posts)}`,
