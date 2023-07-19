@@ -18,6 +18,7 @@ specifiers:
   cross-env: ^7.0.3
   eslint: ^8.44.0
   fast-glob: ^3.3.0
+  fp-ts: ^2.16.0
   https-localhost: ^4.7.1
   lint-staged: ^13.2.3
   markdown-it: ^13.0.1
@@ -58,6 +59,7 @@ dependencies:
   '@unocss/reset': 0.53.5
   '@vueuse/core': 10.2.1_vue@3.3.4
   '@vueuse/head': 1.1.26_vue@3.3.4
+  fp-ts: 2.16.0
   nprogress: 0.2.0
   pinia: 2.1.4_typescript@5.1.6+vue@3.3.4
   vue: 3.3.4
@@ -4755,6 +4757,10 @@ packages:
     resolution: {integrity: sha512-buRG0fpBtRHSTCOASe6hD258tEubFoRLb4ZNA6NxMVHNw2gOcwHo9wyablzMzOA5z9xA9L1KNjk/Nt6MT9aYow==}
     engines: {node: '>= 0.6'}
     dev: true
+
+  /fp-ts/2.16.0:
+    resolution: {integrity: sha512-bLq+KgbiXdTEoT1zcARrWEpa5z6A/8b7PcDW7Gef3NSisQ+VS7ll2Xbf1E+xsgik0rWub/8u0qP/iTTjj+PhxQ==}
+    dev: false
 
   /fresh/0.5.2:
     resolution: {integrity: sha512-zJ2mQYM18rEFOudeV4GShTGIQ7RbzA7ozbU9I/XBpm7kqgMywgmylMwXHxZJmkVoYkna9d2pVXVXPdYTP9ej8Q==}
