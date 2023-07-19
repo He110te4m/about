@@ -16,6 +16,7 @@ import Unocss from 'unocss/vite'
 import Shiki from 'markdown-it-shiki'
 
 import WebfontDownload from 'vite-plugin-webfont-dl'
+import { formatFileToUrl } from './utils/formatter/url'
 import Articles from './plugins/articles'
 
 export default defineConfig({
@@ -33,6 +34,13 @@ export default defineConfig({
     // https://github.com/hannoeru/vite-plugin-pages
     Pages({
       extensions: ['vue', 'md'],
+      onRoutesGenerated(routes) {
+        routes.forEach((item: any) => {
+          item.path = formatFileToUrl(item.path)
+        })
+
+        return routes
+      },
     }),
 
     // https://github.com/JohnCampionJr/vite-plugin-vue-layouts
@@ -135,7 +143,7 @@ export default defineConfig({
     // VueDevTools(),
 
     Articles({
-      postDir: 'src/pages/posts',
+      postDir: 'src/pages',
     }),
   ],
 

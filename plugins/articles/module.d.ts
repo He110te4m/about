@@ -1,11 +1,5 @@
-declare module '~articles' {
-  export interface ArticleInfo {
-    title: string
-    desc: string
-    url: string
-    createAt: number
-    updateAt: number
-  }
+/// <reference path="./types.d.ts" />
 
-  export const articles: ArticleInfo[]
+declare module '~articles' {
+  export const articles: ArticleModule.ArticleInfo[]
 }
