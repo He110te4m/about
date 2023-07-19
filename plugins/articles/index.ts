@@ -1,4 +1,4 @@
-import { extname, resolve } from 'node:path'
+import { extname, join, resolve } from 'node:path'
 import { readFile } from 'node:fs/promises'
 import type { Plugin } from 'vite'
 import glob from 'fast-glob'
@@ -20,13 +20,16 @@ export default function createPlugin(options: PluginOptions): Plugin {
   return {
     name: 'vite-plugin-read-articles',
     resolveId(id) {
-      if (id === moduleID) {
-        return resolvedID
+      if (id.startsWith(moduleID)) {
+        return id.replace(moduleID, resolvedID)
       }
     },
     async load(id) {
-      if (id === resolvedID) {
-        const posts = await readPosts(options)
+      if (id.startsWith(resolvedID)) {
+        const dir = id.slice(resolvedID.length + 1)
+
+        const posts = await readPosts({ ...options, postDir: join(options.postDir, dir) })
+        posts.sort(({ pubDate: pubDate1 }, { pubDate: pubDate2 }) => pubDate2 - pubDate1)
 
         return {
           code: `export const articles = ${JSON.stringify(posts)}`,
