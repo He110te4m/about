@@ -116,3 +116,49 @@ module federation 是 webpack5 中的一大亮点，通过将共享代码作为 
 对于这一点，可以借助 [UNplugin](https://github.com/unjs/unplugin) ，通过与 vite 相似的 API 来迁移插件，同时支持 vite 与 esbuild 。
 
 如果有时间也可以参考 [ES Build 适配器](https://www.npmjs.com/package/@softarc/native-federation-esbuild) 构建一个 vite/rollup 的适配器。
+
+# `@module-federation/vite` 工作流程
+
+整个工作流程需要结合模块联邦的原理来看，分为 dev 与 prod 两种模式，工作流程并不相同。
+
+## prod 模式
+
+### build 阶段
+
+此阶段主要进行多入口构建，同时将依赖包作为
+
+1. vite 正常进行构建流程
+2. `@module-federation/vite` 进行依赖收集，包括 shared libs 、 exposes 等
+3. 将 shared libs 与 exposes 分别作为入口，开始构建成单文件，将 shared libs 作为 externals 传入构建器中处理，同时将相关信息如：名称、版本、文件名等等收集到清单中
+4. 构建完成后，将清单中的内容输出到 `remoteEntry.json` 中
+
+### server / preview 阶段
+
+1. 项目通过 `initFederation` 函数初始化 `remoteEntry.json` ，包括：
+   1. 注册依赖库的 importmap
+   2. 初始化 remote 及其 `remoteEntry.json`
+2. 进入应用初始化逻辑，如初始化 Vue 等
+3. 加载共享依赖库
+   > 依赖库通过 importmap 匹配依赖库地址，指向 build 阶段单独构建的 shared libs 文件。
+   >
+   > 由于项目中使用的 importmap 的存在，共享的依赖库将会指向同一个 http 请求。
+   >
+   > 所以能保证依赖库共享且只被执行一次。
+4. 应用内通过 `loadRemoteModule` 加载远程模块
+5. 查找对应的服务是否已经初始化，若未初始化则会自动初始化
+6. 查找对应的服务是否有匹配的 expose ，若无则报错，若有则获取内容（通过 http 请求获取）并返回
+
+## dev 模式
+
+### shared lib 预构建
+
+1. vite 正常进行构建流程
+2. `@module-federation/vite` 进行依赖收集，只收集 shared libs 等
+3. 将 shared libs 作为入口，开始构建成单文件，将 shared libs 作为 externals 传入构建器中处理，同时将相关信息如：名称、版本、文件名等等收集到清单中
+4. 构建完成后，将清单中的内容输出到 `remoteEntry.json` 中
+
+### exposes 转发
+
+由于 dev 下并没有对 exposes 进行构建，所以当请求到其他服务的 exposes 时，会转发到对应服务的 vite server 上获取内容，同时连接上对应的 websocket。
+
+也就意味着， exposes 的内容是可以支持热更新的。
