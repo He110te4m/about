@@ -1,4 +1,4 @@
-import type { PostExtraData } from './validator'
+import type { PostExtraData } from '../validators/postExtraData'
 
 declare global {
   namespace ArticleModule {

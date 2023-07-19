@@ -1,17 +1,9 @@
-import { extname, join, resolve } from 'node:path'
-import { readFile } from 'node:fs/promises'
+import { extname, join } from 'node:path'
 import type { Plugin } from 'vite'
 import glob from 'fast-glob'
-import MarkdownIt from 'markdown-it'
-import MarkdownItFrontMatter from 'markdown-it-front-matter'
-import { parse as parseYaml } from 'yaml'
 import { formatFileToUrl } from '../../utils/formatter/url'
-import { postExtraDataValidator } from './validator'
-
-export interface PluginOptions {
-  postDir: string
-  resolveToRoutePath?: (file: string) => string
-}
+import type { PluginOptions } from './types'
+import { readArticleInfo } from './utils/readInfo'
 
 export default function createPlugin(options: PluginOptions): Plugin {
   const moduleID = '~articles'
@@ -41,39 +33,21 @@ export default function createPlugin(options: PluginOptions): Plugin {
 
 async function readPosts({ postDir, resolveToRoutePath = defaultResolveToRoutePath }: PluginOptions): Promise<ArticleModule.ArticleInfo[]> {
   const files = await glob('**/*.md', { cwd: postDir })
-
-  const articleInfoList: ArticleModule.ArticleInfo[] = []
-
-  let currentFile = ''
-
-  const parser = MarkdownIt().use(MarkdownItFrontMatter, (res) => {
-    const info = parseYaml(res)
-    const data = postExtraDataValidator.parse(info)
-    if (currentFile) {
-      const url = resolveToRoutePath(currentFile)
-      if (url) {
-        articleInfoList.push({
-          ...data,
-          url,
-        })
-      }
-    }
+  const infoList = files.map((file) => {
+    const path = join(postDir, file)
+    return readArticleInfo(path, resolveToRoutePath)
   })
 
-  const data = files.map(async (filename) => {
-    const fullPath = resolve(postDir, filename)
-    const content = await readFile(fullPath)
-    currentFile = filename
-    return parser.render(content.toString())
-  })
-
-  await Promise.allSettled(data)
-
-  return articleInfoList
+  return Promise.allSettled(infoList)
+    .then(
+      list =>
+        list.filter((res): res is PromiseFulfilledResult<ArticleModule.ArticleInfo> => res.status === 'fulfilled')
+          .map(({ value }) => value),
+    )
 }
 
 function defaultResolveToRoutePath(file: string) {
   const ext = extname(file)
 
-  return formatFileToUrl(file.slice(0, 0 - ext.length))!
+  return formatFileToUrl(file.slice(0, 0 - ext.length))
 }
