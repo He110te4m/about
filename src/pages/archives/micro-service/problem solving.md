@@ -11,6 +11,14 @@ tags: ["micro-service", "vite"]
 ---
 # 必备知识
 
+## esbuild 相关知识
+
+### 别名
+
+esbuild 没有独立的别名系统，别名是通过解析 tsconfig 来获取的。
+
+所以如果 tsconfig 中的别名配置不正确，也会导致 esbuild 构建异常。
+
 ## exposes 需要被多个构建器处理
 
 从 [`@module-federation/vite` 插件工作原理](/archives/micro-service/technical_selection) 可以看到： shared libs 均由 adapter 中的构建器处理，如 esbuild 。

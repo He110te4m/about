@@ -3,21 +3,16 @@ import { readFile } from 'node:fs/promises'
 import MarkdownIt from 'markdown-it'
 import MarkdownItFrontMatter from 'markdown-it-front-matter'
 import { parse as parseYaml } from 'yaml'
-import type { ResolveToRoutePath } from '../types'
-import { postExtraDataValidator } from '../validators/postExtraData'
+import { type PostExtraData, postExtraDataValidator } from '../validators/postExtraData'
 
-export async function readArticleInfo(file: string, resolveToRoutePath: ResolveToRoutePath) {
-  let articleInfo: ArticleModule.ArticleInfo | undefined
+export async function readArticleInfo(file: string) {
+  let articleInfo: PostExtraData | undefined
 
   const parser = MarkdownIt().use(MarkdownItFrontMatter, (res) => {
     const info = parseYaml(res)
     const data = postExtraDataValidator.parse(info)
-    const url = resolveToRoutePath(file)
-    if (url && data) {
-      articleInfo = {
-        ...data,
-        url,
-      }
+    if (data) {
+      articleInfo = data
     }
   })
 
