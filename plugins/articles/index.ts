@@ -32,7 +32,7 @@ export default function createPlugin(options: PluginOptions): Plugin {
       }
 
       if (id.startsWith(resolvedID)) {
-        const dir = id.slice(resolvedID.length + 1)
+        const dir = id.slice(resolvedID.length)
 
         return {
           code:

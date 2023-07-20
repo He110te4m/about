@@ -25,9 +25,9 @@ const list = useFilter(
 <template>
   <ul>
     <li v-for="article in list" :key="article.url">
-      <RouteLink :to="article.url">
+      <RouterLink :to="article.url">
         {{ article.title }}
-      </RouteLink>
+      </RouterLink>
     </li>
   </ul>
 </template>
