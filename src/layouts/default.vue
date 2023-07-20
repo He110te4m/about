@@ -2,7 +2,7 @@
   <div w="full" h="full" class="layout">
     <LayoutSidebar g-name="sidebar" />
     <LayoutHeader g-name="header" />
-    <main g-name="main" overflow="y-auto">
+    <main g-name="main" py="8" overflow="y-auto">
       <RouterView />
     </main>
     <LayoutFooter g-name="footer" />
