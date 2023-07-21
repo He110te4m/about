@@ -3,11 +3,11 @@ import type { Predicate } from 'fp-ts/lib/Predicate'
 import { constTrue, flow } from 'fp-ts/lib/function'
 import type { MaybeRef } from 'vue'
 
-export function useFilter<T extends any[]>(data: MaybeRef<T>, conditions: Predicate<T[number]>[]) {
-  const dataRef = ref(data)
+export function useFilter<T>(data: MaybeRef<T[]>, conditions: Predicate<T>[]) {
+  const dataRef = ref(data) as Ref<T[]>
   const filterFn = pipeCondition(conditions)
 
-  return computed(() => filterFn<T[number]>(unref(dataRef)))
+  return computed(() => filterFn<T>(unref(dataRef)))
 }
 
 function pipeCondition<T>(conditions: Predicate<T>[]) {
