@@ -139,9 +139,9 @@ module federation 是 webpack5 中的一大亮点，通过将共享代码作为 
    2. 初始化 remote 及其 `remoteEntry.json`
 2. 进入应用初始化逻辑，如初始化 Vue 等
 3. 加载共享依赖库
-   > 依赖库通过 importmap 匹配依赖库地址，指向 build 阶段单独构建的 shared libs 文件。
+   > 依赖库通过 [importmap](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script/type/importmap) 匹配依赖库地址，指向 build 阶段单独构建的 shared libs 文件。
    >
-   > 由于项目中使用的 importmap 的存在，共享的依赖库将会指向同一个 http 请求。
+   > 由于项目中使用的 importmap 的存在，共享的依赖库将会指向同一个 url 地址。
    >
    > 所以能保证依赖库共享且只被执行一次。
 4. 应用内通过 `loadRemoteModule` 加载远程模块
