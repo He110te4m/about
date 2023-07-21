@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { flow } from 'fp-ts/function'
+import { flow, pipe } from 'fp-ts/function'
 import { groupBy } from 'fp-ts/NonEmptyArray'
 import { useFilter } from '~/composables/filter/useFilter'
 import { eqString, filterString } from '~/utils/filters/string'
@@ -47,8 +47,17 @@ const list = useFilter(
   ],
 )
 
-const groupByPublishYear = groupBy<ArticleModule.ArticleInfo>(({ createdAt }) => new Date(createdAt).getFullYear().toString())
-const group = computed(() => groupByPublishYear(unref(list)))
+const group = computed(
+  () => pipe(
+    unref(list),
+    groupBy<ArticleModule.ArticleInfo>(
+      flow(
+        prop('createdAt', ''),
+        createdAt => new Date(createdAt).getFullYear().toString(),
+      ),
+    ),
+  ),
+)
 </script>
 
 <template>
