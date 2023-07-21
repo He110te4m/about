@@ -7,7 +7,7 @@ export function useFilter<T extends any[]>(data: MaybeRef<T>, conditions: Predic
   const dataRef = ref(data)
   const filterFn = pipeCondition(conditions)
 
-  return computed(() => filterFn(unref(dataRef)))
+  return computed(() => filterFn<T[number]>(unref(dataRef)))
 }
 
 function pipeCondition<T>(conditions: Predicate<T>[]) {
