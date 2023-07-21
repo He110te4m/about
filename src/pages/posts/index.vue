@@ -36,7 +36,7 @@ const categoryMatcher = flow(
   eqString(category),
 )
 
-const list = useFilter(
+const filtedArticles = useFilter(
   articles,
   // 支持混合检索
   [
@@ -47,9 +47,9 @@ const list = useFilter(
   ],
 )
 
-const group = computed(
+const articleGroup = computed(
   () => pipe(
-    unref(list),
+    unref(filtedArticles),
     groupBy<ArticleModule.ArticleInfo>(
       flow(
         prop('createdAt', ''),
@@ -62,9 +62,9 @@ const group = computed(
 
 <template>
   <dl flex="~ col" items="center" gap="4" h="full">
-    <dd v-for="year in Object.keys(group)" :key="year" flex="~ col" items="center" w="full">
+    <dd v-for="year in Object.keys(articleGroup).reverse()" :key="year" flex="~ col" items="center" w="full">
       <div>{{ year }}</div>
-      <div v-for="article in group[year]" :key="article.url" max-w="720px" w="80%" flex items="center">
+      <div v-for="article in articleGroup[year]" :key="article.url" max-w="720px" w="80%" flex items="center">
         <RouterLink v-slot="{ navigate }" :to="article.url" custom>
           <div role="link" cursor="pointer" text="lg" @click="navigate">
             {{ article.title }}
