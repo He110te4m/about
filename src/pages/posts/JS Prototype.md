@@ -1,9 +1,11 @@
 ---
-title: "原型继承及其衍生的问题"
-description: "原型继承是 ES6 以前实现继承的方式之一，但是其衍生出来的问题，可谓是不少，本文以一道面试题为引，引出 JS 内部的一些机制"
+title: 原型继承及其衍生的问题
+description: 原型继承是 ES6 以前实现继承的方式之一，但是其衍生出来的问题，可谓是不少，本文以一道面试题为引，引出 JS 内部的一些机制
 createdAt: 1553096026000
-category: "Front end"
-tags: ["Prototype", "ES6"]
+category: Front end
+tags:
+  - Prototype
+  - ES6
 ---
 
 ## 面试题 ###

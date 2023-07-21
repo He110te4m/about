@@ -1,13 +1,15 @@
 ---
-title: "Vite 微前端技术选型"
+title: Vite 微前端技术选型
 series:
-  title: "Vite 微前端实践"
+  title: Vite 微前端实践
   order: 1
-description: ""
+description:
 createdAt: 1688110944938
 updatedAt: 1688110944938
-category: "Front End"
-tags: ["micro-service", "vite"]
+category: Front End
+tags:
+  - micro-service
+  - vite
 ---
 # 微前端简介
 

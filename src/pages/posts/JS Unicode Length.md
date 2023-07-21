@@ -1,9 +1,12 @@
 ---
-title: "JS Unicode 编码引发的字符串长度计算问题"
-description: "Unicode 特殊字符长度计算问题"
+title: JS Unicode 编码引发的字符串长度计算问题
+description: Unicode 特殊字符长度计算问题
 createdAt: 1519568277000
-category: "Front end"
-tags: ["Unicode", "charset", "encode"]
+category: Front end
+tags:
+  - Unicode
+  - charset
+  - encode
 ---
 
 # 一. 问题重现

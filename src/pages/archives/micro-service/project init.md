@@ -1,13 +1,15 @@
 ---
-title: "项目搭建"
+title: 项目搭建
 series:
-  title: "Vite 微前端实践"
+  title: Vite 微前端实践
   order: 2
-description: ""
+description:
 createdAt: 1688110944938
 updatedAt: 1688110944938
-category: "Front End"
-tags: ["micro-service", "vite"]
+category: Front End
+tags:
+  - micro-service
+  - vite
 ---
 # 搭建项目
 
