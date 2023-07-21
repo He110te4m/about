@@ -4,8 +4,8 @@ export const postExtraDataValidator = z.object(
   {
     title: z.string(),
     description: z.string().default(''),
-    createdAt: z.number().default(0),
-    updatedAt: z.number(),
+    createdAt: z.string().default(''),
+    updatedAt: z.string(),
     category: z.string().default('other'),
     tags: z.array(z.string()).default([]),
     series: z.object({

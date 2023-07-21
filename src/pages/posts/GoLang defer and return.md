@@ -1,7 +1,7 @@
 ---
 title: GoLang 中的 defer 和命名返回值逻辑
 description: GoLang 常考考点之一，defer 和 return 结合使用的一些注意事项
-createdAt: 1548772799000
+createdAt: 2019/1/29 22:39:59
 category: GoLang
 tags:
   - defer

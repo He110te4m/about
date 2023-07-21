@@ -29,7 +29,10 @@ export default function createPlugin(options: PluginOptions): Plugin {
     async load(id) {
       if (id === resolvedID) {
         const posts = await readPosts(options) || []
-        posts.sort(({ createdAt: createdAt1 }, { createdAt: createdAt2 }) => createdAt1 - createdAt2)
+        posts.sort((
+          { createdAt: createdAt1 }, { createdAt: createdAt2 }) =>
+          new Date(createdAt2).getTime() - new Date(createdAt1).getTime(),
+        )
 
         return {
           code: `export const ${exportName} = ${JSON.stringify(posts)}`,

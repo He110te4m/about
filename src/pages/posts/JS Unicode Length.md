@@ -1,7 +1,7 @@
 ---
 title: JS Unicode 编码引发的字符串长度计算问题
 description: Unicode 特殊字符长度计算问题
-createdAt: 1519568277000
+createdAt: 2018/2/25 22:17:57
 category: Front end
 tags:
   - Unicode
