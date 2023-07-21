@@ -5,12 +5,12 @@ import type { MaybeRef } from 'vue'
 
 export function useFilter<T extends any[]>(data: MaybeRef<T>, conditions: Predicate<T[number]>[]) {
   const dataRef = ref(data)
-  const filterFn = combineCondition(conditions)
+  const filterFn = pipeCondition(conditions)
 
   return computed(() => filterFn(unref(dataRef)))
 }
 
-function combineCondition<T>(conditions: Predicate<T>[]) {
+function pipeCondition<T>(conditions: Predicate<T>[]) {
   const reducer = reduce(
     filter<T>(constTrue),
     (acc, cur: Predicate<T>) => flow(acc, filter(cur)),
