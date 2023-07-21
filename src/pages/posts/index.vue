@@ -9,7 +9,7 @@ import { articles } from '~articles/posts'
 const route = useRoute()
 const keyword = mustString(route.query?.keyword)
 const titleMatcher = flow(
-  prop('title'),
+  prop('title', ''),
   filterString(keyword),
 )
 
