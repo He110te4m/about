@@ -1,4 +1,6 @@
 import { flow } from 'fp-ts/function'
-import { includes } from 'fp-ts/string'
+import { Eq, includes } from 'fp-ts/string'
 
 export const filterString = (keyword: string) => flow(String, includes(keyword))
+
+export const eqString = (keyword: string) => (target: string) => Eq.equals(keyword, target)

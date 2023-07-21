@@ -1,32 +1,47 @@
 <script setup lang="ts">
 import { flow } from 'fp-ts/function'
 import { useFilter } from '~/composables/filter/useFilter'
-import { filterString } from '~/utils/filters/string'
+import { eqString, filterString } from '~/utils/filters/string'
 import { mustString } from '~/utils/formatters/string'
-import { prop } from '~/utils/fp/record'
+import { prop } from '~/utils/filters/record'
 import { articles } from '~articles/posts'
+import { anyPass } from '~/utils/filters/boolean'
 
 const route = useRoute()
 
-// 支持关键字检索
+/** 获取检索的关键字 */
 const keyword = mustString(route.query?.keyword)
+/** 标题检索器 */
 const titleMatcher = flow(
   prop('title', ''),
   filterString(keyword),
 )
+/** 摘要检索器 */
+const descMatcher = flow(
+  prop('description', ''),
+  filterString(keyword),
+)
+/** 关键词检索器 */
+const keywordMatcher = anyPass([
+  titleMatcher,
+  descMatcher,
+])
 
-// 支持分类检索
+/** 获取检索的分类 */
 const category = mustString(route.query?.category)
+/** 分类检索器 */
 const categoryMatcher = flow(
   prop('category', ''),
-  filterString(category),
+  eqString(category),
 )
 
 const list = useFilter(
   articles,
   // 支持混合检索
   [
-    titleMatcher,
+    // 支持关键字检索
+    keywordMatcher,
+    // 支持分类检索
     categoryMatcher,
   ],
 )
