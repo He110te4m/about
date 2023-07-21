@@ -1,5 +1,5 @@
-export function mustString(data: any) {
+export function mustString(data: any, defaultValue = '') {
   return typeof data === 'string'
     ? data
-    : String(data ?? '')
+    : String(data ?? defaultValue)
 }

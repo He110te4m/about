@@ -1,5 +1,5 @@
 import { extname, join } from 'node:path'
-import type { Plugin } from 'vite'
+import { type Plugin } from 'vite'
 import glob from 'fast-glob'
 import { formatFileToUrl } from '../../utils/formatter/url'
 import type { PluginOptions } from './types'
@@ -10,6 +10,8 @@ export default function createPlugin(options: PluginOptions): Plugin {
   const resolvedID = `\0${moduleID}`
   const exportName = 'articles'
 
+  const moduleUsageSet = new Set(moduleID)
+
   return {
     name: 'vite-plugin-read-articles',
     resolveId(id) {
@@ -18,9 +20,12 @@ export default function createPlugin(options: PluginOptions): Plugin {
       }
 
       if (id.startsWith(moduleID)) {
+        moduleUsageSet.add(id)
+
         return id.replace(moduleID, resolvedID)
       }
     },
+
     async load(id) {
       if (id === resolvedID) {
         const posts = await readPosts(options) || []
@@ -41,6 +46,14 @@ export default function createPlugin(options: PluginOptions): Plugin {
 export const ${exportName} = a.filter(({ url }) => url.startsWith(${JSON.stringify(dir)}))
 `,
         }
+      }
+    },
+
+    handleHotUpdate({ file, server }) {
+      // 当 markdown 文件更新时，更新下列表
+      if (file.endsWith('.md')) {
+        const module = server.moduleGraph.getModuleById(resolvedID)
+        module && server.reloadModule(module)
       }
     },
   }

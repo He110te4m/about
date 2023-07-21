@@ -7,16 +7,27 @@ import { prop } from '~/utils/fp/record'
 import { articles } from '~articles/posts'
 
 const route = useRoute()
+
+// 支持关键字检索
 const keyword = mustString(route.query?.keyword)
 const titleMatcher = flow(
   prop('title', ''),
   filterString(keyword),
 )
 
+// 支持分类检索
+const category = mustString(route.query?.category)
+const categoryMatcher = flow(
+  prop('category', ''),
+  filterString(category),
+)
+
 const list = useFilter(
   articles,
+  // 支持混合检索
   [
     titleMatcher,
+    categoryMatcher,
   ],
 )
 </script>
