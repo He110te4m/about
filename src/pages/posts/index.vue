@@ -58,7 +58,7 @@ const articleGroup = computed(
 <template>
   <dl flex="~ col" gap="4" h="full">
     <dd v-for="year in Object.keys(articleGroup).reverse()" :key="year" flex="~ col">
-      <div text="8xl left" color="white" text-shadow="md color-gray-600" select="none" pos="relative" op="10">
+      <div text="8xl left" color="white" text-shadow="md color-gray-800" select="none" pos="relative" op="10">
         {{ year }}
       </div>
       <div v-for="article in articleGroup[year]" :key="article.url" flex items="center" my="4" p-is="16">

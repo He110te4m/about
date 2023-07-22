@@ -7,9 +7,11 @@ const currentArticle = computed(() => articles.find(({ url }) => route.path === 
 
 <template>
   <LayoutGroup>
-    <div v-if="currentArticle">
-      {{ currentArticle.title }}
-    </div>
+    <template v-if="currentArticle">
+      <h1 text="4xl" font="bold">
+        {{ currentArticle.title }}
+      </h1>
+    </template>
     <RouterView />
   </LayoutGroup>
 </template>

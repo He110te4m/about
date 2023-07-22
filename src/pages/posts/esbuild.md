@@ -3,7 +3,7 @@ title: ESBuild 常见问题踩坑指南
 createdAt: 2023/7/20 09:20:57
 ---
 
-# 别名解析
+## 别名解析
 
 ESBuild 中存在单独的别名配置，而在 ts 项目中，ESBuild 也会直接使用 tsconfig.json 中的别名。
 
@@ -11,7 +11,7 @@ ESBuild 中存在单独的别名配置，而在 ts 项目中，ESBuild 也会直
 
 如果 tsconfig 配置混乱，可能会导致构建时错误的查找文件，导致构建失败或者是产物内容错误。
 
-# transform
+## transform
 
 ESBuild 没有单独的 transform 阶段，只有 resolve 与 load 。
 
@@ -19,9 +19,9 @@ ESBuild 没有单独的 transform 阶段，只有 resolve 与 load 。
 
 所以需要通过外置的级联插件，如： `esbuild-plugin-pipe` 、 `esbuild-plugin-transform` 等来级联插件。
 
-# 装饰器
+## 装饰器
 
-## 语法解析
+### 语法解析
 
 ESBuild 中只有 ts、tsx 语法支持装饰器，并且需要在 tsconfig 中开启装饰器功能。
 
@@ -47,7 +47,7 @@ ESBuild 中只有 ts、tsx 语法支持装饰器，并且需要在 tsconfig 中�
 }
 ```
 
-## 默认导出装饰器
+### 默认导出装饰器
 
 在 vue 中使用 vue-class 时，由于编译后会将 `export default class name` 转为 `var name = class {}; export default name;` 的形式，所以在 esbuild 中识别不出标准的 class，导致装饰器应用失败。
 

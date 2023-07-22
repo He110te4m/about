@@ -14,6 +14,7 @@ import VueI18n from '@intlify/unplugin-vue-i18n/vite'
 import LinkAttributes from 'markdown-it-link-attributes'
 import Unocss from 'unocss/vite'
 import Shiki from 'markdown-it-shiki'
+import Emoji from 'markdown-it-emoji'
 
 import WebfontDownload from 'vite-plugin-webfont-dl'
 import { formatFileToUrl } from './utils/formatter/url'
@@ -92,6 +93,7 @@ export default defineConfig({
             light: 'vitesse-light',
             dark: 'vitesse-dark',
           },
+          highlightLines: true,
         })
         md.use(LinkAttributes, {
           matcher: (link: string) => /^https?:\/\//.test(link),
@@ -100,6 +102,8 @@ export default defineConfig({
             rel: 'noopener',
           },
         })
+
+        md.use(Emoji)
       },
     }),
 
