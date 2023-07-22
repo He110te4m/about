@@ -24,7 +24,5 @@ useHead({
 </script>
 
 <template>
-  <div center="full" h="full" w="full">
-    <RouterView />
-  </div>
+  <RouterView />
 </template>
