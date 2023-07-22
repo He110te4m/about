@@ -74,3 +74,8 @@ const articleGroup = computed(
     </dd>
   </dl>
 </template>
+
+<route lang="yaml">
+meta:
+  layout: Home
+</route>
