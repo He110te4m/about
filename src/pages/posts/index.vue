@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { flow, pipe } from 'fp-ts/function'
-import { groupBy } from 'fp-ts/NonEmptyArray'
+import { flow, pipe } from 'fp-ts/lib/function'
+import { groupBy } from 'fp-ts/lib/NonEmptyArray'
 import { articles } from '~articles/posts'
 
 const route = useRoute()

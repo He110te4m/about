@@ -1,6 +1,6 @@
-import { filter, reduce } from 'fp-ts/Array'
-import type { Predicate } from 'fp-ts/Predicate'
-import { constTrue, flow } from 'fp-ts/function'
+import { filter, reduce } from 'fp-ts/lib/Array'
+import type { Predicate } from 'fp-ts/lib/Predicate'
+import { constTrue, flow } from 'fp-ts/lib/function'
 import type { MaybeRef } from 'vue'
 
 export function useFilter<T>(data: MaybeRef<T[]>, conditions: Predicate<T>[]) {

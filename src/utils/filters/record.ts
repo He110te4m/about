@@ -1,6 +1,6 @@
-import { getOrElse } from 'fp-ts/Option'
-import { constant, flow } from 'fp-ts/function'
-import { lookup } from 'fp-ts/Record'
+import { getOrElse } from 'fp-ts/lib/Option'
+import { constant, flow } from 'fp-ts/lib/function'
+import { lookup } from 'fp-ts/lib/Record'
 
 export function prop<Return>(propName: string): (...a: readonly unknown[]) => Return | undefined
 export function prop<Return>(propName: string, defaultValue: Return): (...a: readonly unknown[]) => Return
