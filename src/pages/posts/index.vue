@@ -1,12 +1,7 @@
 <script setup lang="ts">
 import { flow, pipe } from 'fp-ts/function'
 import { groupBy } from 'fp-ts/NonEmptyArray'
-import { useFilter } from '~/composables/filter/useFilter'
-import { eqString, filterString } from '~/utils/filters/string'
-import { mustString } from '~/utils/formatters/string'
-import { prop } from '~/utils/filters/record'
 import { articles } from '~articles/posts'
-import { anyPass } from '~/utils/filters/boolean'
 
 const route = useRoute()
 
@@ -62,9 +57,11 @@ const articleGroup = computed(
 
 <template>
   <dl flex="~ col" items="center" gap="4" h="full">
-    <dd v-for="year in Object.keys(articleGroup).reverse()" :key="year" flex="~ col" items="center" w="full">
-      <div>{{ year }}</div>
-      <div v-for="article in articleGroup[year]" :key="article.url" max-w="720px" w="80%" flex items="center">
+    <dd v-for="year in Object.keys(articleGroup).reverse()" :key="year" flex="~ col" items="stretch" max-w="720px" w="80%">
+      <div text="8xl left" color="white" text-shadow="md color-gray-600" select="none" pos="relative" op="10">
+        {{ year }}
+      </div>
+      <div v-for="article in articleGroup[year]" :key="article.url" flex items="center" my="4" p-is="16">
         <RouterLink v-slot="{ navigate }" :to="article.url" custom>
           <div role="link" cursor="pointer" text="lg" @click="navigate">
             {{ article.title }}

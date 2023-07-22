@@ -1,7 +1,3 @@
-<script lang="ts" setup>
-import { description, socials, title } from '~/configs/site'
-</script>
-
 <template>
   <aside h="full" b-ie="color-gray-200 1" flex="~ col" items="center" py="4" gap="4">
     <img src="/assets/images/logo.jpg" b-rd="50%" w="200px" aspect="1">

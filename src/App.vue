@@ -1,8 +1,5 @@
 <script setup lang="ts">
 import { type Meta } from '@unhead/vue'
-import { description, title } from '~/configs/site'
-import { getOpenGraphMeta } from '~/composables/meta/openGraph'
-import { getTwitterMeta } from '~/composables/meta/twitter'
 
 const info = { title, description }
 
