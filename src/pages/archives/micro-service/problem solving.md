@@ -1,11 +1,9 @@
 ---
 title: 排障指南
-series:
-  title: Vite 微前端实践
-  order: 3
+series: Vite 微前端实践
 description: ""
-createdAt: 2023/6/30 15:42:24
-updatedAt: 2023/6/30 15:42:24
+createdAt: 2023/6/30 15:42:27
+updatedAt: 2023/6/30 15:42:27
 category: Front End
 tags:
   - micro-service

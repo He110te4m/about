@@ -41,7 +41,9 @@ declare global {
   const getCurrentInstance: typeof import('vue')['getCurrentInstance']
   const getCurrentScope: typeof import('vue')['getCurrentScope']
   const getOpenGraphMeta: typeof import('../src/composables/meta/openGraph')['getOpenGraphMeta']
+  const getTime: typeof import('../src/utils/formatters/date')['getTime']
   const getTwitterMeta: typeof import('../src/composables/meta/twitter')['getTwitterMeta']
+  const getYear: typeof import('../src/utils/formatters/date')['getYear']
   const h: typeof import('vue')['h']
   const ignorableWatch: typeof import('@vueuse/core')['ignorableWatch']
   const inject: typeof import('vue')['inject']
@@ -53,6 +55,7 @@ declare global {
   const isRef: typeof import('vue')['isRef']
   const makeDestructurable: typeof import('@vueuse/core')['makeDestructurable']
   const markRaw: typeof import('vue')['markRaw']
+  const mustDate: typeof import('../src/utils/formatters/date')['mustDate']
   const mustString: typeof import('../src/utils/formatters/string')['mustString']
   const nextTick: typeof import('vue')['nextTick']
   const onActivated: typeof import('vue')['onActivated']
@@ -300,6 +303,7 @@ declare global {
   const watchTriggerable: typeof import('@vueuse/core')['watchTriggerable']
   const watchWithFilter: typeof import('@vueuse/core')['watchWithFilter']
   const whenever: typeof import('@vueuse/core')['whenever']
+  const year: typeof import('../src/utils/formatters/date')['year']
 }
 // for type re-export
 declare global {
@@ -346,7 +350,9 @@ declare module 'vue' {
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
     readonly getOpenGraphMeta: UnwrapRef<typeof import('../src/composables/meta/openGraph')['getOpenGraphMeta']>
+    readonly getTime: UnwrapRef<typeof import('../src/utils/formatters/date')['getTime']>
     readonly getTwitterMeta: UnwrapRef<typeof import('../src/composables/meta/twitter')['getTwitterMeta']>
+    readonly getYear: UnwrapRef<typeof import('../src/utils/formatters/date')['getYear']>
     readonly h: UnwrapRef<typeof import('vue')['h']>
     readonly ignorableWatch: UnwrapRef<typeof import('@vueuse/core')['ignorableWatch']>
     readonly inject: UnwrapRef<typeof import('vue')['inject']>
@@ -358,6 +364,7 @@ declare module 'vue' {
     readonly isRef: UnwrapRef<typeof import('vue')['isRef']>
     readonly makeDestructurable: UnwrapRef<typeof import('@vueuse/core')['makeDestructurable']>
     readonly markRaw: UnwrapRef<typeof import('vue')['markRaw']>
+    readonly mustDate: UnwrapRef<typeof import('../src/utils/formatters/date')['mustDate']>
     readonly mustString: UnwrapRef<typeof import('../src/utils/formatters/string')['mustString']>
     readonly nextTick: UnwrapRef<typeof import('vue')['nextTick']>
     readonly onActivated: UnwrapRef<typeof import('vue')['onActivated']>
@@ -645,7 +652,9 @@ declare module '@vue/runtime-core' {
     readonly getCurrentInstance: UnwrapRef<typeof import('vue')['getCurrentInstance']>
     readonly getCurrentScope: UnwrapRef<typeof import('vue')['getCurrentScope']>
     readonly getOpenGraphMeta: UnwrapRef<typeof import('../src/composables/meta/openGraph')['getOpenGraphMeta']>
+    readonly getTime: UnwrapRef<typeof import('../src/utils/formatters/date')['getTime']>
     readonly getTwitterMeta: UnwrapRef<typeof import('../src/composables/meta/twitter')['getTwitterMeta']>
+    readonly getYear: UnwrapRef<typeof import('../src/utils/formatters/date')['getYear']>
     readonly h: UnwrapRef<typeof import('vue')['h']>
     readonly ignorableWatch: UnwrapRef<typeof import('@vueuse/core')['ignorableWatch']>
     readonly inject: UnwrapRef<typeof import('vue')['inject']>
@@ -657,6 +666,7 @@ declare module '@vue/runtime-core' {
     readonly isRef: UnwrapRef<typeof import('vue')['isRef']>
     readonly makeDestructurable: UnwrapRef<typeof import('@vueuse/core')['makeDestructurable']>
     readonly markRaw: UnwrapRef<typeof import('vue')['markRaw']>
+    readonly mustDate: UnwrapRef<typeof import('../src/utils/formatters/date')['mustDate']>
     readonly mustString: UnwrapRef<typeof import('../src/utils/formatters/string')['mustString']>
     readonly nextTick: UnwrapRef<typeof import('vue')['nextTick']>
     readonly onActivated: UnwrapRef<typeof import('vue')['onActivated']>

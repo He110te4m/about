@@ -1,8 +1,6 @@
 ---
 title: Vite 微前端技术选型
-series:
-  title: Vite 微前端实践
-  order: 1
+series: Vite 微前端实践
 description: ""
 createdAt: 2023/6/30 15:42:24
 updatedAt: 2023/6/30 15:42:24

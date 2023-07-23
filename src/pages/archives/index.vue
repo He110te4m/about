@@ -3,13 +3,14 @@ import { nonEmptyArray as NonEmptyArray, number as Number, option as Option, ord
 import { constant, flow, pipe } from 'fp-ts/lib/function'
 import { articles } from '~articles/archives'
 
-/** series.order 排序器，以数字从小到大为序 */
-const sortBySeriesOrder = pipe(
+/** article 排序器，以数字从小到大为序 */
+const sortByCreatedAt = pipe(
   Number.Ord,
   Ord.contramap(
     flow(
-      prop('series', {}),
-      prop('order', -1),
+      prop('createdAt', ''),
+      mustDate,
+      getTime,
     ),
   ),
 )
@@ -25,13 +26,12 @@ const series = pipe(
     flow(
       // 有值时先排序，按 series.order 排序
       NonEmptyArray.sortBy([
-        sortBySeriesOrder,
+        sortByCreatedAt,
       ]),
       // 排序后原地分组，以 series.title 为 key 分组
       NonEmptyArray.groupBy<ArticleModule.ArticleInfo>(
         flow(
-          prop('series', {}),
-          prop('title', ''),
+          prop('series', ''),
         ),
       ),
     ),

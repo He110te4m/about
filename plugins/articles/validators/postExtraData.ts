@@ -8,10 +8,7 @@ export const postExtraDataValidator = z.object(
     updatedAt: z.string(),
     category: z.string().default('other'),
     tags: z.array(z.string()).default([]),
-    series: z.object({
-      title: z.string(),
-      order: z.number(),
-    }),
+    series: z.string(),
   },
 ).partial({
   series: true,

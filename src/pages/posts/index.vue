@@ -48,7 +48,9 @@ const articleGroup = computed(
     NonEmptyArray.groupBy<ArticleModule.ArticleInfo>(
       flow(
         prop('createdAt', ''),
-        createdAt => new Date(createdAt).getFullYear().toString(),
+        mustDate,
+        getYear,
+        mustString,
       ),
     ),
   ),
