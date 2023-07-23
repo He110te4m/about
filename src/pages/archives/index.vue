@@ -30,9 +30,7 @@ const series = pipe(
       ]),
       // 排序后原地分组，以 series.title 为 key 分组
       NonEmptyArray.groupBy<ArticleModule.ArticleInfo>(
-        flow(
-          prop('series', ''),
-        ),
+        prop('series', ''),
       ),
     ),
   ),
