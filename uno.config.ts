@@ -27,7 +27,7 @@ export default defineConfig({
       fonts: {
         sans: 'DM Sans',
         serif: 'DM Serif Display',
-        mono: 'DM Mono',
+        mono: 'Source Code Pro',
       },
     }),
   ],

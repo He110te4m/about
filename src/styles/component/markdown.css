@@ -1,3 +1,7 @@
+.prose.prose-md {
+  max-width: 120ch;
+}
+
 .prose pre:not(.shiki) {
   padding: 0;
 }

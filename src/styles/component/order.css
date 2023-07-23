@@ -5,10 +5,10 @@ ol.order {
 
 ol.order li {
   counter-increment: num;
-  padding-left: 1ch;
+  padding-left: 1em;
 }
 
 ol.order li::marker {
   content: "#" counter(num);
-  font-size: 1ch;
+  font-size: 1em;
 }
