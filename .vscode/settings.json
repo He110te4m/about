@@ -10,5 +10,10 @@
   "files.associations": {
     "*.css": "css"
   },
-  "editor.formatOnSave": false
+  "editor.formatOnSave": false,
+  "[markdown]": {
+    "editor.quickSuggestions": {
+      "other": "on"
+    }
+  },
 }

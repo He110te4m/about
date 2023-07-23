@@ -1,0 +1,32 @@
+{
+  "创建文章": {
+    "prefix": "blog-article",
+    "body": [
+      "---",
+      "title: ${1:文章标题}",
+      "category: ${2|Front End,Builder,GoLang,PHP|}",
+      "description: \"${3}\"",
+      "createdAt: $CURRENT_YEAR/$CURRENT_MONTH/$CURRENT_DATE $CURRENT_HOUR:$CURRENT_MINUTE:$CURRENT_SECOND",
+      "updatedAt: $CURRENT_YEAR/$CURRENT_MONTH/$CURRENT_DATE $CURRENT_HOUR:$CURRENT_MINUTE:$CURRENT_SECOND",
+      "---",
+      "## ${0}"
+    ],
+    "description": "创建博客文章",
+  },
+  "创建系列文章": {
+    "prefix": "blog-series",
+    "body": [
+      "---",
+      "title: ${1:文章标题}",
+      "series: \"${2}\"",
+      "category: ${3|Front End,Builder,GoLang,PHP|}",
+      "description: \"${4}\"",
+      "createdAt: $CURRENT_YEAR/$CURRENT_MONTH/$CURRENT_DATE $CURRENT_HOUR:$CURRENT_MINUTE:$CURRENT_SECOND",
+      "updatedAt: $CURRENT_YEAR/$CURRENT_MONTH/$CURRENT_DATE $CURRENT_HOUR:$CURRENT_MINUTE:$CURRENT_SECOND",
+      "---",
+      "## ${0}"
+    ],
+    "description": "创建博客系列文章",
+    "scope": "markdown",
+  },
+}
