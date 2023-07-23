@@ -1,0 +1,14 @@
+ol.order {
+  counter-increment: group;
+  display: list-item;
+}
+
+ol.order li {
+  counter-increment: num;
+  padding-left: 1ch;
+}
+
+ol.order li::marker {
+  content: "#" counter(num);
+  font-size: 1ch;
+}

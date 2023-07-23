@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { flow, pipe } from 'fp-ts/lib/function'
-import { groupBy } from 'fp-ts/lib/NonEmptyArray'
+import { nonEmptyArray as NonEmptyArray } from 'fp-ts'
 import { articles } from '~articles/posts'
 
 const route = useRoute()
@@ -45,7 +45,7 @@ const filtedArticles = useFilter(
 const articleGroup = computed(
   () => pipe(
     unref(filtedArticles),
-    groupBy<ArticleModule.ArticleInfo>(
+    NonEmptyArray.groupBy<ArticleModule.ArticleInfo>(
       flow(
         prop('createdAt', ''),
         createdAt => new Date(createdAt).getFullYear().toString(),
@@ -58,7 +58,7 @@ const articleGroup = computed(
 <template>
   <dl flex="~ col" gap="4" h="full">
     <dd v-for="year in Object.keys(articleGroup).reverse()" :key="year" flex="~ col">
-      <div text="8xl left" color="white" text-shadow="md color-gray-800" select="none" pos="relative" op="10">
+      <div text="8xl" color="white" text-shadow="md color-gray-800" select="none" op="10">
         {{ year }}
       </div>
       <div v-for="article in articleGroup[year]" :key="article.url" flex items="center" my="4" p-is="16">
