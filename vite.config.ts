@@ -15,6 +15,7 @@ import LinkAttributes from 'markdown-it-link-attributes'
 import Unocss from 'unocss/vite'
 import Shiki from 'markdown-it-shiki'
 import Emoji from 'markdown-it-emoji'
+import Anchor from 'markdown-it-anchor'
 
 import WebfontDownload from 'vite-plugin-webfont-dl'
 import { formatFileToUrl } from './utils/formatter/url'
@@ -104,6 +105,8 @@ export default defineConfig({
         })
 
         md.use(Emoji)
+
+        md.use(Anchor)
       },
     }),
 
