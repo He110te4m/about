@@ -1,4 +1,4 @@
-import { getOrElse } from 'fp-ts/lib/Option'
+import { type Option, getOrElse } from 'fp-ts/lib/Option'
 import { constant, flow } from 'fp-ts/lib/function'
 import { lookup } from 'fp-ts/lib/Record'
 
@@ -6,8 +6,7 @@ export function prop<Return>(propName: string): (...a: readonly unknown[]) => Re
 export function prop<Return>(propName: string, defaultValue: Return): (...a: readonly unknown[]) => Return
 export function prop<Return>(propName: string, defaultValue?: Return) {
   return flow(
-    // @ts-expect-error 这里类型会读不出来， ts 无法自动推导
-    lookup(propName),
+    lookup(propName) as (r: Record<string, Return>) => Option<Return>,
     getOrElse(constant(defaultValue)),
   )
 }
