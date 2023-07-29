@@ -10,7 +10,7 @@ const { t } = useI18n()
     </div>
     <RouterView />
     <div>
-      <button text-sm btn m="3 t8" @click="router.back()">
+      <button inline-block cursor="pointer" rounded bg-teal-700 px-4 py-1 text="sm white" hover:bg-teal-800 outline="none!" m="3 t8" @click="router.back()">
         {{ t('button.back') }}
       </button>
     </div>

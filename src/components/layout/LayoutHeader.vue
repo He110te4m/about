@@ -3,15 +3,15 @@ const { t } = useI18n()
 </script>
 
 <template>
-  <header b-be="color-gray-200 1" px="4" flex justify="between" items="center">
+  <header b-be="color-gray-2 1" px="4" flex justify="between" items="center">
     <div>
       <!-- TODO: 随机内容 -->
     </div>
     <nav flex gap="4">
-      <RouterLink to="/posts">
+      <RouterLink to="/posts" link>
         {{ t('layout.nav.articles') }}
       </RouterLink>
-      <RouterLink to="/archives">
+      <RouterLink to="/archives" link>
         {{ t('layout.nav.archives') }}
       </RouterLink>
     </nav>

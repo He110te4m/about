@@ -12,8 +12,8 @@ import { socials } from './src/configs/site'
 
 export default defineConfig({
   shortcuts: [
-    ['btn', 'px-4 py-1 rounded inline-block bg-teal-700 text-white cursor-pointer !outline-none hover:bg-teal-800 disabled:cursor-default disabled:bg-gray-600 disabled:opacity-50'],
     ['center-full', 'flex items-center justify-around'],
+    ['link', 'color-primary cursor-pointer hover:decoration-underline'],
   ],
   presets: [
     presetUno(),
@@ -46,6 +46,8 @@ export default defineConfig({
         '"sidebar footer"',
       ].join('\r\n'),
     }],
+    ['color-primary', { color: 'var(--primary-color)' }],
+    ['color-title', { color: '#000000' }],
   ],
   safelist: 'prose m-auto text-left'.split(' ')
     .concat(

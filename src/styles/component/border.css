@@ -1,0 +1,51 @@
+.gradient-border {
+  --border-width: 4px;
+
+  padding: var(--border-width);
+  position: relative;
+  overflow: hidden;
+}
+
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  display: inline-block;
+  inset: -100vw;
+  z-index: -2;
+  background: conic-gradient(var(--primary-color) 0%, var(--bg-color) 10%);
+  animation: route linear 2s infinite;
+}
+
+.gradient-border::after {
+  content: '';
+  position: absolute;
+  display: inline-block;
+  inset: var(--border-width);
+  background: var(--bg-color);
+  z-index: -1;
+  border-radius: inherit;
+}
+
+@keyframes route {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0);
+  }
+}
+
+.light {
+  animation: light 3s linear infinite;
+  box-shadow: 0 0 10px 1px var(--primary-color);
+}
+
+@keyframes light {
+  0% {
+    box-shadow: 0 0 10px 1px var(--primary-color);
+  }
+
+  50% {
+    box-shadow: 0 0 30px 1px var(--primary-color);
+  }
+}

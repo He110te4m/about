@@ -60,7 +60,7 @@ const articleGroup = computed(
 <template>
   <dl flex="~ col" gap="4" h="full">
     <dd v-for="year in Object.keys(articleGroup).reverse()" :key="year" flex="~ col">
-      <div text="8xl" color="white" text-shadow="md color-gray-800" select="none" op="10">
+      <div text="8xl" color="white" text-shadow="md color-gray-8" select="none" op="10">
         {{ year }}
       </div>
       <div v-for="article in articleGroup[year]" :key="article.url" flex items="center" my="4" p-is="16">
@@ -69,7 +69,7 @@ const articleGroup = computed(
             {{ article.title }}
           </div>
         </RouterLink>
-        <div scale="50" b="1 color-gray-500" px="4" b-rd="4">
+        <div scale="50" b="1 color-gray-5" px="4" b-rd="4">
           {{ article.category }}
         </div>
       </div>

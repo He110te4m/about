@@ -1,12 +1,14 @@
 <template>
-  <aside h="full" b-ie="color-gray-200 1" flex="~ col" items="center" py="4" gap="4">
-    <img src="/assets/images/logo.jpg" b-rd="50%" w="200px" aspect="1">
+  <aside h="full" b-ie="color-gray-2 1" flex="~ col" items="center" py="4" gap="4">
+    <div w="200px" aspect="1" class="light" b-rd="50%">
+      <img src="/assets/images/logo.jpg" b-rd="50%">
+    </div>
 
     <div font="bold" text="2xl">
       {{ title }}
     </div>
 
-    <div color="gray-500">
+    <div color="gray-5">
       {{ description }}
     </div>
 

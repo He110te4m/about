@@ -9,6 +9,7 @@ declare global {
   const allPass: typeof import('../src/utils/filters/boolean')['allPass']
   const anyPass: typeof import('../src/utils/filters/boolean')['anyPass']
   const asyncComputed: typeof import('@vueuse/core')['asyncComputed']
+  const author: typeof import('../src/configs/site')['author']
   const autoResetRef: typeof import('@vueuse/core')['autoResetRef']
   const computed: typeof import('vue')['computed']
   const computedAsync: typeof import('@vueuse/core')['computedAsync']
@@ -318,6 +319,7 @@ declare module 'vue' {
     readonly allPass: UnwrapRef<typeof import('../src/utils/filters/boolean')['allPass']>
     readonly anyPass: UnwrapRef<typeof import('../src/utils/filters/boolean')['anyPass']>
     readonly asyncComputed: UnwrapRef<typeof import('@vueuse/core')['asyncComputed']>
+    readonly author: UnwrapRef<typeof import('../src/configs/site')['author']>
     readonly autoResetRef: UnwrapRef<typeof import('@vueuse/core')['autoResetRef']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
     readonly computedAsync: UnwrapRef<typeof import('@vueuse/core')['computedAsync']>
@@ -620,6 +622,7 @@ declare module '@vue/runtime-core' {
     readonly allPass: UnwrapRef<typeof import('../src/utils/filters/boolean')['allPass']>
     readonly anyPass: UnwrapRef<typeof import('../src/utils/filters/boolean')['anyPass']>
     readonly asyncComputed: UnwrapRef<typeof import('@vueuse/core')['asyncComputed']>
+    readonly author: UnwrapRef<typeof import('../src/configs/site')['author']>
     readonly autoResetRef: UnwrapRef<typeof import('@vueuse/core')['autoResetRef']>
     readonly computed: UnwrapRef<typeof import('vue')['computed']>
     readonly computedAsync: UnwrapRef<typeof import('@vueuse/core')['computedAsync']>
