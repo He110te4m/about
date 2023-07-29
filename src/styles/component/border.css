@@ -36,16 +36,20 @@
 }
 
 .light {
-  animation: light 3s linear infinite;
-  box-shadow: 0 0 10px 1px var(--primary-color);
+  --sm-width: 6px;
+  --lg-width: 20px;
+  --shadow-color: var(--primary-color);
+
+  animation: light 3s ease-in-out infinite;
+  box-shadow: 0 0 var(--sm-width) 1px var(--shadow-color);
 }
 
 @keyframes light {
   0% {
-    box-shadow: 0 0 10px 1px var(--primary-color);
+    box-shadow: 0 0 var(--sm-width) 1px var(--shadow-color);
   }
 
   50% {
-    box-shadow: 0 0 30px 1px var(--primary-color);
+    box-shadow: 0 0 var(--lg-width) 1px var(--shadow-color);
   }
 }

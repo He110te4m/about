@@ -14,6 +14,9 @@ const { t } = useI18n()
       <RouterLink to="/archives" link>
         {{ t('layout.nav.archives') }}
       </RouterLink>
+      <RouterLink to="/AboutMe" link>
+        {{ t('layout.nav.aboutme') }}
+      </RouterLink>
     </nav>
   </header>
 </template>

@@ -10,8 +10,6 @@ import 'uno.css'
 
 const routes = getRoutes()
 
-import.meta.env.DEV && window.console.log(routes)
-
 // https://github.com/antfu/vite-ssg
 export const createApp = ViteSSG(
   App,
@@ -25,6 +23,8 @@ export const createApp = ViteSSG(
 
 function getRoutes() {
   const routes = setupLayouts(generatedRoutes)
+
+  import.meta.env.DEV && window.console.log(routes)
 
   return routes
 }

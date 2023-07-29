@@ -40,15 +40,6 @@ export default defineConfig({
   ],
   rules: [
     [/^g-name-(.+)$/, ([, name]) => ({ 'grid-area': name })],
-    ['layout', {
-      'display': 'grid',
-      'grid-template': '40px 1fr 40px / 320px 1fr',
-      'grid-template-areas': [
-        '"sidebar header"',
-        '"sidebar main"',
-        '"sidebar footer"',
-      ].join('\r\n'),
-    }],
     ['color-title', { color: '#000000' }],
   ],
   safelist: 'prose m-auto text-left'.split(' ')
