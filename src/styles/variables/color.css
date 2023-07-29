@@ -1,4 +1,11 @@
 :root {
   --bg-color: #FFFFFF;
   --primary-color: #1C6EFF;
+  --turquoise-color: #20CC94;
+  --title-color: #141414;
+  --title-secondary-color: #3D3D3D;
+  --info-color: #5C5C5C;
+  --info-secodary-color: #7A7A7A;
+  --separator-color: #CBD5E1;
+  --disabled-color: #A3A3A3;
 }

@@ -1,6 +1,6 @@
 <template>
-  <aside h="full" b-ie="color-gray-2 1" flex="~ col" items="center" py="4" gap="4">
-    <div w="200px" aspect="1" class="light" b-rd="50%">
+  <aside h="full" b-ie="color-sep 1" flex="~ col" items="center" p-bs="8" gap="2">
+    <div w="200px" aspect="1" class="light" b-rd="50%" m-be="4">
       <img src="/assets/images/logo.jpg" b-rd="50%">
     </div>
 
@@ -8,7 +8,7 @@
       {{ title }}
     </div>
 
-    <div color="gray-5">
+    <div color="desc" font="6">
       {{ description }}
     </div>
 

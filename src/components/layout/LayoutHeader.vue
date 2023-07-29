@@ -3,7 +3,7 @@ const { t } = useI18n()
 </script>
 
 <template>
-  <header b-be="color-gray-2 1" px="4" flex justify="between" items="center">
+  <header b-be="color-sep 1" px="4" font="5" flex justify="between" items="center">
     <div>
       <!-- TODO: 随机内容 -->
     </div>

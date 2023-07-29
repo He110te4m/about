@@ -13,7 +13,10 @@ import { socials } from './src/configs/site'
 export default defineConfig({
   shortcuts: [
     ['center-full', 'flex items-center justify-around'],
-    ['link', 'color-primary cursor-pointer hover:decoration-underline'],
+    ['color-sep', 'color-$separator-color'],
+    ['color-link', 'color-$primary-color'],
+    ['color-info', 'color-$info-color'],
+    ['link', 'color-link cursor-pointer hover:decoration-underline'],
   ],
   presets: [
     presetUno(),
@@ -46,7 +49,6 @@ export default defineConfig({
         '"sidebar footer"',
       ].join('\r\n'),
     }],
-    ['color-primary', { color: 'var(--primary-color)' }],
     ['color-title', { color: '#000000' }],
   ],
   safelist: 'prose m-auto text-left'.split(' ')
