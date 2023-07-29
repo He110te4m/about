@@ -11,4 +11,5 @@ ol.order li {
 ol.order li::marker {
   content: "#" counter(num);
   font-size: 1em;
+  font-family: "DM mono";
 }
