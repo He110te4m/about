@@ -1,6 +1,6 @@
 <template>
   <LayoutGroup>
-    <div w="full" h="full" b="1 color-sep rd-2" p="4" p-be="0">
+    <div w="full" h="full" b="1 color-sep rd-2" p="8" p-be="8">
       <div flex b-be="1 color-info" p-be="4">
         <img src="/assets/images/logo.jpg" b-rd="50%" w="100px" aspect="1" class="light" m-ie="8">
         <div flex="1 ~ col">
