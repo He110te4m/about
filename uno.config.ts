@@ -17,8 +17,8 @@ export default defineConfig({
     ['color-link', 'color-$primary-color'],
     ['color-info', 'color-$info-color'],
     ['link', 'color-link cursor-pointer hover:decoration-underline'],
-    ['card', 'card-shadow b-rd-2 b-1 b-color-sep'],
-    ['group-title', 'group-shadow color-$bg-color select-none font-sans op-50'],
+    ['card', 'card-shadow b-rd-2 b-1 b-color-$separator-color content-bg p-8'],
+    ['group-title', 'group-shadow color-$bg-color select-none font-sans'],
   ],
   presets: [
     presetUno(),
@@ -45,6 +45,13 @@ export default defineConfig({
     ['color-title', { color: '#000000' }],
     ['card-shadow', { 'box-shadow': '0 0 4px 0 var(--separator-color)' }],
     ['group-shadow', { 'text-shadow': '0 0 2px var(--title-color)' }],
+    ['site-bg', {
+      'background-color': '#D9AFD9',
+      'background-image': 'linear-gradient(0deg, #D9AFD9 0%, #97D9E1 100%)',
+    }],
+    ['content-bg', {
+      'background-color': 'var(--content-bg-color)',
+    }],
   ],
   safelist: 'prose m-auto text-left'.split(' ')
     .concat(

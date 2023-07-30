@@ -1,8 +1,8 @@
 <template>
   <LayoutGroup>
-    <div w="full" h="full" card p="8" p-be="8">
+    <div w="full" h="full" p-be="8">
       <div flex b-be="1 color-info" p-be="4">
-        <img src="/assets/images/logo.jpg" b-rd="50%" w="100px" aspect="1" class="light" m-ie="8">
+        <img src="/assets/images/logo.jpg" b-rd="50%" w="100px" h="100px" class="light" m-ie="8">
         <div flex="1 ~ col">
           <div text="4xl">
             {{ title }}
