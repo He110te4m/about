@@ -63,15 +63,12 @@ const articleGroup = computed(
       <div text="4xl center" group="title" b-y="2" b-color="$separator-color" m-y="4">
         {{ year }}
       </div>
-      <div v-for="article in articleGroup[year]" :key="article.url" flex items="start" my="2" p-is="16" z="1" w="full">
+      <div v-for="article in articleGroup[year]" :key="article.url" flex items="start" my="2" p-is="8" lt-md:p-is="1" lt-sm:p-is="0" z="1" w="full">
         <RouterLink v-slot="{ navigate }" :to="article.url" custom>
           <div role="link" cursor="pointer" text="lg" @click="navigate">
             {{ article.title }}
           </div>
         </RouterLink>
-        <div scale="50" b="1 color-$primary-color" color="$primary-color" px="4" b-rd="4">
-          {{ article.category }}
-        </div>
       </div>
     </dd>
   </dl>
