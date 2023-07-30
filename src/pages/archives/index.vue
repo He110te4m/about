@@ -42,7 +42,7 @@ const series = pipe(
     <div text="4xl center" m-be="4">
       {{ name }}
     </div>
-    <ol class="order" px="8">
+    <ol class="order" p-is="8" lt-md:p-is="4">
       <li v-for="article in series[name]" :key="name + article.url">
         <RouterLink v-slot="{ navigate }" :to="article.url" custom>
           <div role="link" cursor="pointer" text="lg" @click="navigate">
