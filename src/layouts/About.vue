@@ -4,7 +4,7 @@
       <div flex b-be="1 color-info" p-be="4" lt-sm:flex="col" lt-sm:items="center">
         <img src="/assets/images/logo.jpg" b-rd="50%" w="100px" h="100px" class="light" m-ie="8" lt-sm:m-ie="0" lt-sm:m-be="4">
         <div flex="1 ~ col">
-          <div text="4xl" lt-sm:text="center">
+          <div text="4xl" lt-sm:text="2xl center">
             {{ title }}
           </div>
 

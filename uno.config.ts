@@ -47,7 +47,7 @@ export default defineConfig({
     ['group-shadow', { 'text-shadow': '0 0 2px var(--title-color)' }],
     ['site-bg', {
       'background-color': '#D9AFD9',
-      'background-image': 'linear-gradient(0deg, #D9AFD9 0%, #97D9E1 100%)',
+      'background-image': 'linear-gradient(-15deg, #D9AFD9 0%, #97D9E1 100%)',
     }],
     ['content-bg', {
       'background-color': 'var(--content-bg-color)',
