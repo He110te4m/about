@@ -5,7 +5,7 @@ ol.order {
 
 ol.order li {
   counter-increment: num;
-  padding-left: 1em;
+  padding-inline-start: 1em;
 }
 
 ol.order li::marker {
