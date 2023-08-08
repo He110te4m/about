@@ -1,29 +1,18 @@
 .gradient-border {
   --border-width: 4px;
 
-  padding: var(--border-width);
-  position: relative;
-  overflow: hidden;
+  --at-apply: relative overflow-hidden p-$border-width;
 }
 
 .gradient-border::before {
-  content: '';
-  position: absolute;
-  display: inline-block;
-  inset: -100vw;
-  z-index: -2;
+  --at-apply: content-empty absolute inline-block inset--100vw z--2;
+
   background: conic-gradient(var(--primary-color) 0%, var(--bg-color) 10%);
   animation: route linear 2s infinite;
 }
 
 .gradient-border::after {
-  content: '';
-  position: absolute;
-  display: inline-block;
-  inset: var(--border-width);
-  background: var(--bg-color);
-  z-index: -1;
-  border-radius: inherit;
+  --at-apply: content-empty absolute inline-block inset-$border-width z--1 bg-$bg-color b-rd-inherit;
 }
 
 @keyframes route {

@@ -1,0 +1,9 @@
+:root {
+  --bg-gradient-angle: -15deg;
+}
+
+@screen lt-sm {
+  :root {
+    --bg-gradient-angle: -45deg;
+  }
+}

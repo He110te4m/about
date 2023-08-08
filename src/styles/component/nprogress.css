@@ -1,14 +1,7 @@
 #nprogress {
-  pointer-events: none;
+  --at-apply: pointer-events-none;
 }
 
 #nprogress .bar {
-  background: rgb(13, 148, 136);
-  opacity: 0.75;
-  position: fixed;
-  z-index: 1031;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 2px;
+  --at-apply: bg-$primary-color op-75 fixed z-1031 top-0 left-0 w-full h-2px;
 }

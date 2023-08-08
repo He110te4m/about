@@ -1,37 +1,36 @@
 .prose.prose-md {
-  max-width: 120ch;
+  --at-apply: max-w-120ch;
 }
 
 .prose pre:not(.shiki) {
-  padding: 0;
+  --at-apply: p-0;
 }
 
 .prose .shiki {
   font-family: 'DM Mono', monospace;
-  font-size: 1.2em;
-  line-height: 1.4;
+  --at-apply: text-1.2em lh-1.4em;
 }
 
 .prose img {
-  width: 100%;
+  --at-apply: w-full;
 }
 
 .prose :where(h1, h2, h3, h4, h5, h6) code {
-  white-space: pre-wrap;
+  --at-apply: whitespace-pre-wrap;
 }
 
 .shiki-light {
-  background: #f8f8f8 !important;
+  --at-apply: bg-#f8f8f8!;
 }
 
 .shiki-dark {
-  background: #0e0e0e !important;
+  --at-apply: bg-#0e0e0e!;
 }
 
 html.dark .shiki-light {
-  display: none;
+  --at-apply: display-none;
 }
 
 html:not(.dark) .shiki-dark {
-  display: none;
+  --at-apply: display-none;
 }
