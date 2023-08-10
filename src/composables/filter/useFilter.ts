@@ -7,7 +7,11 @@ export function useFilter<T>(data: MaybeRef<T[]>, conditions: Predicate<T>[]) {
   const dataRef = ref(data) as Ref<T[]>
   const filterFn = pipeCondition(conditions)
 
-  return computed(() => filterFn<T>(unref(dataRef)))
+  watchEffect(() => {
+    dataRef.value = filterFn<T>(unref(data))
+  })
+
+  return dataRef
 }
 
 function pipeCondition<T>(conditions: Predicate<T>[]) {

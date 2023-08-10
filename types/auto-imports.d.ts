@@ -54,8 +54,11 @@ declare global {
   const isReactive: typeof import('vue')['isReactive']
   const isReadonly: typeof import('vue')['isReadonly']
   const isRef: typeof import('vue')['isRef']
+  const makeCategoryFilter: typeof import('../src/utils/filters/article')['makeCategoryFilter']
   const makeDestructurable: typeof import('@vueuse/core')['makeDestructurable']
+  const makeKeywordFilter: typeof import('../src/utils/filters/article')['makeKeywordFilter']
   const markRaw: typeof import('vue')['markRaw']
+  const multipleFilter: typeof import('../src/utils/filters/function')['multipleFilter']
   const mustDate: typeof import('../src/utils/formatters/date')['mustDate']
   const mustString: typeof import('../src/utils/formatters/string')['mustString']
   const nextTick: typeof import('vue')['nextTick']
@@ -184,6 +187,7 @@ declare global {
   const useFileDialog: typeof import('@vueuse/core')['useFileDialog']
   const useFileSystemAccess: typeof import('@vueuse/core')['useFileSystemAccess']
   const useFilter: typeof import('../src/composables/filter/useFilter')['useFilter']
+  const useFilteredArticles: typeof import('../src/composables/filters/useFilteredArticles')['useFilteredArticles']
   const useFocus: typeof import('@vueuse/core')['useFocus']
   const useFocusWithin: typeof import('@vueuse/core')['useFocusWithin']
   const useFps: typeof import('@vueuse/core')['useFps']
@@ -364,7 +368,9 @@ declare module 'vue' {
     readonly isReactive: UnwrapRef<typeof import('vue')['isReactive']>
     readonly isReadonly: UnwrapRef<typeof import('vue')['isReadonly']>
     readonly isRef: UnwrapRef<typeof import('vue')['isRef']>
+    readonly makeCategoryFilter: UnwrapRef<typeof import('../src/utils/filters/article')['makeCategoryFilter']>
     readonly makeDestructurable: UnwrapRef<typeof import('@vueuse/core')['makeDestructurable']>
+    readonly makeKeywordFilter: UnwrapRef<typeof import('../src/utils/filters/article')['makeKeywordFilter']>
     readonly markRaw: UnwrapRef<typeof import('vue')['markRaw']>
     readonly mustDate: UnwrapRef<typeof import('../src/utils/formatters/date')['mustDate']>
     readonly mustString: UnwrapRef<typeof import('../src/utils/formatters/string')['mustString']>
@@ -667,7 +673,9 @@ declare module '@vue/runtime-core' {
     readonly isReactive: UnwrapRef<typeof import('vue')['isReactive']>
     readonly isReadonly: UnwrapRef<typeof import('vue')['isReadonly']>
     readonly isRef: UnwrapRef<typeof import('vue')['isRef']>
+    readonly makeCategoryFilter: UnwrapRef<typeof import('../src/utils/filters/article')['makeCategoryFilter']>
     readonly makeDestructurable: UnwrapRef<typeof import('@vueuse/core')['makeDestructurable']>
+    readonly makeKeywordFilter: UnwrapRef<typeof import('../src/utils/filters/article')['makeKeywordFilter']>
     readonly markRaw: UnwrapRef<typeof import('vue')['markRaw']>
     readonly mustDate: UnwrapRef<typeof import('../src/utils/formatters/date')['mustDate']>
     readonly mustString: UnwrapRef<typeof import('../src/utils/formatters/string')['mustString']>

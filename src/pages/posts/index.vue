@@ -1,51 +1,22 @@
 <script setup lang="ts">
 import { flow, pipe } from 'fp-ts/lib/function'
-import { nonEmptyArray as NonEmptyArray } from 'fp-ts'
+import { groupBy } from 'fp-ts/lib/NonEmptyArray'
 import { articles } from '~articles/posts'
 
 const route = useRoute()
 
-/** 获取检索的关键字 */
-const keyword = mustString(route.query?.keyword)
-/** 标题检索器 */
-const titleMatcher = flow(
-  prop('title', ''),
-  filterString(keyword),
-)
-/** 摘要检索器 */
-const descMatcher = flow(
-  prop('description', ''),
-  filterString(keyword),
-)
-/** 关键词检索器 */
-const keywordMatcher = anyPass([
-  titleMatcher,
-  descMatcher,
-])
-
-/** 获取检索的分类 */
-const category = mustString(route.query?.category)
-/** 分类检索器 */
-const categoryMatcher = flow(
-  prop('category', ''),
-  eqString(category),
-)
-
 const filtedArticles = useFilter(
   articles,
-  // 支持混合检索
   [
-    // 支持关键字检索
-    keywordMatcher,
-    // 支持分类检索
-    categoryMatcher,
+    makeKeywordFilter(() => route.query.keyword),
+    makeCategoryFilter(() => route.query.category),
   ],
 )
 
 const articleGroup = computed(
   () => pipe(
     unref(filtedArticles),
-    NonEmptyArray.groupBy<ArticleModule.ArticleInfo>(
+    groupBy<ArticleModule.ArticleInfo>(
       flow(
         prop('createdAt', ''),
         mustDate,
