@@ -27,5 +27,16 @@ watchEffect(() => {
 </script>
 
 <template>
-  <input v-model="text" autocomplete="none" @keydown.enter="change">
+  <input
+    v-model="text"
+    b="1 solid truegray-300" hover:b="blue-500" focus:b="blue-500"
+    focus:card-shadow="#3B82F6"
+    p="x-2 y-1"
+    b-rd="2px"
+    lh="4"
+    transition="320"
+    outline="none"
+    autocomplete="none"
+    @keydown.enter="change"
+  >
 </template>

@@ -13,11 +13,10 @@ import { socials } from './src/configs/site'
 export default defineConfig({
   shortcuts: [
     ['center-full', 'flex items-center justify-around'],
-    ['color-sep', 'color-$separator-color'],
-    ['color-link', 'color-$primary-color'],
+    ['color-link', 'color-$color-primary'],
     ['color-info', 'color-$info-color'],
-    ['link', 'color-link cursor-pointer hover:decoration-underline'],
-    ['card', 'card-shadow b-rd-2 b-1 b-color-$separator-color content-bg p-8'],
+    ['link', 'color-link cursor-pointer transition-320 hover:color-$color-blue-l10 active:color-$color-blue-d10'],
+    ['card', 'card-shadow-$separator-color b-rd-2 b-1 b-color-$separator-color content-bg p-8'],
     ['group-title', 'group-shadow color-$bg-color select-none font-sans'],
   ],
   presets: [
@@ -43,7 +42,7 @@ export default defineConfig({
   rules: [
     [/^g-name-(.+)$/, ([, name]) => ({ 'grid-area': name })],
     ['color-title', { color: '#000000' }],
-    ['card-shadow', { 'box-shadow': '0 0 4px 0 var(--separator-color)' }],
+    [/^card-shadow-(.+)$/, ([, color]) => ({ 'box-shadow': `0 0 4px 0 ${parseColor(color)}` })],
     ['group-shadow', { 'text-shadow': '0 0 2px var(--title-color)' }],
     ['site-bg', {
       'background-color': '#D9AFD9',
@@ -58,3 +57,7 @@ export default defineConfig({
       socials.map(({ icon }) => icon),
     ),
 })
+
+function parseColor(color: string) {
+  return color.startsWith('$') ? `var(--${color.slice(1)})` : color
+}

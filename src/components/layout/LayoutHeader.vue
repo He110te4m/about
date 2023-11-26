@@ -24,11 +24,11 @@ watch(
 </script>
 
 <template>
-  <header b-be="color-sep 1" px="4" font="5" flex justify="between" items="center">
+  <header b-be="color-$separator-color 1" px="4" font="5" flex justify="between" items="center">
     <div>
       <!-- TODO: 随机内容 -->
     </div>
-    <nav flex gap="4">
+    <nav flex gap="4" items="center">
       <RouterLink to="/posts" link>
         {{ t('layout.nav.articles') }}
       </RouterLink>

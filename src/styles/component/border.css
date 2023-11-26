@@ -7,7 +7,7 @@
 .gradient-border::before {
   --at-apply: content-empty absolute inline-block inset--100vw z--2;
 
-  background: conic-gradient(var(--primary-color) 0%, var(--bg-color) 10%);
+  background: conic-gradient(var(--color-primary) 0%, var(--bg-color) 10%);
   animation: route linear 2s infinite;
 }
 
@@ -27,7 +27,7 @@
 .light {
   --sm-width: 6px;
   --lg-width: 20px;
-  --shadow-color: var(--primary-color);
+  --shadow-color: var(--color-primary);
 
   animation: light 3s ease-in-out infinite;
   box-shadow: 0 0 var(--sm-width) 1px var(--shadow-color);
