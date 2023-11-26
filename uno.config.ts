@@ -15,7 +15,7 @@ export default defineConfig({
     ['center-full', 'flex items-center justify-around'],
     ['color-link', 'color-$color-primary'],
     ['color-info', 'color-$info-color'],
-    ['link', 'color-link cursor-pointer transition-320 hover:color-$color-blue-l10 active:color-$color-blue-d10'],
+    ['link', 'color-link cursor-pointer transition-320 hover:color-$color-primary-l10 active:color-$color-primary-d10'],
     ['card', 'card-shadow-$separator-color b-rd-2 b-1 b-color-$separator-color content-bg p-8'],
     ['group-title', 'group-shadow color-$bg-color select-none font-sans'],
   ],
