@@ -1,6 +1,8 @@
 import { pipe } from 'fp-ts/lib/function'
 import type { CustomFn, PostFilterOption, PostOption, PostPagerOption, PostSorterOption } from './types'
 import { makePostsFilter } from './filters'
+import { makePostsPager } from './pager'
+import { makePostsSorter } from './sort'
 import { type PostInfo, posts } from '~posts'
 
 export function getPosts(options: PostOption = {}) {
@@ -17,23 +19,24 @@ export function getPosts(options: PostOption = {}) {
 function filterPosts(options: PostFilterOption = {}) {
   return handleCustomFn(options, (posts: PostInfo[]) => {
     const filterFn = makePostsFilter(options)
+
     return filterFn(posts)
   })
 }
 
 function sortPosts(options: PostSorterOption = {}) {
-  // const { field, direction } = options
-
   return handleCustomFn(options, (posts: PostInfo[]) => {
-    return posts
+    const sorterFn = makePostsSorter(options)
+
+    return sorterFn(posts)
   })
 }
 
 function pagerPosts(options: PostPagerOption = {}) {
-  // const { page, size } = options
-
   return handleCustomFn(options, (posts: PostInfo[]) => {
-    return posts
+    const pagerFn = makePostsPager(options)
+
+    return pagerFn(posts)
   })
 }
 

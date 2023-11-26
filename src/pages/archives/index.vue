@@ -19,7 +19,10 @@ const sortByCreatedAt = pipe(
   ),
 )
 
-const posts = getPosts({ filter: { subPath: 'archives' } })
+const posts = getPosts({
+  filter: { subPath: 'archives' },
+  sorter: { direction: 'DESC' },
+})
 
 /** 排序分组后的数据 */
 const series = pipe(

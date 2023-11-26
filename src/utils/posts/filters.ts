@@ -4,10 +4,10 @@ import { filter, reduce } from 'fp-ts/lib/Array'
 import MiniSearch from 'minisearch'
 import { prop } from '../filters/record'
 import { mustString } from '../formatters/string'
-import type { PostOption } from './types'
+import type { PostFilterOption } from './types'
 import type { PostInfo } from '~posts'
 
-export function makePostsFilter({ subPath, category, keyword }: PostOption['filter'] = {}) {
+export function makePostsFilter({ subPath, category, keyword }: PostFilterOption = {}) {
   return pipeCondition([
     makeSubPathFilter(subPath),
     makeCategoryFilter(category),

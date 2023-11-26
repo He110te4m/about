@@ -1,6 +1,7 @@
 declare module '~posts' {
-  import type { PostInfo as Info } from './post'
+  /// <reference path="./post.ts" />
+  import type { PostInfo as Info } from 'post-type'
 
   export type PostInfo = Info
-  export const posts: PostInfo[]
+  export const posts: Info[]
 }

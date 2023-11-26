@@ -13,14 +13,17 @@ const route = useRoute()
 
 const articleGroup = computed(
   () => {
-    const category = route.query.category
-    const keyword = route.query.keyword
+    const category = mustString(route.query.category, '')
+    const keyword = mustString(route.query.keyword, '')
 
     const posts = getPosts({
       filter: {
         subPath: 'posts',
-        category: mustString(category, ''),
-        keyword: mustString(keyword, ''),
+        category,
+        keyword,
+      },
+      sorter: {
+        direction: 'DESC',
       },
     })
 

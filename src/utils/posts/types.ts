@@ -12,7 +12,7 @@ export interface PostFilterOption {
 export type SorterDirction = 'ASC' | 'DESC'
 
 export interface PostSorterOption {
-  field?: keyof Omit<PostInfo, 'url'>
+  field?: ('title' | 'createdAt' | 'updatedAt') & keyof PostInfo
   direction?: SorterDirction
   custom?: CustomFn
 }

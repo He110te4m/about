@@ -22,10 +22,10 @@
       "vite-plugin-vue-component-preview/client",
       "vite-plugin-vue-layouts/client",
       "vite-plugin-pwa/client",
-      "./plugins/articles/types/module.d.ts",
       "./plugins/posts/types/module.d.ts"
     ],
     "paths": {
+      "post-type": ["plugins/posts/types/post.ts"],
       "~/*": ["src/*"]
     }
   },
