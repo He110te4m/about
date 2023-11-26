@@ -1,5 +1,26 @@
 <script lang="ts" setup>
+import { ref, watch } from 'vue'
+import { useI18n } from 'vue-i18n'
+import { RouterLink, useRoute, useRouter } from 'vue-router'
+import SearchField from '~/components/form/SearchField/index.vue'
+import { mustString } from '~/utils/formatters/string'
+
 const { t } = useI18n()
+const route = useRoute()
+const router = useRouter()
+const keyword = ref(mustString(route.query.keyword))
+watch(
+  keyword,
+  (keyword) => {
+    router.push({
+      path: route.path,
+      query: {
+        ...route.query,
+        keyword,
+      },
+    })
+  },
+)
 </script>
 
 <template>
@@ -17,6 +38,7 @@ const { t } = useI18n()
       <RouterLink to="/AboutMe" link>
         {{ t('layout.nav.aboutme') }}
       </RouterLink>
+      <SearchField v-model:keyword="keyword" />
     </nav>
   </header>
 </template>

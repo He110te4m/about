@@ -4,8 +4,6 @@ import Vue from '@vitejs/plugin-vue'
 import Pages from 'vite-plugin-pages'
 import generateSitemap from 'vite-ssg-sitemap'
 import Layouts from 'vite-plugin-vue-layouts'
-import Components from 'unplugin-vue-components/vite'
-import AutoImport from 'unplugin-auto-import/vite'
 import Markdown from 'vite-plugin-vue-markdown'
 import { VitePWA } from 'vite-plugin-pwa'
 import VueI18n from '@intlify/unplugin-vue-i18n/vite'
@@ -19,7 +17,7 @@ import Anchor from 'markdown-it-anchor'
 
 import WebfontDownload from 'vite-plugin-webfont-dl'
 import { formatFileToUrl } from './utils/formatter/url'
-import Articles from './plugins/articles'
+import Articles from './plugins/posts'
 
 export default defineConfig({
   resolve: {
@@ -50,33 +48,33 @@ export default defineConfig({
       defaultLayout: 'Article',
     }),
 
-    // https://github.com/antfu/unplugin-auto-import
-    AutoImport({
-      imports: [
-        'vue',
-        'vue-router',
-        'vue-i18n',
-        '@vueuse/head',
-        '@vueuse/core',
-      ],
-      dts: 'types/auto-imports.d.ts',
-      dirs: [
-        'src/configs',
-        'src/composables/**',
-        'src/stores',
-        'src/utils/**',
-      ],
-      vueTemplate: true,
-    }),
+    // // https://github.com/antfu/unplugin-auto-import
+    // AutoImport({
+    //   imports: [
+    //     'vue',
+    //     'vue-router',
+    //     'vue-i18n',
+    //     '@vueuse/head',
+    //     '@vueuse/core',
+    //   ],
+    //   dts: 'types/auto-imports.d.ts',
+    //   dirs: [
+    //     'src/configs',
+    //     'src/composables/**',
+    //     'src/stores',
+    //     'src/utils/**',
+    //   ],
+    //   vueTemplate: true,
+    // }),
 
-    // https://github.com/antfu/unplugin-vue-components
-    Components({
-      // allow auto load markdown components under `./src/components/`
-      extensions: ['vue', 'md'],
-      // allow auto import and register components used in markdown
-      include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
-      dts: 'types/components.d.ts',
-    }),
+    // // https://github.com/antfu/unplugin-vue-components
+    // Components({
+    //   // allow auto load markdown components under `./src/components/`
+    //   extensions: ['vue', 'md'],
+    //   // allow auto import and register components used in markdown
+    //   include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
+    //   dts: 'types/components.d.ts',
+    // }),
 
     // https://github.com/antfu/unocss
     // see uno.config.ts for config

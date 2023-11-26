@@ -1,7 +1,11 @@
 <script lang="ts" setup>
 import { nonEmptyArray as NonEmptyArray, number as Number, option as Option, ord as Ord } from 'fp-ts'
 import { constant, flow, pipe } from 'fp-ts/lib/function'
-import { articles } from '~articles/archives'
+import { RouterLink } from 'vue-router'
+import { prop } from '~/utils/filters/record'
+import { getTime, mustDate } from '~/utils/formatters/date'
+import { getPosts } from '~/utils/posts'
+import { type PostInfo } from '~posts'
 
 /** article 排序器，以数字从小到大为序 */
 const sortByCreatedAt = pipe(
@@ -15,13 +19,15 @@ const sortByCreatedAt = pipe(
   ),
 )
 
+const posts = getPosts({ filter: { subPath: 'archives' } })
+
 /** 排序分组后的数据 */
 const series = pipe(
-  NonEmptyArray.fromArray(articles),
+  NonEmptyArray.fromArray(posts),
   // 判断数组是否有值
   Option.match(
     // 数组没有内容，直接返回默认值
-    constant({} as Record<string, NonEmptyArray.NonEmptyArray<ArticleModule.ArticleInfo>>),
+    constant({} as Record<string, NonEmptyArray.NonEmptyArray<PostInfo>>),
     // 处理有长度的场景
     flow(
       // 有值时先排序，按 series.order 排序
@@ -29,7 +35,7 @@ const series = pipe(
         sortByCreatedAt,
       ]),
       // 排序后原地分组，以 series.title 为 key 分组
-      NonEmptyArray.groupBy<ArticleModule.ArticleInfo>(
+      NonEmptyArray.groupBy<PostInfo>(
         prop('series', ''),
       ),
     ),

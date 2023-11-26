@@ -1,3 +1,8 @@
+<script lang="ts" setup>
+import LayoutHeader from './LayoutHeader.vue'
+import LayoutFooter from './LayoutFooter.vue'
+</script>
+
 <template>
   <div w="full" h="full" flex="~ col" site-bg>
     <LayoutHeader h="40px" content-bg />

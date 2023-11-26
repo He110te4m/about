@@ -1,3 +1,8 @@
+<script lang="ts" setup>
+import LayoutGroup from '~/components/layout/LayoutGroup.vue'
+import { description, socials, title } from '~/configs/site'
+</script>
+
 <template>
   <LayoutGroup>
     <div w="full" h="full" p-be="8">

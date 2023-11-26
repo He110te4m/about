@@ -1,4 +1,5 @@
 import { type Meta } from '@unhead/vue'
+import { useRoute } from 'vue-router'
 
 export function getTwitterMeta({ title, description }: Record<'title' | 'description', string>): Meta[] {
   const route = useRoute()

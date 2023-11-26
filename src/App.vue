@@ -1,5 +1,10 @@
 <script setup lang="ts">
-import { type Meta } from '@unhead/vue'
+import { type Meta, useHead } from '@unhead/vue'
+import { RouterView } from 'vue-router'
+import { description, title } from '~/configs/site'
+import { preferredDark } from '~/composables/dark'
+import { getOpenGraphMeta } from '~/composables/meta/openGraph'
+import { getTwitterMeta } from '~/composables/meta/twitter'
 
 const info = { title, description }
 

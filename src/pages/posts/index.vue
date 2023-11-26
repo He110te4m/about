@@ -1,30 +1,41 @@
 <script setup lang="ts">
 import { flow, pipe } from 'fp-ts/lib/function'
 import { groupBy } from 'fp-ts/lib/NonEmptyArray'
-import { articles } from '~articles/posts'
+import { computed } from 'vue'
+import { RouterLink, useRoute } from 'vue-router'
+import { prop } from '~/utils/filters/record'
+import { getYear, mustDate } from '~/utils/formatters/date'
+import { mustString } from '~/utils/formatters/string'
+import { getPosts } from '~/utils/posts'
+import type { PostInfo } from '~posts'
 
 const route = useRoute()
 
-const filtedArticles = useFilter(
-  articles,
-  [
-    makeKeywordFilter(() => route.query.keyword),
-    makeCategoryFilter(() => route.query.category),
-  ],
-)
-
 const articleGroup = computed(
-  () => pipe(
-    unref(filtedArticles),
-    groupBy<ArticleModule.ArticleInfo>(
-      flow(
-        prop('createdAt', ''),
-        mustDate,
-        getYear,
-        mustString,
+  () => {
+    const category = route.query.category
+    const keyword = route.query.keyword
+
+    const posts = getPosts({
+      filter: {
+        subPath: 'posts',
+        category: mustString(category, ''),
+        keyword: mustString(keyword, ''),
+      },
+    })
+
+    return pipe(
+      posts,
+      groupBy<PostInfo>(
+        flow(
+          prop('createdAt', ''),
+          mustDate,
+          getYear,
+          mustString,
+        ),
       ),
-    ),
-  ),
+    )
+  },
 )
 </script>
 

@@ -1,8 +1,11 @@
 <script lang="ts" setup>
-import { articles } from '~articles'
+import { computed } from 'vue'
+import { RouterView, useRoute } from 'vue-router'
+import LayoutGroup from '~/components/layout/LayoutGroup.vue'
+import { posts } from '~posts'
 
 const route = useRoute()
-const currentArticle = computed(() => articles.find(({ url }) => route.path === url))
+const currentArticle = computed(() => posts.find(({ url }) => route.path === url))
 </script>
 
 <template>
