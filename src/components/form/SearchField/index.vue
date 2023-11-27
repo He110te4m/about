@@ -29,8 +29,8 @@ watchEffect(() => {
 <template>
   <input
     v-model="text"
-    b="1 solid truegray-300" hover:b="blue-500" focus:b="blue-500"
-    focus:card-shadow="#3B82F6"
+    b="1 solid $separator-color" hover:b="$color-primary" focus:b="$color-primary"
+    focus:card-shadow="$color-primary"
     p="x-2 y-1"
     b-rd="2px"
     lh="4"
