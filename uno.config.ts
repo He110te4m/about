@@ -44,10 +44,6 @@ export default defineConfig({
     ['color-title', { color: '#000000' }],
     [/^card-shadow-(.+)$/, ([, color]) => ({ 'box-shadow': `0 0 4px 0 ${parseColor(color)}` })],
     ['group-shadow', { 'text-shadow': '0 0 2px var(--title-color)' }],
-    ['site-bg', {
-      'background-color': '#D9AFD9',
-      'background-image': 'linear-gradient(var(--bg-gradient-angle), #D9AFD9 0%, #97D9E1 100%)',
-    }],
     ['content-bg', {
       'background-color': 'var(--content-bg-color)',
     }],

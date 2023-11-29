@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { type Meta, useHead } from '@unhead/vue'
-import { RouterView } from 'vue-router'
+import { RouterView, useRouter } from 'vue-router'
+import { storeToRefs } from 'pinia'
+import { useAnimaterStore } from './stores/animater'
 import { description, title } from '~/configs/site'
 import { preferredDark } from '~/composables/dark'
 import { getOpenGraphMeta } from '~/composables/meta/openGraph'
@@ -25,6 +27,15 @@ useHead({
       href: () => preferredDark.value ? '/favicon-dark.svg' : '/favicon.svg',
     },
   ],
+})
+
+const router = useRouter()
+const { animater } = storeToRefs(useAnimaterStore())
+router.beforeEach(() => {
+  animater.value?.fast()
+})
+router.afterEach(() => {
+  animater.value?.slow()
 })
 </script>
 
