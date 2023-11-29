@@ -2,10 +2,10 @@
 import { computed } from 'vue'
 import { RouterView, useRoute } from 'vue-router'
 import LayoutGroup from '~/components/layout/LayoutGroup.vue'
-import { posts } from '~posts'
+import { getPost } from '~/utils/posts'
 
 const route = useRoute()
-const currentArticle = computed(() => posts.find(({ url }) => route.path === url))
+const currentArticle = computed(() => getPost(route.path))
 </script>
 
 <template>

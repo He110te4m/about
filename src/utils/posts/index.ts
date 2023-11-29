@@ -1,8 +1,11 @@
-import { pipe } from 'fp-ts/lib/function'
+import { flow, pipe } from 'fp-ts/lib/function'
+import { filter } from 'fp-ts/lib/Array'
 import type { CustomFn, PostFilterOption, PostOption, PostPagerOption, PostSorterOption } from './types'
 import { makePostsFilter } from './filters'
 import { makePostsPager } from './pager'
 import { makePostsSorter } from './sort'
+import { eqString } from '~/utils/filters/string'
+import { prop } from '~/utils/filters/record'
 import { type PostInfo, posts } from '~posts'
 
 export function getPosts(options: PostOption = {}) {
@@ -12,6 +15,21 @@ export function getPosts(options: PostOption = {}) {
     sortPosts(options.sorter),
     pagerPosts(options.pager),
   )
+}
+
+export function getPost(url?: string) {
+  const matchedPosts = getPosts({
+    filter: {
+      custom: filter(
+        flow(
+          prop('url', ''),
+          eqString(url),
+        ),
+      ),
+    },
+  })
+
+  return matchedPosts[0]
 }
 
 //#region step by step handle posts

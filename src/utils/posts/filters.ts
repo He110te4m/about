@@ -2,9 +2,9 @@ import type { Predicate } from 'fp-ts/lib/Predicate'
 import { constTrue, flow } from 'fp-ts/lib/function'
 import { filter, reduce } from 'fp-ts/lib/Array'
 import MiniSearch from 'minisearch'
-import { prop } from '../filters/record'
-import { mustString } from '../formatters/string'
 import type { PostFilterOption } from './types'
+import { prop } from '~/utils/filters/record'
+import { mustString } from '~/utils/formatters/string'
 import type { PostInfo } from '~posts'
 
 export function makePostsFilter({ subPath, category, keyword }: PostFilterOption = {}) {
