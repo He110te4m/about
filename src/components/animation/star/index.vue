@@ -9,8 +9,11 @@ const containerRef = ref<HTMLDivElement>()
 const { animater } = storeToRefs(useAnimaterStore())
 
 onMounted(() => {
-  const starAnimater = new StarAnimater(containerRef.value!)
+  if (animater.value) {
+    return
+  }
 
+  const starAnimater = new StarAnimater(containerRef.value!)
   animater.value = starAnimater
 })
 </script>

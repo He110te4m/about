@@ -47,6 +47,7 @@ export default defineConfig({
     ['content-bg', {
       'background-color': 'var(--content-bg-color)',
     }],
+    ['flex-min', { flex: '0 0 auto' }],
   ],
   safelist: 'prose m-auto text-left'.split(' ')
     .concat(

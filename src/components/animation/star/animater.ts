@@ -1,5 +1,9 @@
 import { Application, Sprite, Texture } from 'pixi.js'
 
+export interface StarAnimaterOptions {
+  animateTime?: number
+}
+
 interface StarInfo {
   sprite: Sprite
   x: number
@@ -15,14 +19,18 @@ const starBaseSize = 0.05
 const starMinSpeed = 0.025
 
 export class StarAnimater {
-  app!: Application
-  starTexture!: Texture
-  starInfoList: StarInfo[] = []
-  speed = 0
-  warpSpeed = 0
-  cameraZ = 0
+  private app!: Application
+  private starTexture!: Texture
+  private starInfoList: StarInfo[] = []
+  private speed = 0
+  private warpSpeed = 0
+  private cameraZ = 0
+  private animateTime: number
+  private animateStartTime = 0
 
-  constructor(parentEl: HTMLElement) {
+  constructor(parentEl: HTMLElement, { animateTime = 300 }: StarAnimaterOptions = {}) {
+    this.animateTime = animateTime
+
     this.initApp(parentEl)
     this.initStarResource(1000)
     this.initAnimation()
@@ -30,10 +38,19 @@ export class StarAnimater {
 
   fast() {
     this.warpSpeed = 1
+    this.animateStartTime = performance.now()
   }
 
   slow() {
-    this.warpSpeed = 0
+    const now = performance.now()
+    if (this.animateStartTime + this.animateTime < now) {
+      this.warpSpeed = 0
+      return
+    }
+
+    setTimeout(() => {
+      this.slow()
+    }, 300)
   }
 
   private initApp(parentEl: HTMLElement) {

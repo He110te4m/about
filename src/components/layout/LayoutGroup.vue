@@ -1,11 +1,10 @@
 <script lang="ts" setup>
 import LayoutHeader from './LayoutHeader.vue'
 import LayoutFooter from './LayoutFooter.vue'
-import StarAnimater from '~/components/animation/star/index.vue'
 </script>
 
 <template>
-  <div w="full" h="full" flex="~ col" pos="relative">
+  <div w="full" h="full" flex="~ col">
     <LayoutHeader h="40px" content-bg />
     <main py="8" overflow="y-auto" flex="1">
       <slot name="wrapper">
@@ -15,6 +14,5 @@ import StarAnimater from '~/components/animation/star/index.vue'
       </slot>
     </main>
     <LayoutFooter h="40px" content-bg />
-    <StarAnimater pos="absolute" z="-1" inset="0" />
   </div>
 </template>

@@ -3,6 +3,7 @@ import { type Meta, useHead } from '@unhead/vue'
 import { RouterView, useRouter } from 'vue-router'
 import { storeToRefs } from 'pinia'
 import { useAnimaterStore } from './stores/animater'
+import StarAnimater from '~/components/animation/star/index.vue'
 import { description, title } from '~/configs/site'
 import { preferredDark } from '~/composables/dark'
 import { getOpenGraphMeta } from '~/composables/meta/openGraph'
@@ -40,5 +41,8 @@ router.afterEach(() => {
 </script>
 
 <template>
-  <RouterView />
+  <div id="app" pos="relative">
+    <RouterView />
+    <StarAnimater pos="absolute" z="-1" inset="0" />
+  </div>
 </template>

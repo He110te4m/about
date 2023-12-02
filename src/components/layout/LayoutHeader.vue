@@ -29,16 +29,16 @@ watch(
       <!-- TODO: 随机内容 -->
     </div>
     <nav flex gap="4" items="center">
-      <RouterLink to="/posts" link>
+      <RouterLink to="/posts" link flex="min">
         {{ t('layout.nav.articles') }}
       </RouterLink>
-      <RouterLink to="/archives" link>
+      <RouterLink to="/archives" link flex="min">
         {{ t('layout.nav.archives') }}
       </RouterLink>
-      <RouterLink to="/AboutMe" link>
+      <RouterLink to="/AboutMe" link flex="min">
         {{ t('layout.nav.aboutme') }}
       </RouterLink>
-      <SearchField v-model:keyword="keyword" />
+      <SearchField v-model:keyword="keyword" lt-sm:flex="1" />
     </nav>
   </header>
 </template>
