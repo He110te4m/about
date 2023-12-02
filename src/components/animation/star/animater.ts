@@ -1,6 +1,7 @@
 import { Application, Sprite, Texture } from 'pixi.js'
 
 export interface StarAnimaterOptions {
+  starCount?: number
   animateTime?: number
 }
 
@@ -28,11 +29,11 @@ export class StarAnimater {
   private animateTime: number
   private animateStartTime = 0
 
-  constructor(parentEl: HTMLElement, { animateTime = 300 }: StarAnimaterOptions = {}) {
+  constructor(parentEl: HTMLElement, { starCount = 1000, animateTime = 300 }: StarAnimaterOptions = {}) {
     this.animateTime = animateTime
 
     this.initApp(parentEl)
-    this.initStarResource(1000)
+    this.initStarResource(starCount)
     this.initAnimation()
   }
 
@@ -100,12 +101,14 @@ export class StarAnimater {
         // Map star 3d position to 2d with really simple projection
         const z = star.z - this.cameraZ
 
-        star.sprite.x = star.x * (fov / z) * this.app.renderer.screen.width + this.app.renderer.screen.width / 2
-        star.sprite.y = star.y * (fov / z) * this.app.renderer.screen.width + this.app.renderer.screen.height / 2
+        const { width: screenWidth, height: screenHeight } = this.app.renderer.screen
+
+        star.sprite.x = star.x * (fov / z) * screenWidth + screenWidth / 2
+        star.sprite.y = star.y * (fov / z) * screenWidth + screenHeight / 2
 
         // Calculate star scale & rotation.
-        const dxCenter = star.sprite.x - this.app.renderer.screen.width / 2
-        const dyCenter = star.sprite.y - this.app.renderer.screen.height / 2
+        const dxCenter = star.sprite.x - screenWidth / 2
+        const dyCenter = star.sprite.y - screenHeight / 2
         const distanceCenter = Math.sqrt(dxCenter * dxCenter + dyCenter * dyCenter)
         const distanceScale = Math.max(0, (2000 - z) / 2000)
 
@@ -114,7 +117,7 @@ export class StarAnimater {
         // Scale the star depending on how fast we are moving, what the stretchfactor is
         // and depending on how far away it is from the center.
         star.sprite.scale.y = distanceScale * starBaseSize
-          + distanceScale * this.speed * starStretch * distanceCenter / this.app.renderer.screen.width
+          + distanceScale * this.speed * starStretch * distanceCenter / screenWidth
         star.sprite.rotation = Math.atan2(dyCenter, dxCenter) + Math.PI / 2
       })
     })
