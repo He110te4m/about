@@ -62,7 +62,7 @@ export class StarAnimater {
   }
 
   private initStarResource(starCount: number) {
-    this.starTexture = Texture.from('/public/assets/sprites/star.png')
+    this.starTexture = Texture.from('/assets/sprites/star.png')
 
     for (let i = 0; i < starCount; i++) {
       const star = this.createStar()

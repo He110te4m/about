@@ -43,6 +43,8 @@ router.afterEach(() => {
 <template>
   <div id="app" pos="relative">
     <RouterView />
-    <StarAnimater pos="absolute" z="-1" inset="0" />
+    <ClientOnly>
+      <StarAnimater pos="absolute" z="-1" inset="0" />
+    </ClientOnly>
   </div>
 </template>
