@@ -48,6 +48,35 @@ export default defineConfig({
       'background-color': 'var(--content-bg-color)',
     }],
     ['flex-min', { flex: '0 0 auto' }],
+
+    [/^scroll$/, () => `
+::-webkit-scrollbar {
+  --at-apply: w-2 h-2;
+}
+
+::-webkit-scrollbar-corner {
+  --at-apply: bg-transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #262626;
+  --at-apply: b-rd-1 transition;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: #434343;
+}
+::-webkit-scrollbar-thumb:active {
+  background-color: #8c8c8c;
+}
+
+::-webkit-scrollbar-track {
+  --at-apply: bg-transparent b-rd-50%;
+}
+
+::-webkit-scrollbar-button {
+  display: none;
+}
+`],
   ],
   safelist: 'prose m-auto text-left'.split(' ')
     .concat(

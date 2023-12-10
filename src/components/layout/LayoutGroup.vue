@@ -4,7 +4,7 @@ import LayoutFooter from './LayoutFooter.vue'
 </script>
 
 <template>
-  <div w="full" h="full" flex="~ col">
+  <div w="full" h="full" flex="~ col" max-h="100vh">
     <LayoutHeader h="40px" content-bg />
     <main py="8" overflow="y-auto" flex="1">
       <slot name="wrapper">

@@ -14,7 +14,7 @@ const currentArticle = computed(() => getPost(route.path))
       <h1 text="4xl" font="bold">
         {{ currentArticle.title }}
       </h1>
+      <RouterView />
     </template>
-    <RouterView />
   </LayoutGroup>
 </template>
