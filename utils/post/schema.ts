@@ -14,5 +14,3 @@ export const postExtraDataValidator = z.object(
   series: true,
   updatedAt: true,
 })
-
-export type PostExtraData = z.infer<typeof postExtraDataValidator>

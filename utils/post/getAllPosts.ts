@@ -4,12 +4,11 @@ import glob from 'fast-glob'
 import MarkdownIt from 'markdown-it'
 import MarkdownItFrontMatter from 'markdown-it-front-matter'
 import { parse as parseYaml } from 'yaml'
-import { formatFileToUrl } from '../../../utils/formatter/url'
-import { type PostExtraData, postExtraDataValidator } from '../validators/postExtraData'
-import type { PluginOptions } from '../types/option'
-import type { PostInfo } from '../types/post'
+import { formatFileToUrl } from '../formatter/url'
+import { postExtraDataValidator } from './schema'
+import type { GetAllPostsOption, PostExtraData, PostInfo } from './types'
 
-export async function getAllPosts(options: PluginOptions) {
+export async function getAllPosts(options: GetAllPostsOption) {
   const infoList = await getPostFileInfoList(options)
 
   const list = await Promise.allSettled(infoList.map(async ({ path, url }) => {
@@ -26,7 +25,7 @@ export async function getAllPosts(options: PluginOptions) {
     .map(({ value }) => value)
 }
 
-async function getPostFileInfoList({ postDir: rootDir, resolveToRoutePath = defaultResolveToRoutePath }: PluginOptions) {
+async function getPostFileInfoList({ postDir: rootDir, resolveToRoutePath = defaultResolveToRoutePath }: GetAllPostsOption) {
   const files = await glob('**/*.md', { cwd: rootDir })
 
   return files.map(file => ({

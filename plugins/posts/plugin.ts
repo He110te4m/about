@@ -1,9 +1,10 @@
 import type { Plugin } from 'vite'
-import { exportName, postListModuleID } from '../const'
-import type { PluginOptions } from '../types/option'
-import { getAllPosts } from '../utils/file'
+import { type GetAllPostsOption, getAllPosts } from '../../utils/post'
+import { exportName, postListModuleID } from './const'
 
 const resolvedID = `\0${postListModuleID}`
+
+type PluginOptions = GetAllPostsOption
 
 export function createPostListModules(options: PluginOptions): Plugin {
   return {

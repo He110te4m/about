@@ -1,5 +1,3 @@
-import { createPostListModules } from './plugins/all'
-
-export * from './types/option'
+import { createPostListModules } from './plugin'
 
 export default createPostListModules
