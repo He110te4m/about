@@ -19,6 +19,8 @@ import WebfontDownload from 'vite-plugin-webfont-dl'
 import { getAllPosts } from './utils/post'
 import { formatFileToUrl } from './utils/formatter/url'
 import InjectPosts from './plugins/posts'
+import createRSSPlugin from './plugins/rss'
+import { description, title } from './src/configs/site'
 
 export default defineConfig(async () => {
   const posts = await getAllPosts({
@@ -160,6 +162,16 @@ export default defineConfig(async () => {
       InjectPosts({
         posts,
         checkHMR: file => file.endsWith('.md'),
+      }),
+
+      createRSSPlugin({
+        posts,
+        rss: {
+          title,
+          description,
+          trailingSlash: true,
+          site: 'https://me.he110.site',
+        },
       }),
     ],
 

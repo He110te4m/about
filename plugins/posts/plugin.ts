@@ -5,12 +5,12 @@ const exportName = 'posts'
 const postListModuleID = '~posts'
 const resolvedID = `\0${postListModuleID}`
 
-interface PostListModuleParams {
+interface PostListModuleOption {
   posts: PostInfo[]
   checkHMR?: (file: string) => boolean
 }
 
-export function createPostListModules({ posts, checkHMR }: PostListModuleParams): Plugin {
+export function createPostListModules({ posts, checkHMR }: PostListModuleOption): Plugin {
   return {
     name: 'vite-plugin-he110-posts',
 
