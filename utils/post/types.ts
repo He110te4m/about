@@ -1,12 +1,9 @@
 import type { z } from 'zod'
-import type { postExtraDataValidator } from './schema'
+import type { postExtraDataValidator, postOptionValidator } from './schema'
 
 export type ResolveToRoutePath = (file: string) => string
 
-export interface GetAllPostsOption {
-  postDir: string
-  resolveToRoutePath?: ResolveToRoutePath
-}
+export type GetAllPostsOption = z.infer<typeof postOptionValidator>
 
 export type PostExtraData = z.infer<typeof postExtraDataValidator>
 

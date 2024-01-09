@@ -1,12 +1,16 @@
 import type { Plugin } from 'vite'
-import { type GetAllPostsOption, getAllPosts } from '../../utils/post'
-import { exportName, postListModuleID } from './const'
+import type { PostInfo } from '~posts'
 
+const exportName = 'posts'
+const postListModuleID = '~posts'
 const resolvedID = `\0${postListModuleID}`
 
-type PluginOptions = GetAllPostsOption
+interface PostListModuleParams {
+  posts: PostInfo[]
+  checkHMR?: (file: string) => boolean
+}
 
-export function createPostListModules(options: PluginOptions): Plugin {
+export function createPostListModules({ posts, checkHMR }: PostListModuleParams): Plugin {
   return {
     name: 'vite-plugin-he110-posts',
 
@@ -18,8 +22,6 @@ export function createPostListModules(options: PluginOptions): Plugin {
 
     async load(id) {
       if (id === resolvedID) {
-        const posts = await getAllPosts(options) || []
-
         return {
           code: `export const ${exportName} = ${JSON.stringify(posts)}`,
         }
@@ -28,7 +30,7 @@ export function createPostListModules(options: PluginOptions): Plugin {
 
     handleHotUpdate({ file, server }) {
       // 当 markdown 文件更新时，更新下列表
-      if (file.endsWith('.md')) {
+      if (checkHMR?.(file)) {
         const module = server.moduleGraph.getModuleById(resolvedID)
         module && server.reloadModule(module)
       }

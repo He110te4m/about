@@ -16,169 +16,177 @@ import Emoji from 'markdown-it-emoji'
 import Anchor from 'markdown-it-anchor'
 
 import WebfontDownload from 'vite-plugin-webfont-dl'
+import { getAllPosts } from './utils/post'
 import { formatFileToUrl } from './utils/formatter/url'
-import Articles from './plugins/posts'
+import InjectPosts from './plugins/posts'
 
-export default defineConfig({
-  resolve: {
-    alias: {
-      '~/': `${path.resolve(__dirname, 'src')}/`,
-    },
-  },
+export default defineConfig(async () => {
+  const posts = await getAllPosts({
+    postDir: 'src/pages',
+  })
 
-  plugins: [
-    Vue({
-      include: [/\.vue$/, /\.md$/],
-    }),
-
-    // https://github.com/hannoeru/vite-plugin-pages
-    Pages({
-      extensions: ['vue', 'md'],
-      onRoutesGenerated(routes) {
-        routes.forEach((item: any) => {
-          item.path = formatFileToUrl(item.path)
-        })
-
-        return routes
+  return {
+    resolve: {
+      alias: {
+        '~/': `${path.resolve(__dirname, 'src')}/`,
       },
-    }),
+    },
 
-    // https://github.com/JohnCampionJr/vite-plugin-vue-layouts
-    Layouts({
-      defaultLayout: 'Article',
-    }),
+    plugins: [
+      Vue({
+        include: [/\.vue$/, /\.md$/],
+      }),
 
-    // // https://github.com/antfu/unplugin-auto-import
-    // AutoImport({
-    //   imports: [
-    //     'vue',
-    //     'vue-router',
-    //     'vue-i18n',
-    //     '@vueuse/head',
-    //     '@vueuse/core',
-    //   ],
-    //   dts: 'types/auto-imports.d.ts',
-    //   dirs: [
-    //     'src/configs',
-    //     'src/composables/**',
-    //     'src/stores',
-    //     'src/utils/**',
-    //   ],
-    //   vueTemplate: true,
-    // }),
+      // https://github.com/hannoeru/vite-plugin-pages
+      Pages({
+        extensions: ['vue', 'md'],
+        onRoutesGenerated(routes) {
+          routes.forEach((item: any) => {
+            item.path = formatFileToUrl(item.path)
+          })
 
-    // // https://github.com/antfu/unplugin-vue-components
-    // Components({
-    //   // allow auto load markdown components under `./src/components/`
-    //   extensions: ['vue', 'md'],
-    //   // allow auto import and register components used in markdown
-    //   include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
-    //   dts: 'types/components.d.ts',
-    // }),
+          return routes
+        },
+      }),
 
-    // https://github.com/antfu/unocss
-    // see uno.config.ts for config
-    Unocss(),
+      // https://github.com/JohnCampionJr/vite-plugin-vue-layouts
+      Layouts({
+        defaultLayout: 'Article',
+      }),
 
-    // https://github.com/antfu/vite-plugin-vue-markdown
-    // Don't need this? Try vitesse-lite: https://github.com/antfu/vitesse-lite
-    Markdown({
-      wrapperClasses: 'prose prose-md text-left',
-      headEnabled: true,
-      markdownItSetup(md) {
-        // https://prismjs.com/
-        md.use(Shiki, {
-          theme: {
-            light: 'vitesse-light',
-            dark: 'vitesse-dark',
-          },
-          highlightLines: true,
-        })
-        md.use(LinkAttributes, {
-          matcher: (link: string) => /^https?:\/\//.test(link),
-          attrs: {
-            target: '_blank',
-            rel: 'noopener',
-          },
-        })
+      // // https://github.com/antfu/unplugin-auto-import
+      // AutoImport({
+      //   imports: [
+      //     'vue',
+      //     'vue-router',
+      //     'vue-i18n',
+      //     '@vueuse/head',
+      //     '@vueuse/core',
+      //   ],
+      //   dts: 'types/auto-imports.d.ts',
+      //   dirs: [
+      //     'src/configs',
+      //     'src/composables/**',
+      //     'src/stores',
+      //     'src/utils/**',
+      //   ],
+      //   vueTemplate: true,
+      // }),
 
-        md.use(Emoji)
+      // // https://github.com/antfu/unplugin-vue-components
+      // Components({
+      //   // allow auto load markdown components under `./src/components/`
+      //   extensions: ['vue', 'md'],
+      //   // allow auto import and register components used in markdown
+      //   include: [/\.vue$/, /\.vue\?vue/, /\.md$/],
+      //   dts: 'types/components.d.ts',
+      // }),
 
-        md.use(Anchor)
+      // https://github.com/antfu/unocss
+      // see uno.config.ts for config
+      Unocss(),
+
+      // https://github.com/antfu/vite-plugin-vue-markdown
+      // Don't need this? Try vitesse-lite: https://github.com/antfu/vitesse-lite
+      Markdown({
+        wrapperClasses: 'prose prose-md text-left',
+        headEnabled: true,
+        markdownItSetup(md) {
+          // https://prismjs.com/
+          md.use(Shiki, {
+            theme: {
+              light: 'vitesse-light',
+              dark: 'vitesse-dark',
+            },
+            highlightLines: true,
+          })
+          md.use(LinkAttributes, {
+            matcher: (link: string) => /^https?:\/\//.test(link),
+            attrs: {
+              target: '_blank',
+              rel: 'noopener',
+            },
+          })
+
+          md.use(Emoji)
+
+          md.use(Anchor)
+        },
+      }),
+
+      // https://github.com/antfu/vite-plugin-pwa
+      VitePWA({
+        registerType: 'autoUpdate',
+        includeAssets: ['favicon.svg', 'safari-pinned-tab.svg'],
+        manifest: {
+          name: 'He110\' Blog',
+          short_name: 'He110',
+          theme_color: '#ffffff',
+          icons: [
+            {
+              src: '/pwa-192x192.png',
+              sizes: '192x192',
+              type: 'image/png',
+            },
+            {
+              src: '/pwa-512x512.png',
+              sizes: '512x512',
+              type: 'image/png',
+            },
+            {
+              src: '/pwa-512x512.png',
+              sizes: '512x512',
+              type: 'image/png',
+              purpose: 'any maskable',
+            },
+          ],
+        },
+      }),
+
+      // https://github.com/intlify/bundle-tools/tree/main/packages/unplugin-vue-i18n
+      VueI18n({
+        runtimeOnly: true,
+        compositionOnly: true,
+        fullInstall: true,
+        include: [path.resolve(__dirname, 'locales/**')],
+      }),
+
+      // https://github.com/feat-agency/vite-plugin-webfont-dl
+      WebfontDownload(),
+
+      // // https://github.com/webfansplz/vite-plugin-vue-devtools
+      // VueDevTools(),
+
+      InjectPosts({
+        posts,
+        checkHMR: file => file.endsWith('.md'),
+      }),
+    ],
+
+    // https://github.com/vitest-dev/vitest
+    test: {
+      include: ['test/**/*.test.ts'],
+      environment: 'jsdom',
+      deps: {
+        inline: ['@vue', '@vueuse', 'vue-demi'],
       },
-    }),
+    },
 
-    // https://github.com/antfu/vite-plugin-pwa
-    VitePWA({
-      registerType: 'autoUpdate',
-      includeAssets: ['favicon.svg', 'safari-pinned-tab.svg'],
-      manifest: {
-        name: 'He110\' Blog',
-        short_name: 'He110',
-        theme_color: '#ffffff',
-        icons: [
-          {
-            src: '/pwa-192x192.png',
-            sizes: '192x192',
-            type: 'image/png',
-          },
-          {
-            src: '/pwa-512x512.png',
-            sizes: '512x512',
-            type: 'image/png',
-          },
-          {
-            src: '/pwa-512x512.png',
-            sizes: '512x512',
-            type: 'image/png',
-            purpose: 'any maskable',
-          },
-        ],
+    // https://github.com/antfu/vite-ssg
+    ssgOptions: {
+      script: 'async',
+      formatting: 'minify',
+      crittersOptions: {
+        reduceInlineStyles: false,
       },
-    }),
-
-    // https://github.com/intlify/bundle-tools/tree/main/packages/unplugin-vue-i18n
-    VueI18n({
-      runtimeOnly: true,
-      compositionOnly: true,
-      fullInstall: true,
-      include: [path.resolve(__dirname, 'locales/**')],
-    }),
-
-    // https://github.com/feat-agency/vite-plugin-webfont-dl
-    WebfontDownload(),
-
-    // // https://github.com/webfansplz/vite-plugin-vue-devtools
-    // VueDevTools(),
-
-    Articles({
-      postDir: 'src/pages',
-    }),
-  ],
-
-  // https://github.com/vitest-dev/vitest
-  test: {
-    include: ['test/**/*.test.ts'],
-    environment: 'jsdom',
-    deps: {
-      inline: ['@vue', '@vueuse', 'vue-demi'],
+      onFinished() {
+        generateSitemap()
+      },
     },
-  },
 
-  // https://github.com/antfu/vite-ssg
-  ssgOptions: {
-    script: 'async',
-    formatting: 'minify',
-    crittersOptions: {
-      reduceInlineStyles: false,
+    ssr: {
+      // TODO: workaround until they support native ESM
+      noExternal: ['workbox-window', /vue-i18n/],
     },
-    onFinished() {
-      generateSitemap()
-    },
-  },
-
-  ssr: {
-    // TODO: workaround until they support native ESM
-    noExternal: ['workbox-window', /vue-i18n/],
-  },
+  }
 })

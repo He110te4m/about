@@ -14,3 +14,11 @@ export const postExtraDataValidator = z.object(
   series: true,
   updatedAt: true,
 })
+
+export const postOptionValidator = z.object({
+  postDir: z.string(),
+  resolveToRoutePath: z.function()
+    .args(z.string())
+    .returns(z.string())
+    .optional(),
+})
