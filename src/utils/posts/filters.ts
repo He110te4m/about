@@ -43,6 +43,8 @@ const engine = new MiniSearch({
   tokenize: searchTokenize,
   searchOptions: {
     tokenize: searchTokenize,
+    prefix: true,
+    fuzzy: 0.2,
   },
 })
 
