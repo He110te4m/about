@@ -1,14 +1,14 @@
-import * as O from 'fp-ts/Option'
-import * as A from 'fp-ts/Array'
+import * as O from 'fp-ts/lib/Option'
+import * as A from 'fp-ts/lib/Array'
 import {
   apply,
   flow,
   getMonoid as getFunctionMonoid,
   pipe,
-} from 'fp-ts/function'
-import type { Predicate } from 'fp-ts/Predicate'
-import { concatAll } from 'fp-ts/Monoid'
-import { first } from 'fp-ts/Semigroup'
+} from 'fp-ts/lib/function'
+import type { Predicate } from 'fp-ts/lib/Predicate'
+import { concatAll } from 'fp-ts/lib/Monoid'
+import { first } from 'fp-ts/lib/Semigroup'
 
 export function guard<A, B>(branches: Array<[Predicate<A>, (x: A) => B]>) {
   return (fallback: (x: A) => B) =>
