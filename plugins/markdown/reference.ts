@@ -1,5 +1,5 @@
-// import type { PluginWithOptions } from 'markdown-it'
 import type MarkdownIt from 'markdown-it'
+import type Token from 'markdown-it/lib/token'
 
 export interface MarkdownReferenceOption {
   idPrefix?: string
@@ -28,6 +28,7 @@ interface ReferenceTokenData {
   name: string
   url: string
   id: number
+  children?: Token[]
 }
 
 const referenceSet = new Set<ReferenceTokenData>()
@@ -72,18 +73,22 @@ function registerSyntaxParser(md: MarkdownIt) {
       // Parse the subsequent content of the syntax block
       state.pos += reference.length
       if (!silent) {
-        const token = state.push(referenceTokenID, '', 0)
+        const childrenTokens: Token[] = []
+        state.md.inline.parse(
+          name,
+          state.md,
+          state.env,
+          childrenTokens,
+        )
         const tokenData: ReferenceTokenData = {
           id: referenceID++,
-          name,
+          name: md.renderer.renderInline(childrenTokens, md.options, state.env),
           url,
         }
-
         referenceSet.add(tokenData)
 
-        token.meta = {
-          id: tokenData.id,
-        }
+        const token = state.push(referenceTokenID, '', 0)
+        token.meta = tokenData
       }
 
       // Notify the tokenizer that parsing is successful
@@ -175,10 +180,17 @@ function registerInlineReferenceRenderer(md: MarkdownIt, option: MarkdownReferen
   md.renderer.rules[referenceTokenID] = (tokens, idx, options, env, slf) => {
     const referenceID = slf.rules[formatReferenceIDFnName]?.(tokens, idx, options, env, slf)
     const collectionID = slf.rules[formatReferenceCollectionIDFnName]?.(tokens, idx, options, env, slf)
-    const { id } = tokens[idx].meta ?? {}
+    const { id, name } = tokens[idx].meta ?? {}
 
-    return [referenceID, collectionID, id].every(item => item)
-      ? `<sup class="${renderSupCls(classPrefix)}"><a id="${collectionID}" href="#${id}">${renderSupText(id)}</a></sup>`
+    return [referenceID, collectionID, id, name].every(item => item)
+      ? `
+<span>
+  <span>${name}</span>
+  <sup class="${renderSupCls(classPrefix)}">
+    <a id="${collectionID}" href="#${referenceID}">${renderSupText(id)}</a>
+  </sup>
+</span>
+`.trim()
       : ''
   }
 }
@@ -192,8 +204,10 @@ function registerReferenceCollectionRenderer(md: MarkdownIt, option: MarkdownRef
 function registerReferenceCollectionStartRenderer(md: MarkdownIt, option: MarkdownReferenceOption) {
   const { classPrefix = referenceClassPrefix } = option
 
-  md.renderer.rules[referenceCollectionStartTagID] = () => {
-    return `<ol class="${classPrefix}">`
+  md.renderer.rules[referenceCollectionStartTagID] = (_tokens, _idx, _options, env, _slf) => {
+    return !env.ignoreReferenceCollection
+      ? `<ol class="${classPrefix}">`
+      : ''
   }
 }
 
@@ -209,7 +223,7 @@ function registerReferenceCollectionListRenderer(md: MarkdownIt, option: Markdow
     const referenceID = slf.rules[formatReferenceIDFnName]?.(tokens, idx, options, env, slf)
     const collectionID = slf.rules[formatReferenceCollectionIDFnName]?.(tokens, idx, options, env, slf)
 
-    if ([name, url, id, referenceID, collectionID].some(item => !item)) {
+    if (env.ignoreReferenceCollection || [name, url, id, referenceID, collectionID].some(item => !item)) {
       return ''
     }
 
@@ -224,8 +238,10 @@ function registerReferenceCollectionListRenderer(md: MarkdownIt, option: Markdow
 }
 
 function registerReferenceCollectionEndRenderer(md: MarkdownIt) {
-  md.renderer.rules[referenceCollectionEndTagID] = () => {
-    return '</ol>'
+  md.renderer.rules[referenceCollectionEndTagID] = (_tokens, _idx, _options, env, _slf) => {
+    return !env.ignoreReferenceCollection
+      ? '</ol>'
+      : ''
   }
 }
 
