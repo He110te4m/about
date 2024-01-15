@@ -21,6 +21,7 @@ import { formatFileToUrl } from './utils/formatter/url'
 import InjectPosts from './plugins/posts'
 import createRSSPlugin from './plugins/rss'
 import { description, title } from './src/configs/site'
+import { useMarkdownReference } from './plugins/markdown/reference'
 
 export default defineConfig(async () => {
   const posts = await getAllPosts({
@@ -109,6 +110,8 @@ export default defineConfig(async () => {
               rel: 'noopener',
             },
           })
+
+          md.use(useMarkdownReference)
 
           md.use(Emoji)
 
