@@ -44,7 +44,7 @@ router.afterEach(() => {
   <div pos="relative" scroll>
     <RouterView />
     <ClientOnly>
-      <StarAnimater pos="absolute" z="-1" inset="0" />
+      <StarAnimater pos="absolute" z="-1" inset="0" pointer-events="none" />
     </ClientOnly>
   </div>
 </template>

@@ -48,7 +48,6 @@ export default defineConfig({
       'background-color': 'var(--content-bg-color)',
     }],
     ['flex-min', { flex: '0 0 auto' }],
-
     [/^scroll$/, () => `
 ::-webkit-scrollbar {
   --at-apply: w-2 h-2;
