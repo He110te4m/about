@@ -24,11 +24,12 @@ const referenceSeparator = ':'
 
 const matchRule = /^\@\[(.*?)\]\((.*?)\)/
 
+let referenceID = 1
+
 interface ReferenceTokenData {
   name: string
   url: string
   id: number
-  children?: Token[]
 }
 
 const referenceSet = new Set<ReferenceTokenData>()
@@ -51,8 +52,6 @@ function registerReferenceRule(md: MarkdownIt) {
 
 /** parse inline syntax */
 function registerSyntaxParser(md: MarkdownIt) {
-  let referenceID = 1
-
   md.inline.ruler.before(
     // resolve new syntax before resolve link
     'link',
@@ -102,7 +101,7 @@ function registerSyntaxParser(md: MarkdownIt) {
 function registerSyntaxCollection(md: MarkdownIt) {
   md.core.ruler.after('inline', referenceCollectionID, (state) => {
     const tokens = Array.from(referenceSet)
-    referenceSet.clear()
+    resetSharedResouces()
     if (!tokens.length) {
       return false
     }
@@ -259,4 +258,9 @@ function renderItemCls(classPrefix: string) {
 
 function renderItemSepCls(classPrefix: string) {
   return `${renderItemCls(classPrefix)}__separator`
+}
+
+function resetSharedResouces() {
+  referenceSet.clear()
+  referenceID = 1
 }
