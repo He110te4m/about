@@ -41,10 +41,10 @@ router.afterEach(() => {
 </script>
 
 <template>
-  <div pos="relative" scroll>
+  <div pos="relative">
     <RouterView />
     <ClientOnly>
-      <StarAnimater pos="absolute" z="-1" inset="0" pointer-events="none" />
+      <StarAnimater pos="fixed" z="-1" inset="0" pointer-events="none" />
     </ClientOnly>
   </div>
 </template>
