@@ -1,4 +1,5 @@
 .prose.prose-md {
+  --un-prose-font-mono: "DM mono";
   --at-apply: max-w-120ch;
 }
 
@@ -7,7 +8,6 @@
 }
 
 .prose .shiki {
-  font-family: 'DM Mono', monospace;
   --at-apply: text-1.2em lh-1.4em;
 }
 
