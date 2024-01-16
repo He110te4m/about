@@ -388,10 +388,10 @@ export function convertComputed(mixin: Mixin, proxy: any) {
 
 ```typescript
 import { type WatchStopHandle, watch } from 'vue-demi'
-import type { Mixin } from '../types'
+import type { AnyObject, Mixin } from '../types'
 
 export function convertWatch(mixin: Mixin, proxy: any) {
-  const watchs: Record<string, WatchStopHandle> = {}
+  const watchs: AnyObject = {}
 
   if (mixin.watch) {
     Object.keys(mixin.watch)
@@ -417,10 +417,10 @@ export function convertWatch(mixin: Mixin, proxy: any) {
 `methods` 处理更加简单，通过 `bind` 修正 `this` 即可
 
 ```typescript
-import type { Mixin } from '../types'
+import type { AnyObject, Mixin } from '../types'
 
 export function convertMethods(mixin: Mixin, proxy: any) {
-  const methods: Record<string, any> = {}
+  const methods: AnyObject = {}
 
   if (mixin.methods) {
     for (const name of Object.keys(mixin.methods)) {
