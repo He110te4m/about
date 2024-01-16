@@ -15,6 +15,9 @@ import Shiki from 'markdown-it-shiki'
 import Emoji from 'markdown-it-emoji'
 import Anchor from 'markdown-it-anchor'
 
+// @ts-expect-error The libs don't have types.
+import TOC from 'markdown-it-table-of-contents'
+
 import WebfontDownload from 'vite-plugin-webfont-dl'
 import { getAllPosts } from './utils/post'
 import { formatFileToUrl } from './utils/formatter/url'
@@ -116,6 +119,8 @@ export default defineConfig(async () => {
           md.use(Emoji)
 
           md.use(Anchor)
+
+          md.use(TOC)
         },
       }),
 

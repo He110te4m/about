@@ -115,6 +115,9 @@ devDependencies:
   markdown-it-shiki:
     specifier: ^0.9.0
     version: 0.9.0
+  markdown-it-table-of-contents:
+    specifier: ^0.6.0
+    version: 0.6.0
   shiki:
     specifier: ^0.14.3
     version: 0.14.3
@@ -6427,6 +6430,11 @@ packages:
     dependencies:
       shiki: 0.14.3
       synckit: 0.8.5
+    dev: true
+
+  /markdown-it-table-of-contents@0.6.0:
+    resolution: {integrity: sha512-jHvEjZVEibyW97zEYg19mZCIXO16lHbvRaPDkEuOfMPBmzlI7cYczMZLMfUvwkhdOVQpIxu3gx6mgaw46KsNsQ==}
+    engines: {node: '>6.4.0'}
     dev: true
 
   /markdown-it@13.0.1:

@@ -179,16 +179,13 @@ function registerInlineReferenceRenderer(md: MarkdownIt, option: MarkdownReferen
   md.renderer.rules[referenceTokenID] = (tokens, idx, options, env, slf) => {
     const referenceID = slf.rules[formatReferenceIDFnName]?.(tokens, idx, options, env, slf)
     const collectionID = slf.rules[formatReferenceCollectionIDFnName]?.(tokens, idx, options, env, slf)
-    const { id, name } = tokens[idx].meta ?? {}
+    const { id } = tokens[idx].meta ?? {}
 
-    return [referenceID, collectionID, id, name].every(item => item)
+    return [referenceID, collectionID, id].every(item => item)
       ? `
-<span>
-  <span>${name}</span>
-  <sup class="${renderSupCls(classPrefix)}">
-    <a id="${collectionID}" href="#${referenceID}">${renderSupText(id)}</a>
-  </sup>
-</span>
+<sup class="${renderSupCls(classPrefix)}">
+  <a id="${collectionID}" href="#${referenceID}">${renderSupText(id)}</a>
+</sup>
 `.trim()
       : ''
   }
