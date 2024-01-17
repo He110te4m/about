@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { computed } from 'vue'
 import { RouterView, useRoute } from 'vue-router'
-import LayoutGroup from '~/components/layout/LayoutGroup.vue'
+import { LayoutGroup } from '~/components/layout'
 import { getPost } from '~/utils/posts'
 
 const route = useRoute()
