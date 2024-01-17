@@ -6,6 +6,7 @@ import StarAnimater from '~/components/animation/star/index.vue'
 import { description, title } from '~/configs'
 import { getOpenGraphMeta } from '~/composables/meta/openGraph'
 import { getTwitterMeta } from '~/composables/meta/twitter'
+import { LayoutFooter, LayoutHeader } from '~/components/layout'
 
 const info = { title, description }
 
@@ -40,9 +41,11 @@ router.afterEach(() => {
 
 <template>
   <div pos="relative">
+    <LayoutHeader h="40px" content-bg pos="sticky" top="0" />
     <RouterView />
     <ClientOnly>
       <StarAnimater pos="fixed" z="-1" inset="0" pointer-events="none" />
     </ClientOnly>
+    <LayoutFooter h="40px" content-bg pos="sticky" bottom="0" />
   </div>
 </template>
