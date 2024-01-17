@@ -10,6 +10,7 @@ export function useActivePosition(navs: MaybeRef<NavItemType[]>, els: MaybeRef<(
 
   const vm = getCurrentInstance()
   const parentLeft = computed(() => vm?.proxy?.$el?.getBoundingClientRect().left ?? 0)
+  const getPos = makeGetPos(parentLeft)
 
   watchEffect(() => {
     const list = unref(navs)
@@ -21,7 +22,7 @@ export function useActivePosition(navs: MaybeRef<NavItemType[]>, els: MaybeRef<(
     const idx = list.findIndex(item => route.path.startsWith(item.url))
     const el: HTMLElement | undefined = comps[idx]?.$el;
 
-    [left.value, width.value] = getPos(parentLeft.value, el) ?? [left.value, width.value]
+    [left.value, width.value] = getPos(el) ?? [left.value, width.value]
   })
 
   return {
@@ -30,14 +31,16 @@ export function useActivePosition(navs: MaybeRef<NavItemType[]>, els: MaybeRef<(
   }
 }
 
-function getPos(parentLeft: number, el?: HTMLElement) {
-  if (!el) {
-    return
+function makeGetPos(parentLeft: MaybeRef<number>) {
+  return (el?: HTMLElement) => {
+    if (!el) {
+      return
+    }
+
+    const rect = el.getBoundingClientRect()
+    const left = `${rect.left - unref(parentLeft)}px`
+    const width = `${rect.width}px`
+
+    return [left, width]
   }
-
-  const rect = el.getBoundingClientRect()
-  const left = `${rect.left - parentLeft}px`
-  const width = `${rect.width}px`
-
-  return [left, width]
 }
