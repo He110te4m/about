@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { nonEmptyArray as NonEmptyArray, number as Number, option as Option, ord as Ord } from 'fp-ts'
 import { constant, flow, pipe } from 'fp-ts/lib/function'
-import { RouterLink } from 'vue-router'
+import { ArticlePreview } from '~/components/article'
 import { prop } from '~/utils/filters/record'
 import { getTime, mustDate } from '~/utils/formatters/date'
 import { getPosts } from '~/utils/posts'
@@ -53,12 +53,13 @@ const series = pipe(
     </div>
     <ol class="order" p-is="8" lt-md:p-is="4">
       <li v-for="article in series[name]" :key="name + article.url">
-        <RouterLink v-slot="{ navigate }" :to="article.url" custom>
-          <div role="link" cursor="pointer" text="lg" @click="navigate">
-            {{ article.title }}
-          </div>
-        </RouterLink>
+        <ArticlePreview :article="article" />
       </li>
     </ol>
   </template>
 </template>
+
+<route lang="yaml">
+meta:
+  layout: Home
+</route>

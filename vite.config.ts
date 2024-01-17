@@ -127,7 +127,7 @@ export default defineConfig(async () => {
       // https://github.com/antfu/vite-plugin-pwa
       VitePWA({
         registerType: 'autoUpdate',
-        includeAssets: ['favicon.svg', 'safari-pinned-tab.svg'],
+        includeAssets: ['favicon.svg'],
         manifest: {
           name: 'He110\' Blog',
           short_name: 'He110',
@@ -142,12 +142,6 @@ export default defineConfig(async () => {
               src: '/pwa-512x512.png',
               sizes: '512x512',
               type: 'image/png',
-            },
-            {
-              src: '/pwa-512x512.png',
-              sizes: '512x512',
-              type: 'image/png',
-              purpose: 'any maskable',
             },
           ],
         },
