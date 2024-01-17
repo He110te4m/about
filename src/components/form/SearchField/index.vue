@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { useVModel } from '@vueuse/core'
 import { ref, watchEffect } from 'vue'
-import { useManualValue } from './useInputValue'
+import { useManualValue } from './useManualValue'
 
 const props = withDefaults(
   defineProps<{
