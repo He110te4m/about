@@ -2,8 +2,6 @@ import { acceptHMRUpdate, defineStore, storeToRefs } from 'pinia'
 import { ref } from 'vue'
 import type { StarAnimater } from '~/components/animation/star/animater'
 
-function noop() { }
-
 const useAnimaterStore = defineStore('animater', () => {
   const animater = ref<StarAnimater>()
 
@@ -17,8 +15,8 @@ export function useAnimater() {
 
   return {
     animater,
-    goFast: animater.value?.fast ?? noop,
-    goSlow: animater.value?.slow ?? noop,
+    goFast: () => animater.value?.fast(),
+    goSlow: () => animater.value?.slow(),
   }
 }
 
