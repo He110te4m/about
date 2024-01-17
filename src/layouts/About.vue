@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import LayoutGroup from '~/components/layout/LayoutGroup.vue'
-import { description, socials, title } from '~/configs/site'
+import { description, socials, title } from '~/configs'
 </script>
 
 <template>

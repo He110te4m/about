@@ -8,7 +8,7 @@ import {
   transformerDirectives,
   transformerVariantGroup,
 } from 'unocss'
-import { socials } from './src/configs/site'
+import { socials } from './src/configs'
 
 export default defineConfig({
   shortcuts: [

@@ -23,7 +23,7 @@ import { getAllPosts } from './utils/post'
 import { formatFileToUrl } from './utils/formatter/url'
 import InjectPosts from './plugins/posts'
 import createRSSPlugin from './plugins/rss'
-import { description, title } from './src/configs/site'
+import { description, title } from './src/configs'
 import { useMarkdownReference } from './plugins/markdown/reference'
 
 export default defineConfig(async () => {
@@ -129,7 +129,7 @@ export default defineConfig(async () => {
         registerType: 'autoUpdate',
         includeAssets: ['favicon.svg'],
         manifest: {
-          name: 'He110\' Blog',
+          name: title,
           short_name: 'He110',
           theme_color: '#ffffff',
           icons: [

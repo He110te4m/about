@@ -3,7 +3,7 @@ import { type Meta, useHead } from '@unhead/vue'
 import { RouterView, useRouter } from 'vue-router'
 import { useAnimater } from '~/composables/animate'
 import StarAnimater from '~/components/animation/star/index.vue'
-import { description, title } from '~/configs/site'
+import { description, title } from '~/configs'
 import { getOpenGraphMeta } from '~/composables/meta/openGraph'
 import { getTwitterMeta } from '~/composables/meta/twitter'
 

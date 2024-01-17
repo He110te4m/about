@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { author } from '~/configs/site'
+import { author } from '~/configs'
 </script>
 
 <template>
