@@ -1,13 +1,12 @@
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue'
-import { storeToRefs } from 'pinia'
 import { StarAnimater } from './animater'
 import { useAnimaterCount } from './useAnimaterCount'
-import { useAnimaterStore } from '~/stores/animater'
+import { useAnimater } from '~/composables/animate'
 
 const containerRef = ref<HTMLDivElement>()
 
-const { animater } = storeToRefs(useAnimaterStore())
+const { animater } = useAnimater()
 const { count } = useAnimaterCount()
 
 onMounted(() => {
