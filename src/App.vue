@@ -1,11 +1,9 @@
 <script setup lang="ts">
 import { type Meta, useHead } from '@unhead/vue'
 import { RouterView, useRouter } from 'vue-router'
-import { storeToRefs } from 'pinia'
-import { useAnimaterStore } from './stores/animater'
+import { useAnimater } from '~/composables/animate'
 import StarAnimater from '~/components/animation/star/index.vue'
 import { description, title } from '~/configs/site'
-import { preferredDark } from '~/composables/dark'
 import { getOpenGraphMeta } from '~/composables/meta/openGraph'
 import { getTwitterMeta } from '~/composables/meta/twitter'
 
@@ -25,18 +23,18 @@ useHead({
     {
       rel: 'icon',
       type: 'image/svg+xml',
-      href: () => preferredDark.value ? '/favicon-dark.svg' : '/favicon.svg',
+      href: '/favicon.svg',
     },
   ],
 })
 
 const router = useRouter()
-const { animater } = storeToRefs(useAnimaterStore())
+const { goFast, goSlow } = useAnimater()
 router.beforeEach(() => {
-  animater.value?.fast()
+  goFast()
 })
 router.afterEach(() => {
-  animater.value?.slow()
+  goSlow()
 })
 </script>
 
