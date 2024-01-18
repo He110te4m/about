@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import SearchField from '~/components/form/SearchField/index.vue'
+import { SearchField } from '~/components/form/search'
 import { mustString } from '~/utils/formatters/string'
 import { NavList } from '~/components/nav'
 

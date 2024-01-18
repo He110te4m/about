@@ -2,7 +2,7 @@
 import { type Meta, useHead } from '@unhead/vue'
 import { RouterView, useRouter } from 'vue-router'
 import { useAnimater } from '~/composables/animate'
-import StarAnimater from '~/components/animation/star/index.vue'
+import { Animation } from '~/components/animation'
 import { description, title } from '~/configs'
 import { getOpenGraphMeta } from '~/composables/meta/openGraph'
 import { getTwitterMeta } from '~/composables/meta/twitter'
@@ -45,6 +45,6 @@ router.afterEach(() => {
   <LayoutFooter h="40px" content-bg pos="sticky" bottom="0" />
 
   <ClientOnly>
-    <StarAnimater pos="fixed" z="-1" inset="0" pointer-events="none" />
+    <Animation pos="fixed" z="-1" inset="0" pointer-events="none" />
   </ClientOnly>
 </template>
