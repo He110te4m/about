@@ -40,12 +40,11 @@ router.afterEach(() => {
 </script>
 
 <template>
-  <div pos="relative">
-    <LayoutHeader h="40px" content-bg pos="sticky" top="0" />
-    <RouterView />
-    <ClientOnly>
-      <StarAnimater pos="fixed" z="-1" inset="0" pointer-events="none" />
-    </ClientOnly>
-    <LayoutFooter h="40px" content-bg pos="sticky" bottom="0" />
-  </div>
+  <LayoutHeader h="40px" content-bg pos="sticky" top="0" />
+  <RouterView />
+  <LayoutFooter h="40px" content-bg pos="sticky" bottom="0" />
+
+  <ClientOnly>
+    <StarAnimater pos="fixed" z="-1" inset="0" pointer-events="none" />
+  </ClientOnly>
 </template>

@@ -1,7 +1,0 @@
-#nprogress {
-  --at-apply: pointer-events-none;
-}
-
-#nprogress .bar {
-  --at-apply: bg-$color-primary op-75 fixed z-1031 top-0 left-0 w-full h-2px;
-}
