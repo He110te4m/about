@@ -2,7 +2,7 @@
   --bg-gradient-angle: -15deg;
 }
 
-@screen lt-sm {
+@screen lt-xs {
   :root {
     --bg-gradient-angle: -45deg;
   }

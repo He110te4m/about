@@ -23,7 +23,7 @@ watch(
 </script>
 
 <template>
-  <header b-be="color-$separator-color 1" px="4" font="5" flex items="center">
+  <header b-be="color-$separator-color 1" px="4" font="5" h-full flex content-bg items="center">
     <div flex="1">
       <!-- TODO: 随机内容 -->
     </div>

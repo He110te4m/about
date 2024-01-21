@@ -51,7 +51,7 @@ const series = pipe(
     <div text="4xl center" m-be="4">
       {{ name }}
     </div>
-    <ol class="order" p-is="8" lt-md:p-is="4">
+    <ol class="order" p-is="8" lt-sm:p-is="4">
       <li v-for="article in series[name]" :key="name + article.url">
         <ArticlePreview :article="article" />
       </li>

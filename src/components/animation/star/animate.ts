@@ -1,6 +1,6 @@
 import { acceptHMRUpdate, defineStore, storeToRefs } from 'pinia'
 import { ref } from 'vue'
-import type { StarAnimater } from '~/components/animation/star/animater'
+import type { StarAnimater } from './animater'
 
 const useAnimaterStore = defineStore('animater', () => {
   const animater = ref<StarAnimater>()
