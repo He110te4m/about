@@ -3,7 +3,7 @@ import { computed, unref } from 'vue'
 import { useBreakpoints } from '~/composables/breakpoints'
 import { guard } from '~/utils/filters/guard'
 
-export function useAnimaterCount() {
+export function useStarCount() {
   const {
     xl,
     lg,

@@ -1,14 +1,14 @@
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
-import { StarAnimater } from './animater'
-import { useAnimaterCount } from './useAnimaterCount'
-import { useAnimater } from './animate'
+import { StarAnimater } from './StarAnimater'
+import { useStarCount } from './useStarCount'
+import { useAnimater } from './useAnimater'
 
 const containerRef = ref<HTMLDivElement>()
 
 const { animater } = useAnimater()
-const { count } = useAnimaterCount()
+const { count } = useStarCount()
 
 onMounted(() => {
   if (animater.value) {
