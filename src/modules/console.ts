@@ -4,12 +4,12 @@ export const install: UserModule = () => {
   globalThis.console.info(
     '%c ',
     // eslint-disable-next-line @typescript-eslint/quotes
-    `padding-left:348.94px;padding-top:80.75px;background-repeat:no-repeat;background-image:url("data:image/svg+xml,%3Csvg class='animation' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 348.94 80.75'%3E%3Cstyle%3E@keyframes draw%7B40%25,80%25%7Bopacity:1;stroke-dashoffset:0;stroke:%23ec0062%7D95%25,to%7Bstroke-dashoffset:0;opacity:0%7D%7D*%7Bbox-sizing:border-box%7D.line%7Bfill:none;stroke:%23334;stroke-width:4.75;stroke-linecap:round;stroke-miterlimit:10;stroke-dasharray:200;animation:draw 7s infinite ease-in-out%7D.line-forwards%7Bstroke-dashoffset:200%7D%3C/style%3E%3Cpath class='line line-forwards' d='M2.38 6.55v71.28M2.38 42.19h54.04M64.42 6.55v71.28M143.91 6.73H81.87v71.28h62.04M90.91 42.37h43.68M171.36 8.73l10-2v65.1M161.36 77.83h40M238.13 8.73l10-2v65.1M228.13 77.83h40M294.9 6.55v71.28M304.9 6.55h44.04v71.28H304.9'/%3E%3C/svg%3E")`,
+    `padding-left:360px;padding-top:80.75px;background-repeat:no-repeat;background-image:url("data:image/svg+xml,%3Csvg class='animation' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 360 80.75'%3E%3Cstyle%3E@keyframes draw%7B40%25,80%25%7Bopacity:1;stroke-dashoffset:0;stroke:%23ec0062%7D95%25,to%7Bstroke-dashoffset:0;opacity:0%7D%7D*%7Bbox-sizing:border-box%7D.line%7Bfill:none;stroke:%23F2F2F2;stroke-width:4.75;stroke-linecap:round;stroke-miterlimit:10;stroke-dasharray:200;animation:draw 7s infinite ease-in-out%7D.line-forwards%7Bstroke-dashoffset:200%7D%3C/style%3E%3Cpath class='line line-forwards' d='M2.38 6.55v71.28M2.38 42.19h54.04M64.42 6.55v71.28M143.91 6.73H81.87v71.28h62.04M90.91 42.37h43.68M171.36 8.73l10-2v65.1M161.36 77.83h40M238.13 8.73l10-2v65.1M228.13 77.83h40M294.9 6.55v71.28M304.9 6.55h44.04v71.28H304.9'/%3E%3C/svg%3E")`,
   )
 }
 
 // source svg:
-// <svg class="animation" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 348.94 80.75">
+// <svg class="animation" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 80.75">
 //   <style>
 //     * {
 //       box-sizing: border-box;
@@ -28,7 +28,7 @@ export const install: UserModule = () => {
 //     }
 //     .line {
 //       fill: none;
-//       stroke: #334;
+//       stroke: #F2F2F2;
 //       stroke-width: 4.75;
 //       stroke-linecap: round;
 //       stroke-miterlimit: 10;
