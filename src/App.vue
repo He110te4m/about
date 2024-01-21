@@ -1,8 +1,6 @@
 <script setup lang="ts">
 import { type Meta, useHead } from '@unhead/vue'
-import { RouterView, useRouter } from 'vue-router'
-import { useAnimater } from '~/composables/animate'
-import { Animation } from '~/components/animation'
+import { TravelThroughTheStars } from '~/components/background'
 import { description, title } from '~/configs'
 import { getOpenGraphMeta } from '~/composables/meta/openGraph'
 import { getTwitterMeta } from '~/composables/meta/twitter'
@@ -28,15 +26,6 @@ useHead({
     },
   ],
 })
-
-const router = useRouter()
-const { goFast, goSlow } = useAnimater()
-router.beforeEach(() => {
-  goFast()
-})
-router.afterEach(() => {
-  goSlow()
-})
 </script>
 
 <template>
@@ -45,6 +34,6 @@ router.afterEach(() => {
   <LayoutFooter h="40px" content-bg pos="sticky" bottom="0" />
 
   <ClientOnly>
-    <Animation pos="fixed" z="-1" inset="0" pointer-events="none" />
+    <TravelThroughTheStars pos="fixed" z="-1" inset="0" pointer-events="none" />
   </ClientOnly>
 </template>

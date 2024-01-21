@@ -1,1 +1,1 @@
-export { default as Animation } from './star/TravelThroughTheStars.vue'
+export { default as TravelThroughTheStars } from './star/TravelThroughTheStars.vue'
