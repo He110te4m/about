@@ -8,7 +8,7 @@ import {
   transformerDirectives,
   transformerVariantGroup,
 } from 'unocss'
-import { socials } from './src/configs'
+import { type BreakPointSize, breakPoints, socials } from './src/configs'
 
 export default defineConfig({
   shortcuts: [
@@ -53,6 +53,14 @@ export default defineConfig({
     .concat(
       socials.map(({ icon }) => icon),
     ),
+  theme: {
+    breakpoints: (Object.keys(breakPoints) as BreakPointSize[])
+      .reduce((obj, size) => {
+        obj[size] = `${breakPoints[size]}px`
+        return obj
+      }, {} as Record<BreakPointSize, string>),
+
+  },
 })
 
 function parseColor(color: string) {
