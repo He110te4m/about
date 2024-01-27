@@ -29,9 +29,13 @@ useHead({
 </script>
 
 <template>
-  <LayoutHeader h="40px" content-bg pos="sticky" top="0" />
-  <RouterView />
-  <LayoutFooter h="40px" content-bg pos="sticky" bottom="0" />
+  <div pos="relative" min-h="100vh" flex="~ col">
+    <LayoutHeader h="40px" content-bg pos="sticky" top="0" />
+    <div flex="1">
+      <RouterView />
+    </div>
+    <LayoutFooter h="40px" content-bg pos="sticky" bottom="0" />
+  </div>
 
   <ClientOnly>
     <TravelThroughTheStars pos="fixed" z="-1" inset="0" pointer-events="none" />

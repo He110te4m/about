@@ -34,6 +34,7 @@ watchEffect(() => {
     p="x-2 y-1"
     b-rd="2px"
     lh="4"
+    w="140px" lt-sm:display="none"
     transition="320"
     outline="none"
     autocomplete="none"

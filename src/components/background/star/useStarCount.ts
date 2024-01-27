@@ -18,7 +18,7 @@ export function useStarCount() {
       [constant(unref(lg)), constant(1000)],
       [constant(unref(md)), constant(700)],
       [constant(unref(sm)), constant(500)],
-      [constant(unref(xs)), constant(300)],
+      [constant(unref(xs)), constant(200)],
     ])(constant(undefined))(null),
   )
 
