@@ -1,1 +1,1 @@
-export { default as TravelThroughTheStars } from './star/TravelThroughTheStars.vue'
+export * from './star'

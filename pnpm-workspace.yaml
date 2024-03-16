@@ -1,0 +1,5 @@
+packages:
+  # all packages with wasm
+  - 'packages/*'
+  # root app
+  - .
