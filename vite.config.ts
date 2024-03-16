@@ -128,7 +128,10 @@ export default defineConfig(async () => {
       // https://github.com/antfu/vite-plugin-pwa
       VitePWA({
         registerType: 'autoUpdate',
-        includeAssets: ['favicon.svg'],
+        includeAssets: ['favicon.svg', 'rss.xml', 'sitemap.xml'],
+        workbox: {
+          navigateFallbackDenylist: [/^\/rss\.xml/, /^\/sitemap\.xml/],
+        },
         manifest: {
           name: title,
           short_name: 'He110',

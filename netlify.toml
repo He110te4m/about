@@ -5,6 +5,16 @@
   publish = "dist"
   command = "pnpm run build"
 
+[functions]
+  external_node_modules = ["express"]
+  node_bundler = "esbuild"
+
+[[redirects]]
+  force = true
+  from = "/api/*"
+  status = 200
+  to = "/.netlify/functions/tts/:splat"
+
 [[redirects]]
   from = "/*"
   to = "/index.html"
